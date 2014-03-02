@@ -1,0 +1,510 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>New Project</title>
+    <meta name="description" content="New Project">
+    <meta name="keywords" content="New Project">
+    <meta name="author" content="Romanova">
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1">
+
+    <!-- normalize css -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- jquery -->
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+
+    <!--[if IE]><script type="text/javascript" src="css/PIE/PIE.js"></script><![endif]-->
+    <!--[if lt IE 9]><script src="js/html5.js"></script><![endif]-->
+    <!--[if IE 8]><link rel="stylesheet" href="css/ie/style-for-8.css"><script src="js/ie/ie8fix.js"></script><![endif]-->
+    <!--[if IE 9]><link rel="stylesheet" href="css/ie/style-for-9.css"><script src="js/ie/ie9fix.js"></script><![endif]-->
+    <!--[if gte IE 9]><style type="text/css">.gradient {filter: none;}</style><![endif]-->
+    <!-- fonts css -->
+    <link href="css/fonts/fonts.css" media="screen" rel="stylesheet" type="text/css" />
+    <!-- custom js -->
+    <script src="js/script.js"></script>
+</head>
+<body>
+	<header class="clearfix">
+        <a href="#" class="logo"><img src="images/icons/logo.png" alt="" /></a>
+        <div class="logo_capt">краткое описание слоган или адрес</div>
+        <div class="search">
+            <form>
+                <input type="text" name="search" class="search_text" placeholder="Поиск">
+                <input type="submit" class="search_button">
+            </form>
+        </div>
+	</header>
+
+    <div class="menu_mobile">
+        <div class="menu_button"><span>Меню</span></div>
+    </div>
+    <nav class="clearfix">
+        <ul>
+            <li><a href="#" class="main"><span>Главная</span></a></li>
+            <li><a href="#" class="important"><span>Важно</span></a></li>
+            <li>
+                <a href="#" class="shop"><span>Магазин</span></a>
+                <ul>
+                    <li class="1">
+                        <a href="#" onclick="return false">Крупная бытовая техника</a>
+                        <ul>
+                            <li><a href="#">Холодильники</a></li>
+                            <li><a href="#">Морозильные камеры</a></li>
+                            <li><a href="#">Стиральные машины</a></li>
+                            <li><a href="#">Сушильные автоматы</a></li>
+                            <li><a href="#">Плиты</a></li>
+                            <li><a href="#">Посудомоечные машины</a></li>
+                            <li><a href="#">Профессиональная техника</a></li>
+                            <li><a href="#">Аксессуары к кбт</a></li>
+                        </ul>
+                    </li>
+                    <li class="2">
+                        <a href="#" onclick="return false">Встраиваемая техника</a>
+                        <ul>
+                            <li><a href="#">Духовые шкафы</a></li>
+                            <li><a href="#">Варочные поверхности</a></li>
+                            <li><a href="#"> Холодильники</a></li>
+                            <li><a href="#">Морозильники</a></li>
+                            <li><a href="#">Стиральные машины</a></li>
+                            <li><a href="#">Посудомоечные машины </a></li>
+                            <li><a href="#">Вытяжки</a></li>
+                            <li><a href="#">Микроволновые печи</a></li>
+                            <li><a href="#">Прочая встраиваемая техника</a></li>
+                            <li><a href="#">Измельчители пищевых отходов</a></li>
+                            <li><a href="#">Аксессуары к вбт</a></li>
+                        </ul>
+                    </li>
+                    <li class="3">
+                        <a href="#" onclick="return false">Климатическая техника</a>
+                        <ul>
+                            <li><a href="#">Кондиционеры</a></li>
+                            <li><a href="#">Вентиляторы</a></li>
+                            <li><a href="#">Очистители воздуха</a></li>
+                            <li><a href="#">Увлажнители и осушители воздуха</a></li>
+                            <li><a href="#">Водонагреватели</a></li>
+                            <li><a href="#">Обогреватели</a></li>
+                            <li><a href="#">Газовые котлы</a></li>
+                            <li><a href="#">Электрические котлы</a></li>
+                            <li><a href="#">Термометры и гигрометры</a></li>
+                            <li><a href="#">Метеостанции и барометры</a></li>
+                            <li><a href="#">Аксессуары к климатической технике</a></li>
+                        </ul>
+                    </li>
+                    <li class="4">
+                        <a href="#" onclick="return false">Посуда для кухни</a>
+                        <ul>
+                            <li><a href="#">Кухонная посуда</a></li>
+                            <li><a href="#">Кухонные аксессуары</a></li>
+                            <li><a href="#">Кухонные ножи и принадлежности</a></li>
+                            <li><a href="#">Столовая посуда</a></li>
+                            <li><a href="#">Столовые приборы</a></li>
+                            <li><a href="#">Фарфоровая посуда</a></li>
+                            <li><a href="#">Хранение и упаковка</a></li>
+                            <li><a href="#">Барбекю</a></li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="#" onclick="return false">Мелкая бытовая техника</a>
+                        <ul>
+                            <li><a href="#"></a></li>
+                            <li><a href="#">Аэрогрили</a></li>
+                            <li><a href="#">Блинницы</a></li>
+                            <li><a href="#">Бутербродницы</a></li>
+                            <li><a href="#">Вафельницы</a></li>
+                            <li><a href="#">Весы кухонные</a></li>
+                            <li><a href="#">Грили</a></li>
+                            <li><a href="#">Для укладки волос</a></li>
+                            <li><a href="#">Йогуртницы и мороженицы</a></li>
+                            <li><a href="#">Кофеварки</a></li>
+                            <li><a href="#">Кофемолки</a></li>
+                            <li><a href="#">Кулеры для воды</a></li>
+                            <li><a href="#">Кухонные комбайны</a></li>
+                            <li><a href="#">Ломтерезки</a></li>
+                            <li><a href="#">Маринаторы</a></li>
+                            <li><a href="#">Массажеры</a></li>
+                            <li><a href="#">Машинки для стрижки и триммеры</a></li>
+                            <li><a href="#">Микроволновые печи</a></li>
+                            <li><a href="#">Миксеры</a></li>
+                            <li><a href="#">Мультиварки</a></li>
+                            <li><a href="#">Мясорубки</a></li>
+                            <li><a href="#">Пароварки</a></li>
+                            <li><a href="#">Пылесосы</a></li>
+                            <li><a href="#">Соковыжималки</a></li>
+                            <li><a href="#">Сушилки для овощей и фруктов</a></li>
+                            <li><a href="#">Тостеры</a></li>
+                            <li><a href="#">Утюги</a></li>
+                            <li><a href="#">Фены </a></li>
+                            <li><a href="#">Фотоэпиляторы</a></li>
+                            <li><a href="#">Фритюрницы</a></li>
+                            <li><a href="#">Хлебопечки</a></li>
+                            <li class="active"><a href="#">Электрочайники</a></li>
+                            <li><a href="#">Эпиляторы и женские электробритвы</a></li>
+                            <li><a href="#">Аксессуары к мбт</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </li>
+            <li><a href="#" class="contacts"><span>Контакты</span></a></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </nav>
+
+    <div class="logged no">
+        <div class="enter_icon"><span>Вход</span></div>
+        <div class="login">
+            <div class="close"></div>
+            <form>
+                <div class="name">
+                    <div class="icon"></div>
+                    <input type="text" name="login">
+                </div>
+                <div class="pass">
+                    <div class="icon"></div>
+                    <input type="password" name="pass">
+                </div>
+                <input type="submit" value="Вход" class="enter">
+            </form>
+        </div>
+        <div class="exit">
+            <a href="#" class="user">
+                <div class="icon"></div>
+                <div class="name">ЮYour_nick</div>
+                <div class="lk">личный кабинет</div>
+            </a>
+            <a href="#" class="exit_icon"></a>
+        </div>
+    </div>
+
+    <div class="cart empty"><a href="#"><div class="price">€ <span>52.00</span></div></a></div>
+    <ul class="breadcrumbs">
+        <li><a href="#">Store</a></li>
+        <li><a href="#">Магазин</a></li>
+        <li><a href="#">мелкая техника</a></li>
+        <li>электрочайники</li>
+    </ul>
+
+
+    <div id="content" class="clearfix">
+        <aside>
+            <ul>
+                <li>
+                    <a href="#">Мелкая бытовая техника</a>
+                    <ul>
+                        <li><a href="#"></a></li>
+                        <li><a href="#">Аэрогрили</a></li>
+                        <li><a href="#">Блинницы</a></li>
+                        <li><a href="#">Бутербродницы</a></li>
+                        <li><a href="#">Вафельницы</a></li>
+                        <li><a href="#">Весы кухонные</a></li>
+                        <li><a href="#">Грили</a></li>
+                        <li><a href="#">Для укладки волос</a></li>
+                        <li><a href="#">Йогуртницы и мороженицы</a></li>
+                        <li><a href="#">Кофеварки</a></li>
+                        <li><a href="#">Кофемолки</a></li>
+                        <li><a href="#">Кулеры для воды</a></li>
+                        <li><a href="#">Кухонные комбайны</a></li>
+                        <li><a href="#">Ломтерезки</a></li>
+                        <li><a href="#">Маринаторы</a></li>
+                        <li><a href="#">Массажеры</a></li>
+                        <li><a href="#">Машинки для стрижки и триммеры</a></li>
+                        <li><a href="#">Микроволновые печи</a></li>
+                        <li><a href="#">Миксеры</a></li>
+                        <li><a href="#">Мультиварки</a></li>
+                        <li><a href="#">Мясорубки</a></li>
+                        <li><a href="#">Пароварки</a></li>
+                        <li><a href="#">Пылесосы</a></li>
+                        <li><a href="#">Соковыжималки</a></li>
+                        <li><a href="#">Сушилки для овощей и фруктов</a></li>
+                        <li><a href="#">Тостеры</a></li>
+                        <li><a href="#">Утюги</a></li>
+                        <li><a href="#">Фены </a></li>
+                        <li><a href="#">Фотоэпиляторы</a></li>
+                        <li><a href="#">Фритюрницы</a></li>
+                        <li><a href="#">Хлебопечки</a></li>
+                        <li class="active"><a href="#">Электрочайники</a></li>
+                        <li><a href="#">Эпиляторы и женские электробритвы</a></li>
+                        <li><a href="#">Аксессуары к мбт</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Крупная бытовая техника</a>
+                    <ul>
+                        <li><a href="#">Холодильники</a></li>
+                        <li><a href="#">Морозильные камеры</a></li>
+                        <li><a href="#">Стиральные машины</a></li>
+                        <li><a href="#">Сушильные автоматы</a></li>
+                        <li><a href="#">Плиты</a></li>
+                        <li><a href="#">Посудомоечные машины</a></li>
+                        <li><a href="#">Профессиональная техника</a></li>
+                        <li><a href="#">Аксессуары к кбт</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+        <ul class="breadcrumbs2">
+            <li><a href="#">Store</a></li>
+            <li><a href="#">Магазин</a></li>
+            <li><a href="#">мелкая техника</a></li>
+            <li>электрочайники</li>
+        </ul>
+
+        <div class="tovari">
+            <ul>
+                <li>
+                    <a href="#">
+                        <img src="images/data/1.png" alt="" />
+                        <div class="comp">Braun</div>
+                        <div class="price">€ <span>21.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/2.png" alt="" />
+                        <div class="comp">Philips</div>
+                        <div class="price">€ <span>18.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/3.png" alt="" />
+                        <div class="comp">Maxwell</div>
+                        <div class="price">€ <span>22.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/4.png" alt="" />
+                        <div class="comp">Moulinex</div>
+                        <div class="price">€ <span>21.00</span></div>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="#">
+                        <img src="images/data/5.png" alt="" />
+                        <div class="comp">Braun</div>
+                        <div class="price">€ <span>21.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/6.png" alt="" />
+                        <div class="comp">Philips</div>
+                        <div class="price">€ <span>18.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/7.png" alt="" />
+                        <div class="comp">Maxwell</div>
+                        <div class="price">€ <span>22.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/8.png" alt="" />
+                        <div class="comp">Moulinex</div>
+                        <div class="price">€ <span>21.00</span></div>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="#">
+                        <img src="images/data/9.png" alt="" />
+                        <div class="comp">Braun</div>
+                        <div class="price">€ <span>21.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/10.png" alt="" />
+                        <div class="comp">Philips</div>
+                        <div class="price">€ <span>18.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/11.png" alt="" />
+                        <div class="comp">Maxwell</div>
+                        <div class="price">€ <span>22.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/12.png" alt="" />
+                        <div class="comp">Moulinex</div>
+                        <div class="price">€ <span>21.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/1.png" alt="" />
+                        <div class="comp">Braun</div>
+                        <div class="price">€ <span>21.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/2.png" alt="" />
+                        <div class="comp">Philips</div>
+                        <div class="price">€ <span>18.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/3.png" alt="" />
+                        <div class="comp">Maxwell</div>
+                        <div class="price">€ <span>22.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/4.png" alt="" />
+                        <div class="comp">Moulinex</div>
+                        <div class="price">€ <span>21.00</span></div>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="#">
+                        <img src="images/data/5.png" alt="" />
+                        <div class="comp">Braun</div>
+                        <div class="price">€ <span>21.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/6.png" alt="" />
+                        <div class="comp">Philips</div>
+                        <div class="price">€ <span>18.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/7.png" alt="" />
+                        <div class="comp">Maxwell</div>
+                        <div class="price">€ <span>22.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/8.png" alt="" />
+                        <div class="comp">Moulinex</div>
+                        <div class="price">€ <span>21.00</span></div>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="#">
+                        <img src="images/data/9.png" alt="" />
+                        <div class="comp">Braun</div>
+                        <div class="price">€ <span>21.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/10.png" alt="" />
+                        <div class="comp">Philips</div>
+                        <div class="price">€ <span>18.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/11.png" alt="" />
+                        <div class="comp">Maxwell</div>
+                        <div class="price">€ <span>22.00</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="images/data/12.png" alt="" />
+                        <div class="comp">Moulinex</div>
+                        <div class="price">€ <span>21.00</span></div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+ 	<footer>
+        <div class="subscribe">
+            <form>
+                <div class="title">СЛЕДИТЕ ЗА НОВИНКАМИ</div>
+                <input type="text" name="mail" placeholder="Ваш Email адрес" class="input">
+                <input type="submit" value="Подписаться" class="button">
+            </form>
+        </div>
+        <div class="socials">
+            <a href="#" class="fb"></a>
+            <a href="#" class="tw"></a>
+            <div class="phone">855 892 - 6870</div>
+        </div>
+        <div class="copyright">
+            <div class="thank_you">Спасибо за визит!</div>
+            <div class="developer">Swebsite developer <a href="#">Ourname.com</a><div><span>2013</span>  All rights reserved</div></div>
+        </div>
+        <div class="uls clearfix">
+            <div class="footer_ul">
+                <div class="ul_title">Our World</div>
+                <ul>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Our Team </a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer_ul">
+                <div class="ul_title">Shop</div>
+                <ul>
+                    <li><a href="#">Your Account</a></li>
+                    <li><a href="#">Wish list & Registry</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shiping & Returns</a></li>
+                    <li><a href="#">International orders</a></li>
+                </ul>
+            </div>
+            <div class="footer_ul">
+                <div class="ul_title">Blog</div>
+                <ul>
+                    <li><a href="#">Store blog</a></li>
+                </ul>
+                <div class="ul_title">Care resources</div>
+                <ul>
+                    <li><a href="#">Size Guides</a></li>
+                </ul>
+            </div>
+            <div class="footer_ul">
+                <div class="ul_title">Fine print</div>
+                <ul>
+                    <li><a href="#">Privacy policy</a></li>
+                    <li><a href="#">Terms of Servise</a></li>
+                    <li><a href="#">Site map</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+	 </footer>
+<div class="zoom">
+    <a href="#">
+        <img src="images/data/1.png" alt="" />
+    </a>
+</div>
+    <div class="drop_ul">
+        <div class="colonka1"></div>
+        <div class="colonka2"></div>
+        <div class="colonka3"></div>
+        <div class="colonka4"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+
+    .enter_icon{
+        display: block;
+        width: 50px;
+        height: 35px;
+        position: relative;
+        top: 117px;
+        left: -75px;
+        float: left;
+        background: url("../../images/background/enter-icon.png") no-repeat 0 0;
+        cursor: pointer;
+        z-index: 10;
+    }
+    .enter_icon span{
+        position: absolute;
+        top: 6px;
+        left: 32px;
+        font-size: 1.6em;
+        font-weight: bold;
+        color: #231f20;
+    }
+    .login{
+        background: #c7c8ca;
+        display: none;
+        position: absolute;
+        -moz-border-radius: 10px 0 10px 10px;
+        -webkit-border-radius: 10px 0 10px 10px;
+        -khtml-border-radius: 10px 0 10px 10px;
+        border-radius: 10px 0 10px 10px;
+        behavior: url(./pie/PIE.htc);
+        z-index: 20;
+    }
+    .login.hovered{display: block;}
+
+
+    footer{text-align: right}
+    footer .copyright{
+        clear:both;
+        float:none;
+        border:none;
+        text-align: left;
+        padding:0;
+        width: auto;
+        height:auto;
+        padding-bottom: 20px;
+        margin-top:10px;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+    }
+    footer .copyright .thank_you{left:0; display: inline}
+    footer .copyright .developer{
+        position: relative;
+        left: 0;
+        top: 0;
+        float: right;
+    }
+    footer .copyright .developer div{display: inline;margin-left:5px;}
+
+
+
+
+
+
+    .cart{
+        background-image: url("../../images/background/cart2.png");
+        margin: 10px 2px 0 0;
+        width: 170px;
+        position: absolute;
+        right: 10px;
+    }
+    .cart .price{
+        left: 0;
+        font-size: 1.4em;
+        width: 100%;
+        text-align: center;
+    }
+    footer .footer_ul {
+        margin-right: 0px;
+        margin-left: 10px;
+    }
+    .search .search_text{width:300px;}
+    .breadcrumbs {top: 24px;}
+    #content{margin-top:57px;}
+
+
+    .tovari ul{text-align: left;}

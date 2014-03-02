@@ -1,0 +1,8 @@
+	@font-face {
+    font-family: 'AGAVANTGARDECYR-BOOK';
+    src: url('AGAVANTGARDECYR-BOOK.eot');
+    src: url('AGAVANTGARDECYR-BOOK.woff') format('woff'),
+         url('AGAVANTGARDECYR-BOOK.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

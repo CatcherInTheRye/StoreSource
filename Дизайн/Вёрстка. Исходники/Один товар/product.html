@@ -1,0 +1,851 @@
+<!doctype html>
+<html>
+<!--[if IE 8]><html class="ie8"><![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>New Project</title>
+    <meta name="description" content="New Project">
+    <meta name="keywords" content="New Project">
+    <meta name="author" content="Romanova">
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1">
+
+    <!-- normalize css -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- jquery -->
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+
+    <!--[if IE]><script type="text/javascript" src="css/PIE/PIE.js"></script><![endif]-->
+    <!--[if lt IE 9]><script src="js/html5.js"></script><![endif]-->
+    <!--[if IE 8]><link rel="stylesheet" href="css/ie/style-for-8.css"><script src="js/ie/ie8fix.js"></script><![endif]-->
+    <!--[if IE 9]><link rel="stylesheet" href="css/ie/style-for-9.css"><script src="js/ie/ie9fix.js"></script><![endif]-->
+    <!--[if gte IE 9]><style type="text/css">.gradient {filter: none;}</style><![endif]-->
+    <!-- fonts css -->
+    <link href="css/fonts/fonts.css" media="screen" rel="stylesheet" type="text/css" />
+    <!-- slider -->
+    <link rel="stylesheet" href="css/jquery.bxslider.css">
+    <script src="js/jquery.bxslider.min.js"></script>
+    <!-- custom js -->
+    <script src="js/script.js"></script>
+    <style>
+    @media all and (max-width:1390px) {
+        .enter_icon, .exit_icon{
+            display: block;
+            width: 50px;
+            height: 35px;
+            position: relative;
+            top: 117px;
+            left: -75px;
+            float: left;
+            background: url("images/background/enter-icon.png") no-repeat 0 0;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .exit_icon{
+            width: 110px;
+            background-image: url("images/background/exit-icon.png");
+            left: -112px;
+        }
+        .enter_icon span{
+            position: absolute;
+            top: 6px;
+            left: 32px;
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #231f20;
+        }
+        .login, .exit{
+            background: #c7c8ca;
+            display: none;
+            position: absolute;
+            -moz-border-radius: 10px 0 10px 10px;
+            -webkit-border-radius: 10px 0 10px 10px;
+            -khtml-border-radius: 10px 0 10px 10px;
+            border-radius: 10px 0 10px 10px;
+            behavior: url(./pie/PIE.htc);
+            z-index: 20;
+        }
+        .exit{height: 91px;width: 290px;}
+        .login.clicked, .exit.clicked{display: block;}
+        .login .close, .exit .close{
+            display: block;
+            width: 15px;
+            height:15px;
+            position: absolute;
+            top:4px;
+            right:2px;
+            cursor: pointer;
+        }
+        .exit .exit_ic{right:28px;}
+        .product .right_part .tabs_titles li{margin-left:10px;}
+    }
+    @media all and (max-width:1270px) {
+        footer{text-align: right}
+        footer .copyright{
+            clear:both;
+            float:none;
+            border:none;
+            text-align: left;
+            padding:0;
+            width: auto;
+            height:auto;
+            padding-bottom: 20px;
+            margin-top:10px;
+            position: absolute;
+            top: 100%;
+            width: 100%;
+        }
+        footer .copyright .thank_you{left:0; display: inline}
+        footer .copyright .developer{
+            position: relative;
+            left: 0;
+            top: 0;
+            float: right;
+        }
+        footer .copyright .developer div{display: inline;margin-left:5px;}
+        .tovari ul li a, .zoom a {height: 280px;}
+        .product .right_part .tabs_titles li{margin-left:25px;}
+        .product .right_part .tabs_titles li a{font-size: 1.3em}
+    }
+    @media all and (max-width:1240px) {.product .right_part .tabs_titles li{margin-left:15px;}}
+    @media all and (max-width:1135px) {.product .right_part .tabs_titles li{margin-left:5px;}}
+    @media all and (max-width:1030px) {.product .right_part .tabs_titles li{margin-left:2px;}}
+    @media all and (max-width:1090px) {
+        .cart{
+            background-image: url("images/background/cart2.png");
+            margin: 10px 2px 0 0;
+            width: 155px;
+            position: absolute;
+            right: 10px;
+        }
+        .cart .price{
+            left: 9px;
+            font-size: 1.4em;
+            width: 100%;
+            text-align: center;
+        }
+        footer .footer_ul { margin-right: 0px;margin-left: 10px;}
+        .search .search_text{width:300px;}
+        .breadcrumbs {top: 24px;}
+        #content{margin-top:57px;}
+        nav{margin-bottom: -10px}
+        .drop_ul{width: 90%;}
+        .drop_ul>div{width: 33%}
+        .tovari ul li a, .zoom a {height: 250px;}
+    }
+
+    @media all and (max-width:1000px) {.tovari ul li a img {max-width: 90%;}}
+    @media all and (max-width:799px) {
+        body{min-width: 480px; padding: 15px 0}
+        .logo_capt{
+            display: block;
+            width: 70%;
+            margin: 0;
+            margin-top: -9px;
+            font-size: 1.8em;
+            min-width: 470px;
+            background: #FFFFFF;
+            margin-left:8px;
+        }
+        .drop_ul{display: none!important;}
+        .logo{width:40%}
+        .search {float:left; margin-top: 11px; margin-left:10px;}
+        .search .search_text{width:230px;}
+        .cart {
+            position: absolute;
+            top: 18px;
+            right: 2px;
+            background-image: url("images/background/cart3.png");
+        }
+        .cart .price{top: 92px; left: 0px;font-size: 1.2em;}
+        nav {left: 0;width: 100%;}
+        nav>ul>li{
+            width: 100%; background: url("images/background/nav/1empty.png") repeat-x 0 0;height: 56px;}
+        nav>ul>li>a{width:100%; height:56px; background-position: 50% 0}
+        nav>ul>li>a.main{background-image: url("images/background/nav/11.png")!important}
+        nav>ul>li>a.important {background-image: url("images/background/nav/12.png")!important;}
+        nav>ul>li>a.shop  {background-image: url("images/background/nav/13.png")!important;}
+        nav>ul>li>a.contacts  {background-image: url("images/background/nav/14.png")!important;}
+        nav>ul>li>a:hover,nav ul li.active a{background-position: 50% 100%!important}
+        nav>ul>li:hover{background-image: url("images/background/nav/1empty2.png")}
+        nav>ul>li.active{background-image: url("images/background/nav/1empty2.png")}
+        .breadcrumbs{display: none;}
+        .breadcrumbs2{display: block}
+        .menu_mobile{
+            display: block;
+            width:100%;
+            height:56px;
+            background:#d0d0d2 url("images/background/menu_mobile.png") no-repeat 50% 0;
+            position: relative;
+            left:0;
+            margin: 13px 0 -20px 0;
+        }
+        .menu_mobile .menu_button{
+            position: absolute;
+            width:40px;
+            height:50px;
+            left:10px;
+            top:10px;
+            background: url("images/background/menu_button.png") no-repeat 0 0;
+            cursor: pointer;
+        }
+        .menu_mobile .menu_button span{
+            font-size: 1.8em;
+            position: relative;
+            top:5px;
+            left:50px;
+            color: #231f20;
+            font-weight: bold;
+        }
+        .menu_mobile .menu_button:active{background-position: 100% 0}
+        .menu_mobile .menu_button:active span{color:#999999}
+        .enter_icon, .exit_icon {
+            position: absolute;
+            right: 65px;
+            left: inherit;
+            top: 164px;
+            background-image: url("images/background/enter-icon2.png");
+        }
+        .exit_icon{background-image: url("images/background/exit-icon.png"); top:160px;}
+        .login.clicked,.exit.clicked{
+            display: block;
+            position: absolute;
+            top: 155px!important;
+            left: 0!important;
+            width: 100%;
+            height:54px;
+            -moz-border-radius: 0px;
+            -webkit-border-radius: 0px;
+            -khtml-border-radius: 0px;
+            border-radius: 0px;
+        }
+        .exit.clicked{margin:0;}
+        .login .name {margin: 10px 0 0 10px; float:left;}
+        .login .pass { margin: 10px 0 0 10px;float:left;}
+        .login .name ,.login .pass{width: 30%}
+        .login .name input,.login .pass input{width:85%}
+        .login .enter{
+            top: 15px;
+            right: 27px;
+            width: 50px;
+            left: inherit;
+        }
+        .login .close, .exit .close{
+            position: absolute;
+            top:-30px;
+            right:5px;
+            width: 40px;
+            height: 40px;
+            display: block;
+            cursor: pointer;
+            background: url("images/background/close.png") no-repeat 0 0;
+        }
+        .exit .user{top:8px;}
+        .exit .exit_ic {top: -4px;}
+        aside{display:none;}
+        nav>ul>li.active>ul{display: block}
+        nav>ul>li.active{height:auto;}
+        nav>ul>li>ul{margin: 0 auto; width: 445px;}
+        nav>ul>li>ul>li{display: block;}
+        nav>ul>li>ul>li>a{
+            display: block;
+            padding: 16px 0 0 40px;
+            background: url("images/background/aside-menu-bg.png") no-repeat 0 0;
+            height: 38px;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #231f20;
+        }
+        nav>ul>li>ul>li.active>a{background-image: url("images/background/aside-menu-bg-active.png"); color: #FFFFFF}
+        nav>ul>li>ul>li>a:hover{text-decoration: none;}
+        nav>ul>li>ul>li>ul{
+            display: none;
+            border: 2px solid #efeff0;
+            margin:0 2px;
+            padding-left: 56px;
+            padding-top: 10px;
+        }
+        nav>ul>li>ul>li.active>ul{display: block;}
+        nav>ul>li>ul>li>ul>li{margin-bottom: 3px;}
+        nav>ul>li>ul>li>ul>li>a{color: #58595b;font-size: 1.7em; position: relative;}
+        nav>ul>li>ul>li>ul>li>a:hover{text-decoration: none; color: #0e0000}
+        nav>ul>li>ul>li>ul>li>a:hover:before{
+            content: " ";
+            display: block;
+            width: 5px;
+            height: 10px;
+            background: url("images/background/menu_arrow.png") no-repeat 0 0;
+            position: absolute;
+            top:4px;
+            left:-15px;
+        }
+        nav>ul>li>ul>li>ul>li.active>a{color: #23b14b;text-decoration: none;}
+        nav>ul>li>ul>li>ul>li.active>a:before{
+            content: " ";
+            display: block;
+            width: 5px;
+            height: 10px;
+            background: url("images/background/menu_arrow-active.png") no-repeat 0 0;
+            position: absolute;
+            top:4px;
+            left:-15px;
+        }
+        .breadcrumbs2{padding: 30px 0 0 20px;}
+        .tovari{width: 100%;}
+        .tovari ul{text-align: center;}
+        .tovari ul li{ min-width: 230px;max-width: 300px;width:45%}
+        footer .uls {margin-top: 20px;float:left;width: 100%;}
+        footer .footer_ul { width: 30%;margin-bottom: 20px;}
+        footer{height: auto;}
+        footer .copyright .thank_you{display: block;  padding-left:5px;}
+        footer .copyright .developer {left: 5px;float: left; }
+        nav>ul>li>a>span{
+            top:18px;
+            position: relative;
+            font-size: 2em;
+            width:480px;
+            text-align: left;
+            display: inline-block;
+            margin: 0 auto;
+            padding-left:150px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .zoom{display:none!important;}
+        .tovari ul li a img {max-height: 300px; max-width: 85%}
+        .tovari ul li a, .zoom a {height: 350px;}
+        .tovari ul li a .price{bottom:15px;}
+        .product{width: 100%}
+        .product .left_part{width: 100%; text-align: center}
+        .product .left_part .big_img{display: none;}
+        .product .product_var_wrap {
+            margin-top: 0px;
+            width: 90%;
+            position: relative;
+            left: 0;
+            margin:0 auto;
+            margin-bottom: 50px;
+        }
+        .product .left_part .product_var li a img{width:50%;display: block;margin: 0 auto;}
+        .product .right_part .current_tab_title{display: block;}
+        .product .title_for_mobile{display: block;}
+        .product .right_part h1, .product .right_part .price, .product .right_part .status, .product .right_part .add_to_cart{display: none;}
+        .product .right_part .alike_wrap .price{display: block}
+        .product .right_part{width: 100%}
+        .product .right_part .current_tab_title{
+            font-size: 3.3em;
+            color: #000000;
+            font-weight: bold;
+            padding-bottom: 20px;
+            background: url("images/background/tabs_triangle2.png") no-repeat 50% 100%;
+            display: inline-block;
+            zoom: 1;
+            *display:inline;
+            cursor: pointer;
+        }
+        .product .right_part .tabs_titles{
+            position: absolute;
+            top:120px;
+            left:10px;
+            padding:0 10px;
+            border: 1px solid #939598;
+            background: #FFFFFF;
+            z-index: 100;
+            display: none;
+        }
+        .product .right_part .tabs_titles li{ display: block; padding: 5px 0;}
+        .product .right_part .tabs_titles li.active{background: none; }
+        .product .right_part .tabs_titles li a{font-size: 2.6em;}
+        .product .right_part .alike_wrap {
+            width: 94%;
+            margin: 16px auto;
+            position: relative;
+            left: -10px;
+        }
+        .product_var li.active{ opacity: 1}
+    }
+
+    @media all and (max-width:520px) {.tovari ul li a img {max-height: 240px;}.tovari ul li a, .zoom a {height: 300px;}}
+    @media all and (max-width:320px) {
+        body {min-width: 320px; }
+        .search .search_text { width: 110px; }
+        nav>ul>li>a>span { width: 320px; }
+        nav>ul>li>ul { width: 320px; }
+        footer .footer_ul { width: 43%; }
+        .go_top { display: none!important;}
+        .logo_capt {  margin-left: 8px; font-size: 0.9em;min-width: 300px }
+        nav>ul>li>a { background-position: 32% 0; }
+        .login.clicked, .exit.clicked{top:145px!important;}
+        nav>ul>li>a:hover,nav ul li.active a {background-position: 32% 100% !important; }
+        .cart { right: 0px;}
+        .enter_icon, .exit_icon {top: 154px;}
+        nav>ul>li>a>span{padding-left:90px;}
+        footer .socials{clear:left; margin-left:10px; margin-top:15px;        text-align: left;}
+        footer .footer_ul{height:auto;}
+        footer .footer_ul ul:last-child{margin-bottom: 0;}
+        footer .copyright{width: 95%;}
+        footer .subscribe{margin-left:10px;}
+        .exit_icon {top: 149px;}
+        .exit_icon {top: 149px;}
+        .product .left_part{width:100%;float:left;}
+        .product .title_for_mobile {padding-left: 10px; margin-bottom: 30px; position: relative;}
+        .product .product_var_wrap {width: 80%;}
+        .product .title_for_mobile h1 {padding-right: 0px!important;padding-top: 60px;}
+        .product .title_for_mobile .add_to_cart {right: 0px;top: -55px;}
+        .product .title_for_mobile .price {padding-right: 0px!important;}
+    }
+    </style>
+</head>
+<body>
+	<header class="clearfix">
+        <a href="#" class="logo"><img src="images/icons/logo.png" alt="" /></a>
+        <div class="logo_capt">краткое описание слоган или адрес</div>
+        <div class="search">
+            <form>
+                <input type="text" name="search" class="search_text" placeholder="Поиск">
+                <input type="submit" class="search_button">
+            </form>
+        </div>
+	</header>
+
+    <div class="menu_mobile">
+        <div class="menu_button"><span>Меню</span></div>
+    </div>
+    <nav class="clearfix">
+        <ul>
+            <li><a href="#" class="main" onclick="return false"><span>Главная</span></a></li>
+            <li><a href="#" class="important" onclick="return false"><span>Важно</span></a></li>
+            <li>
+                <a href="#" class="shop" onclick="return false"><span>Магазин</span></a>
+                <ul>
+                    <li class="1">
+                        <a href="#" onclick="return false">Крупная бытовая техника</a>
+                        <ul>
+                            <li><a href="#">Холодильники</a></li>
+                            <li><a href="#">Морозильные камеры</a></li>
+                            <li><a href="#">Стиральные машины</a></li>
+                            <li><a href="#">Сушильные автоматы</a></li>
+                            <li><a href="#">Плиты</a></li>
+                            <li><a href="#">Посудомоечные машины</a></li>
+                            <li><a href="#">Профессиональная техника</a></li>
+                            <li><a href="#">Аксессуары к кбт</a></li>
+                        </ul>
+                    </li>
+                    <li class="2">
+                        <a href="#" onclick="return false">Встраиваемая техника</a>
+                        <ul>
+                            <li><a href="#">Духовые шкафы</a></li>
+                            <li><a href="#">Варочные поверхности</a></li>
+                            <li><a href="#"> Холодильники</a></li>
+                            <li><a href="#">Морозильники</a></li>
+                            <li><a href="#">Стиральные машины</a></li>
+                            <li><a href="#">Посудомоечные машины </a></li>
+                            <li><a href="#">Вытяжки</a></li>
+                            <li><a href="#">Микроволновые печи</a></li>
+                            <li><a href="#">Прочая встраиваемая техника</a></li>
+                            <li><a href="#">Измельчители пищевых отходов</a></li>
+                            <li><a href="#">Аксессуары к вбт</a></li>
+                        </ul>
+                    </li>
+                    <li class="3">
+                        <a href="#" onclick="return false">Климатическая техника</a>
+                        <ul>
+                            <li><a href="#">Кондиционеры</a></li>
+                            <li><a href="#">Вентиляторы</a></li>
+                            <li><a href="#">Очистители воздуха</a></li>
+                            <li><a href="#">Увлажнители и осушители воздуха</a></li>
+                            <li><a href="#">Водонагреватели</a></li>
+                            <li><a href="#">Обогреватели</a></li>
+                            <li><a href="#">Газовые котлы</a></li>
+                            <li><a href="#">Электрические котлы</a></li>
+                            <li><a href="#">Термометры и гигрометры</a></li>
+                            <li><a href="#">Метеостанции и барометры</a></li>
+                            <li><a href="#">Аксессуары к климатической технике</a></li>
+                        </ul>
+                    </li>
+                    <li class="4">
+                        <a href="#" onclick="return false">Посуда для кухни</a>
+                        <ul>
+                            <li><a href="#">Кухонная посуда</a></li>
+                            <li><a href="#">Кухонные аксессуары</a></li>
+                            <li><a href="#">Кухонные ножи и принадлежности</a></li>
+                            <li><a href="#">Столовая посуда</a></li>
+                            <li><a href="#">Столовые приборы</a></li>
+                            <li><a href="#">Фарфоровая посуда</a></li>
+                            <li><a href="#">Хранение и упаковка</a></li>
+                            <li><a href="#">Барбекю</a></li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="#" onclick="return false">Мелкая бытовая техника</a>
+                        <ul>
+                            <li><a href="#"></a></li>
+                            <li><a href="#">Аэрогрили</a></li>
+                            <li><a href="#">Блинницы</a></li>
+                            <li><a href="#">Бутербродницы</a></li>
+                            <li><a href="#">Вафельницы</a></li>
+                            <li><a href="#">Весы кухонные</a></li>
+                            <li><a href="#">Грили</a></li>
+                            <li><a href="#">Для укладки волос</a></li>
+                            <li><a href="#">Йогуртницы и мороженицы</a></li>
+                            <li><a href="#">Кофеварки</a></li>
+                            <li><a href="#">Кофемолки</a></li>
+                            <li><a href="#">Кулеры для воды</a></li>
+                            <li><a href="#">Кухонные комбайны</a></li>
+                            <li><a href="#">Ломтерезки</a></li>
+                            <li><a href="#">Маринаторы</a></li>
+                            <li><a href="#">Массажеры</a></li>
+                            <li><a href="#">Машинки для стрижки и триммеры</a></li>
+                            <li><a href="#">Микроволновые печи</a></li>
+                            <li><a href="#">Миксеры</a></li>
+                            <li><a href="#">Мультиварки</a></li>
+                            <li><a href="#">Мясорубки</a></li>
+                            <li><a href="#">Пароварки</a></li>
+                            <li><a href="#">Пылесосы</a></li>
+                            <li><a href="#">Соковыжималки</a></li>
+                            <li><a href="#">Сушилки для овощей и фруктов</a></li>
+                            <li><a href="#">Тостеры</a></li>
+                            <li><a href="#">Утюги</a></li>
+                            <li><a href="#">Фены </a></li>
+                            <li><a href="#">Фотоэпиляторы</a></li>
+                            <li><a href="#">Фритюрницы</a></li>
+                            <li><a href="#">Хлебопечки</a></li>
+                            <li class="active"><a href="#">Электрочайники</a></li>
+                            <li><a href="#">Эпиляторы и женские электробритвы</a></li>
+                            <li><a href="#">Аксессуары к мбт</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </li>
+            <li><a href="#" class="contacts" onclick="return false"><span>Контакты</span></a></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </nav>
+
+    <div class="logged no">
+        <div class="enter_icon"><span>Вход</span></div>
+        <div class="login">
+            <div class="close"></div>
+            <form>
+                <div class="name">
+                    <div class="icon"></div>
+                    <input type="text" name="login">
+                </div>
+                <div class="pass">
+                    <div class="icon"></div>
+                    <input type="password" name="pass" value="">
+                </div>
+                <input type="submit" value="Вход" class="enter">
+            </form>
+        </div>
+        <div class="exit">
+            <a href="#" class="user">
+                <div class="icon"></div>
+                <div class="name">ЮYour_nick</div>
+                <div class="lk">личный кабинет</div>
+            </a>
+            <a href="#" class="exit_icon"></a>
+        </div>
+    </div>
+
+    <div class="cart empty"><a href="#"><div class="price">€ <span>52.00</span></div></a></div>
+    <ul class="breadcrumbs">
+        <li><a href="#">Store</a></li>
+        <li><a href="#">Магазин</a></li>
+        <li><a href="#">мелкая техника</a></li>
+        <li>электрочайники</li>
+    </ul>
+
+
+    <div id="content" class="clearfix">
+        <aside>
+            <ul>
+                <li>
+                    <a href="#">Мелкая бытовая техника</a>
+                    <ul>
+                        <li><a href="#"></a></li>
+                        <li><a href="#">Аэрогрили</a></li>
+                        <li><a href="#">Блинницы</a></li>
+                        <li><a href="#">Бутербродницы</a></li>
+                        <li><a href="#">Вафельницы</a></li>
+                        <li><a href="#">Весы кухонные</a></li>
+                        <li><a href="#">Грили</a></li>
+                        <li><a href="#">Для укладки волос</a></li>
+                        <li><a href="#">Йогуртницы и мороженицы</a></li>
+                        <li><a href="#">Кофеварки</a></li>
+                        <li><a href="#">Кофемолки</a></li>
+                        <li><a href="#">Кулеры для воды</a></li>
+                        <li><a href="#">Кухонные комбайны</a></li>
+                        <li><a href="#">Ломтерезки</a></li>
+                        <li><a href="#">Маринаторы</a></li>
+                        <li><a href="#">Массажеры</a></li>
+                        <li><a href="#">Машинки для стрижки и триммеры</a></li>
+                        <li><a href="#">Микроволновые печи</a></li>
+                        <li><a href="#">Миксеры</a></li>
+                        <li><a href="#">Мультиварки</a></li>
+                        <li><a href="#">Мясорубки</a></li>
+                        <li><a href="#">Пароварки</a></li>
+                        <li><a href="#">Пылесосы</a></li>
+                        <li><a href="#">Соковыжималки</a></li>
+                        <li><a href="#">Сушилки для овощей и фруктов</a></li>
+                        <li><a href="#">Тостеры</a></li>
+                        <li><a href="#">Утюги</a></li>
+                        <li><a href="#">Фены </a></li>
+                        <li><a href="#">Фотоэпиляторы</a></li>
+                        <li><a href="#">Фритюрницы</a></li>
+                        <li><a href="#">Хлебопечки</a></li>
+                        <li class="active"><a href="#">Электрочайники</a></li>
+                        <li><a href="#">Эпиляторы и женские электробритвы</a></li>
+                        <li><a href="#">Аксессуары к мбт</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Крупная бытовая техника</a>
+                    <ul>
+                        <li><a href="#">Холодильники</a></li>
+                        <li><a href="#">Морозильные камеры</a></li>
+                        <li><a href="#">Стиральные машины</a></li>
+                        <li><a href="#">Сушильные автоматы</a></li>
+                        <li><a href="#">Плиты</a></li>
+                        <li><a href="#">Посудомоечные машины</a></li>
+                        <li><a href="#">Профессиональная техника</a></li>
+                        <li><a href="#">Аксессуары к кбт</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+        <ul class="breadcrumbs2">
+            <li><a href="#">Store</a></li>
+            <li><a href="#">Магазин</a></li>
+            <li><a href="#">мелкая техника</a></li>
+            <li>электрочайники</li>
+        </ul>
+
+        <div class="product">
+            <div class="left_part">
+                <div class="title_for_mobile">
+                    <h1>BRAUN WK 300</h1>
+                    <div class="price">€ <span>21.00</span></div>
+                    <div class="status">in stock</div>
+                    <a href="#" class="add_to_cart"></a>
+                </div>
+                <div class="big_img">
+                    <img src="images/data/17.png" alt=""/>
+                </div>
+                <div class="product_var_wrap">
+                    <ul class="product_var">
+                        <li class="active"><a href="images/data/17.png" onclick="return false"><img src="images/data/13.png" alt=""></a></li>
+                        <li><a href="images/background/cart3.png" onclick="return false"><img src="images/data/14.png" alt=""></a></li>
+                        <li><a href="images/data/16.png" onclick="return false"><img src="images/data/1.png" alt=""></a></li>
+                        <li><a href="images/data/19.png" onclick="return false"><img src="images/data/15.png" alt=""></a></li>
+                        <li><a href="images/data/17.png" onclick="return false"><img src="images/data/13.png" alt=""></a></li>
+                        <li><a href="images/data/18.png" onclick="return false"><img src="images/data/14.png" alt=""></a></li>
+                        <li><a href="images/data/16.png" onclick="return false"><img src="images/data/1.png" alt=""></a></li>
+                        <li><a href="images/data/19.png" onclick="return false"><img src="images/data/15.png" alt=""></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right_part">
+                <h1>BRAUN WK 300</h1>
+                <div class="price">€ <span>21.00</span></div>
+                <div class="status">in stock</div>
+                <a href="#" class="add_to_cart"></a>
+                <div class="tabs">
+                    <div class="current_tab_title">Описание</div>
+                    <ul class="tabs_titles">
+                        <li class="active"><a href="#" onclick="return false">Описание</a></li>
+                        <li><a href="#" onclick="return false">О бренде</a></li>
+                        <li><a href="#" onclick="return false">Характеристики</a></li>
+                        <li><a href="#" onclick="return false">Обзор</a></li>
+                        <li><a href="#" onclick="return false">Доставка</a></li>
+                    </ul>
+                    <ul class="tabs_content">
+                        <li class="active">
+                            Чайник Braun сочетает в себе уникальный дизайн и быстроту работы - для совершенного результата. Беспроводной чайник вскипятит воду для чая, растворимого кофе и других нужд гораздо быстрее, чем любой другой бытовой прибор: 250 мл воды в нем закипают менее чем за минуту! Никогда еще кипячение воды не было таким быстрым, легким и безопасным, и никогда еще обычный чайник не был таким стильным!
+                            <br/><br/>
+                            Мощность: 2200 Вт. Объем: 1,6 л. Индикатор уровня воды: двухсторонний. Закрытый нагревательный элемент: нержавеющая сталь. Автоматическое отключение в 4х случаях (без воды, открытие, закивание, снятие с основания). Моющийся фильтр от накипи.
+                            <br/><br/>
+                            <ul>
+                                <li>Мощность 	2200 Вт</li>
+                                <li>Объем 	1,6 л</li>
+                                <li>Быстрая система кипячения 	45 сек</li>
+                                <li>Индикатор уровня воды 	двухсторонний</li>
+                                <li>Кнопки вкл/выкл 	• </li>
+                                <li>Закрытый нагревательный элемент 	нержавеющая сталь</li>
+                                <li>Автоматическое отключение при закипании воды 	•</li>
+                                <li>Автоматическое отключение при отсутствии воды в чайнике 	•</li>
+                                <li>Автоматическое отключение при открытой крышке 	•</li>
+                                <li>Автоматическое отключение если чайник снят с основания 	•</li>
+                                <li>Моющийся фильтр от накипи 	•</li>
+                                <li>Отсек для хранения шнура 	•</li>
+                                <li>Легкая чистка 	•</li>
+                            </ul>
+                        </li>
+                        <li>
+                            Чайник Braun сочетает в себе уникальный дизайн и быстроту работы - для совершенного результата. Беспроводной чайник вскипятит воду для чая, растворимого кофе и других нужд гораздо быстрее, чем любой другой бытовой прибор: 250 мл воды в нем закипают менее чем за минуту! Никогда еще кипячение воды не было таким быстрым, легким и безопасным, и никогда еще обычный чайник не был таким стильным!
+                            <br/><br/>
+                            Мощность: 2200 Вт. Объем: 1,6 л. Индикатор уровня воды: двухсторонний. Закрытый нагревательный элемент: нержавеющая сталь. Автоматическое отключение в 4х случаях (без воды, открытие, закивание, снятие с основания). Моющийся фильтр от накипи.
+                            <br/><br/>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>Мощность 	2200 Вт</li>
+                                <li>Объем 	1,6 л</li>
+                                <li>Быстрая система кипячения 	45 сек</li>
+                                <li>Индикатор уровня воды 	двухсторонний</li>
+                                <li>Кнопки вкл/выкл 	• </li>
+                                <li>Закрытый нагревательный элемент 	нержавеющая сталь</li>
+                                <li>Автоматическое отключение при закипании воды 	•</li>
+                                <li>Автоматическое отключение при отсутствии воды в чайнике 	•</li>
+                                <li>Автоматическое отключение при открытой крышке 	•</li>
+                                <li>Автоматическое отключение если чайник снят с основания 	•</li>
+                                <li>Моющийся фильтр от накипи 	•</li>
+                                <li>Отсек для хранения шнура 	•</li>
+                                <li>Легкая чистка 	•</li>
+                            </ul>
+                        </li>
+                        <li>
+                            Мощность: 2200 Вт. Объем: 1,6 л. Индикатор уровня воды: двухсторонний. Закрытый нагревательный элемент: нержавеющая сталь. Автоматическое отключение в 4х случаях (без воды, открытие, закивание, снятие с основания). Моющийся фильтр от накипи.
+                            <br/><br/>
+                        </li>
+                        <li>
+                            Чайник Braun сочетает в себе уникальный дизайн и быстроту работы - для совершенного результата. Беспроводной чайник вскипятит воду для чая, растворимого кофе и других нужд гораздо быстрее, чем любой другой бытовой прибор: 250 мл воды в нем закипают менее чем за минуту! Никогда еще кипячение воды не было таким быстрым, легким и безопасным, и никогда еще обычный чайник не был таким стильным!
+                            <br/><br/>
+                        </li>
+                    </ul>
+                    <div class="alike">
+                        <div class="title">Похожие товары</div>
+                        <div class="alike_wrap">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <img src="images/data/3.png" alt="" />
+                                        <div class="comp">Maxwell</div>
+                                        <div class="price">€ <span>22.00</span></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="images/data/4.png" alt="" />
+                                        <div class="comp">Moulinex</div>
+                                        <div class="price">€ <span>21.00</span></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="images/data/5.png" alt="" />
+                                        <div class="comp">Braun</div>
+                                        <div class="price">€ <span>21.00</span></div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <img src="images/data/3.png" alt="" />
+                                        <div class="comp">Maxwell</div>
+                                        <div class="price">€ <span>22.00</span></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="images/data/4.png" alt="" />
+                                        <div class="comp">Moulinex</div>
+                                        <div class="price">€ <span>21.00</span></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="images/data/5.png" alt="" />
+                                        <div class="comp">Braun</div>
+                                        <div class="price">€ <span>21.00</span></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+ 	<footer>
+        <div class="subscribe">
+            <form>
+                <div class="title">СЛЕДИТЕ ЗА НОВИНКАМИ</div>
+                <input type="text" name="mail" placeholder="Ваш Email адрес" class="input">
+                <input type="submit" value="Подписаться" class="button">
+            </form>
+        </div>
+        <div class="socials">
+            <a href="#" class="fb"></a>
+            <a href="#" class="tw"></a>
+            <div class="phone">855 892 - 6870</div>
+        </div>
+        <div class="copyright">
+            <div class="thank_you">Спасибо за визит!</div>
+            <div class="developer">Swebsite developer <a href="#">Ourname.com</a><div><span>2013</span>  All rights reserved</div></div>
+        </div>
+        <div class="uls clearfix">
+            <div class="footer_ul">
+                <div class="ul_title">Our World</div>
+                <ul>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Our Team </a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer_ul">
+                <div class="ul_title">Shop</div>
+                <ul>
+                    <li><a href="#">Your Account</a></li>
+                    <li><a href="#">Wish list & Registry</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shiping & Returns</a></li>
+                    <li><a href="#">International orders</a></li>
+                </ul>
+            </div>
+            <div class="footer_ul">
+                <div class="ul_title">Blog</div>
+                <ul>
+                    <li><a href="#">Store blog</a></li>
+                </ul>
+                <div class="ul_title">Care resources</div>
+                <ul>
+                    <li><a href="#">Size Guides</a></li>
+                </ul>
+            </div>
+            <div class="footer_ul">
+                <div class="ul_title">Fine print</div>
+                <ul>
+                    <li><a href="#">Privacy policy</a></li>
+                    <li><a href="#">Terms of Servise</a></li>
+                    <li><a href="#">Site map</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+	 </footer>
+<div class="zoom">
+    <a href="#">
+        <img src="images/data/1.png" alt="" />
+    </a>
+</div>
+    <div class="drop_ul">
+        <div class="colonka1"></div>
+        <div class="colonka2"></div>
+        <div class="colonka3"></div>
+        <div class="colonka4"></div>
+    </div>
+<div class="go_top"></div>
+<div class="big_big_img"><div class="bg"></div><div class="wrap"><img src="images/data/1.png" alt="" ></div></div>
+<div class="cover"></div>
+</body>
+</html>
