@@ -8,7 +8,7 @@ namespace StoreLib.Modules.Performance
 {
     public class CompressAttribute : ActionFilterAttribute
     {
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        public overrIde void OnActionExecuting(ActionExecutingContext filterContext)
         {
             HttpRequestBase request = filterContext.HttpContext.Request;
             HttpResponseBase response = filterContext.HttpContext.Response;

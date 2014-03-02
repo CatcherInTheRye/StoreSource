@@ -8,25 +8,25 @@ namespace StoreLib.Modules.Autorization
 {
     public class StorePrincipal : IPrincipal
     {
-        private StoreIdentity identity;
+        private StoreIdentity Identity;
 
-        public StorePrincipal(StoreIdentity identity)
+        public StorePrincipal(StoreIdentity Identity)
         {
-            this.identity = identity;
+            this.Identity = Identity;
         }
 
-        public StoreIdentity StoreIdentity { get { return identity; } }
+        public StoreIdentity StoreIdentity { get { return Identity; } }
 
-        public IIdentity Identity { get { return identity; } }
+        public IIdentity Identity { get { return Identity; } }
 
         public bool IsInRole(string role)
         {
-            return string.Compare(identity.UserType.ToLower(), role, StringComparison.InvariantCultureIgnoreCase) == 0;
+            return string.Compare(Identity.UserType.ToLower(), role, StringComparison.InvariantCultureIgnoreCase) == 0;
         }
 
         public bool IsNeedToCheckStatus(TimeSpan checkTime)
         {
-            return DateTime.UtcNow.Subtract(identity.LastCheckTime) > checkTime;
+            return DateTime.UtcNow.Subtract(Identity.LastCheckTime) > checkTime;
         }
     }
 }

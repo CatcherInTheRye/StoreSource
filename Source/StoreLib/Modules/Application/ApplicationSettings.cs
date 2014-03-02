@@ -18,7 +18,16 @@ namespace StoreLib.Modules.Application
         public int FormsAuthenticationTicketTime { get; private set; }
         public TimeSpan StatusCheckTime { get; private set; }
         public string CompanyName { get; private set; }
-        
+        public string Sitename { get; private set; }
+
+        public bool IsSsl { get; private set; }
+        public bool IsStandartPortsSsl { get; private set; }
+        public string Port { get; private set; }
+        public string PortSsl { get; private set; }
+        public string SiteAddress { get; private set; }
+        public bool UniqueEmail { get; private set; }
+        public string SiteEmail { get; private set; }
+
         public static ApplicationSettings AppSettings
         {
             get
@@ -62,6 +71,22 @@ namespace StoreLib.Modules.Application
             StatusCheckTime = TimeSpan.FromMinutes(!string.IsNullOrEmpty(value) ? Convert.ToInt32(value) : 90);
             value = ConfigurationManager.AppSettings["CompanyName"];
             CompanyName = !string.IsNullOrEmpty(value) ? value : "Store";
+            value = ConfigurationManager.AppSettings["Sitename"];
+            Sitename = !string.IsNullOrEmpty(value) ? value : "www.store.com";
+            value = ConfigurationManager.AppSettings["IsSsl"];
+            IsSsl = !string.IsNullOrEmpty(value) && Convert.ToBoolean(value);
+            value = ConfigurationManager.AppSettings["IsStandartPortsSsl"];
+            IsStandartPortsSsl = !string.IsNullOrEmpty(value) && Convert.ToBoolean(value);
+            value = ConfigurationManager.AppSettings["Port"];
+            Port = !string.IsNullOrEmpty(value) ? value : "80";
+            value = ConfigurationManager.AppSettings["Sitename"];
+            PortSsl = !string.IsNullOrEmpty(value) ? value : "443";
+            value = ConfigurationManager.AppSettings["Sitename"];
+            SiteAddress = !string.IsNullOrEmpty(value) ? value : string.Empty;
+            value = ConfigurationManager.AppSettings["UniqueEmail"];
+            UniqueEmail = !string.IsNullOrEmpty(value) && Convert.ToBoolean(value);
+            value = ConfigurationManager.AppSettings["SiteEmail"];
+            SiteEmail = !string.IsNullOrEmpty(value) ? value : string.Empty;
         }
     }
 }

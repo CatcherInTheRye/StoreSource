@@ -15,7 +15,7 @@ namespace VStore.Filters
         private static object _initializerLock = new object();
         private static bool _isInitialized;
 
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        public overrIde void OnActionExecuting(ActionExecutingContext filterContext)
         {
             // Ensure ASP.NET Simple Membership is initialized only once per app start
             LazyInitializer.EnsureInitialized(ref _initializer, ref _isInitialized, ref _initializerLock);
@@ -42,7 +42,7 @@ namespace VStore.Filters
                 }
                 catch (Exception ex)
                 {
-                    throw new InvalidOperationException("The ASP.NET Simple Membership database could not be initialized. For more information, please see http://go.microsoft.com/fwlink/?LinkId=256588", ex);
+                    throw new InvalIdOperationException("The ASP.NET Simple Membership database could not be initialized. For more information, please see http://go.microsoft.com/fwlink/?LinkId=256588", ex);
                 }
             }
         }

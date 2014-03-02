@@ -1,46 +1,79 @@
-﻿@model VStore.Models.LoginModel
-
+﻿@using StoreLib.Model
+@using StoreLib.Modules.Application
+@using StoreLib.Modules.Route
 @{
-    ViewBag.Title = "Log in";
+    LoginStatus loginStatus = ViewBag.LoginStatus != null ? (LoginStatus)ViewBag.LoginStatus : LoginStatus.Undefined;
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
-
-<section id="loginForm">
-<h2>Use a local account to log in.</h2>
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Log in Form</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-            </li>
-        </ol>
-        <input type="submit" value="Log in" />
-    </fieldset>
-    @*<p>
-        @Html.ActionLink("Register", "Register") if you don't have an account.
-    </p>*@
-}
-</section>
-
-@*<section class="social" id="socialLoginForm">
-    <h2>Use another service to log in.</h2>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>*@
-
-@*@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}*@
+<div class="row">
+    <div class="span4 offset1">
+        <div class="left">
+            <h1>Залогинься</h1>
+            <h3 class="font14px">Returning Clients</h3>
+            <h5>Чтобы войти, введите, пожалуйста, свой email и пароль.</h5>
+            @using (Html.BeginForm("Login", "Account"))
+            {
+                @Html.HIdden("returnUrl", Request["returnUrl"] ?? String.Empty)
+                @*<label>Email address:</label>*@
+                <input type="email" class="span4" name="login" Id="login" value="@ViewBag.Login" placeholder="Email" />
+                if (loginStatus == LoginStatus.UsernameRequired)
+                {<text><div class="alert alert-error">Введите Email.</div></text>}
+        
+                @*<label>Password:</label>*@
+                <input type="password" class="span4" name="password" Id="password" placeholder="Password" />
+      
+                if (loginStatus != LoginStatus.Undefined && loginStatus != LoginStatus.UsernameRequired)
+                {
+                    switch (loginStatus)
+                    {
+                        case LoginStatus.Locked:
+                            <text><div class="alert alert-error">
+                                      Ваш аккаунт на сайте @ApplicationHelper.SiteName был заблокирован согласно правилам сайта.<br />
+                                      Если Вы считаете, что это было сделано по ошибке, пожалуйста, свяжитесь с нами.
+                                  </div></text>
+                            break;
+                        case LoginStatus.Pending:
+                            <text><div class="alert alert-error">Ваш аккаунт не подтверждён. Пожалуйста, проверьте свой Email чтобы подтвердить регистрацию или @Html.ActionLink("нажмите здесь для повторного получения письма с подтверждением", "ResendConfirmationCode", new { controller = "Account", @class = "red bold text_underline" }).ToSslLink().</div></text>
+                            break;
+                        case LoginStatus.WrongPassword:
+                            <text><div class="alert alert-error">The Email address or Password is wrong. Please enter your Email address and Password again and press Sign In button.</div></text>
+                            break;
+                        default:
+                            <text><div class="alert alert-error">The Password is requered.</div></text>
+                            break;
+                    }
+                }
+                <input type="submit" value="Sign in" class="red_btn floatR" />
+            }
+            <div class="clear"></div>
+            <br />
+            <h3>Forgot your password?</h3>
+            @using (Html.BeginForm("ForgotPassword", "Account", FormMethod.Post, new { @Id = "forgotPassword" }))
+            {
+                <input name="email" type="email" class="span4" placeholder="Email address" />
+                <input type="submit" value="Reset Password" class="gray_btn floatR" />
+            }
+        </div>
+    </div>
+    
+    <div class="span4 offset1">
+        <div class="right">
+            <h1>New Account?</h1>
+            <h5>By creating an account you can review and manage your ZFolio.com  information. All you need is your email address and password to access shipping, billing information, order history, settings and more.</h5>
+            <a href="@Url.Action("Register", "Account").ToSslLink()" class="red_btn floatR mt5">Create Account</a>
+            <div class="clear"></div>
+            <br />
+            <h3 class="mt30">Confirmation link</h3>
+            @using (Html.BeginForm("ResendConfirmationCode", "Account", FormMethod.Post, new { @Id = "resend" }))
+            {
+                <h5>DId not receive your confirmation link?</h5>
+                <p>
+                    Enter your <i>registered</i> e-mail address.<br />
+                    A registration e-mail will be sent containing your login confirmation code.
+                </p>
+                <input name="email" type="email" class="span4" placeholder="Email address" />
+                <input type="submit" value="Resend Confirmation Link" class="gray_btn floatR" />
+            }
+        </div>
+    </div>
+</div>

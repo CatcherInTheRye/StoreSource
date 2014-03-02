@@ -91,8 +91,8 @@ namespace VStore.Models
 
     public class ExternalLogin
     {
-        public string Provider { get; set; }
-        public string ProviderDisplayName { get; set; }
-        public string ProviderUserId { get; set; }
+        public string ProvIder { get; set; }
+        public string ProvIderDisplayName { get; set; }
+        public string ProvIderUserId { get; set; }
     }
 }

@@ -21,8 +21,8 @@ namespace StoreLib.Modules.Autorization
         {
             HttpCachePolicyBase cachePolicy = filterContext.HttpContext.Response.Cache;
             cachePolicy.SetExpires(DateTime.UtcNow.AddDays(-1));
-            cachePolicy.SetValidUntilExpires(false);
-            cachePolicy.AppendCacheExtension("must-revalidate, proxy-revalidate");
+            cachePolicy.SetValIdUntilExpires(false);
+            cachePolicy.AppendCacheExtension("must-revalIdate, proxy-revalIdate");
             cachePolicy.SetCacheability(HttpCacheability.NoCache);
             cachePolicy.SetNoStore();
         }
@@ -71,7 +71,7 @@ namespace StoreLib.Modules.Autorization
             }
         }
 
-        public override void OnAuthorization(AuthorizationContext filterContext)
+        public overrIde void OnAuthorization(AuthorizationContext filterContext)
         {
             if (filterContext == null)
             {
@@ -86,7 +86,7 @@ namespace StoreLib.Modules.Autorization
                     LogOutUser(filterContext);
                     return;
                 }
-                StoreIdentity identity = principal.StoreIdentity;
+                StoreIdentity Identity = principal.StoreIdentity;
 
                 SessionUser user = filterContext.HttpContext.Session[SessionKeys.User] as SessionUser;
                 if (user == null)
@@ -103,7 +103,7 @@ namespace StoreLib.Modules.Autorization
                     if (userFromService != null && userFromService.Status == Statuses.Active)
                     {
                         IFormsAuthenticationService formsService = new FormsAuthenticationService();
-                        formsService.SignIn(userFromService.Login, identity.RememberMe, userFromService);
+                        formsService.SignIn(userFromService.Login, Identity.RememberMe, userFromService);
                     }
                     else
                     {

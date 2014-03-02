@@ -89,3 +89,6 @@ G:\Programing\Store\Source\VStore\bin\zh-Hans\System.Spatial.resources.dll
 G:\Programing\Store\Source\VStore\bin\zh-Hant\System.Spatial.resources.dll
 G:\Programing\Store\Source\VStore\obj\Debug\VStore.dll
 G:\Programing\Store\Source\VStore\obj\Debug\VStore.pdb
+G:\Programing\Store\StoreSource\Source\VStore\obj\Debug\VStore.csprojResolveAssemblyReference.cache
+G:\Programing\Store\StoreSource\Source\VStore\obj\Debug\VStore.dll
+G:\Programing\Store\StoreSource\Source\VStore\obj\Debug\VStore.pdb

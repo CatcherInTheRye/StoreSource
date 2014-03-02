@@ -10,11 +10,15 @@ namespace StoreLib.Model
     {
         public int Id { get; set; }
         public string Login { get; set; }
+        public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public Statuses Status { get; set; }
         public UserTypes UserType { get; set; }
+        public bool IsEmailConfirmed { get; set; }
+        public bool IsNeedToModify { get; set; }
+        public bool IsNeedToResetPassword { get; set; }
 
         public string FullName { get { return StringHelper.FullName(FirstName, LastName); } }
     }

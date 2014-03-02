@@ -20,4 +20,15 @@
         Inactive = 3,
         Locked = 4
     }
+
+    public enum LoginStatus: byte
+    {
+        Undefined = 0,
+        OK = 1,
+        UsernameRequired = 2,
+        PasswordRequired = 3,
+        WrongPassword = 4,
+        Locked = 5,
+        Pending = 6
+    }
 }

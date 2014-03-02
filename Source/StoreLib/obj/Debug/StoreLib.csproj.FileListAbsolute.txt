@@ -3,3 +3,6 @@ G:\Programing\Эврика\Eureca\Eureca 4\StoreLib\bin\Debug\StoreLib.pdb
 G:\Programing\Эврика\Eureca\Eureca 4\StoreLib\obj\Debug\StoreLib.csprojResolveAssemblyReference.cache
 G:\Programing\Эврика\Eureca\Eureca 4\StoreLib\obj\Debug\StoreLib.dll
 G:\Programing\Эврика\Eureca\Eureca 4\StoreLib\obj\Debug\StoreLib.pdb
+G:\Programing\Store\StoreSource\Source\StoreLib\obj\Debug\StoreLib.csprojResolveAssemblyReference.cache
+G:\Programing\Store\StoreSource\Source\StoreLib\obj\Debug\StoreLib.dll
+G:\Programing\Store\StoreSource\Source\StoreLib\obj\Debug\StoreLib.pdb

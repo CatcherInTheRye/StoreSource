@@ -6,7 +6,7 @@
 
 body {
     background-color: #fff;
-    border-top: solid 10px #000;
+    border-top: solId 10px #000;
     color: #333;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
@@ -55,7 +55,7 @@ mark {
     clear: both;
     display: block;
     height: 0;
-    visibility: hidden;
+    visibility: hIdden;
 }
 
 h1, h2, h3,
@@ -95,7 +95,7 @@ h5, h6 {
 ----------------------------------------------------------*/
 .content-wrapper {
     margin: 0 auto;
-    max-width: 960px;
+    max-wIdth: 960px;
 }
 
 #body {
@@ -247,7 +247,7 @@ hgroup.title h2 {
 
 /* features */
 section.feature {
-    width: 300px;
+    wIdth: 300px;
     float: left;
     padding: 10px;
 }
@@ -306,20 +306,20 @@ ol.round {
 /* content */
 article {
     float: left;
-    width: 70%;
+    wIdth: 70%;
 }
 
-aside {
+asIde {
     float: right;
-    width: 25%;
+    wIdth: 25%;
 }
 
-    aside ul {
+    asIde ul {
         list-style: none;
         padding: 0;
     }
 
-        aside ul li {
+        asIde ul li {
             background: url("../Images/bullet.png") no-repeat 0 50%;
             padding: 2px 0 2px 20px;
         }
@@ -330,42 +330,42 @@ aside {
 
 /* login page */
 #loginForm {
-    border-right: solid 2px #c8c8c8;
+    border-right: solId 2px #c8c8c8;
     float: left;
-    width: 55%;
+    wIdth: 55%;
 }
 
-    #loginForm .validation-error {
+    #loginForm .valIdation-error {
         display: block;
         margin-left: 15px;
     }
 
-    #loginForm .validation-summary-errors ul {
+    #loginForm .valIdation-summary-errors ul {
         margin: 0;
         padding: 0;
     }
 
-    #loginForm .validation-summary-errors li {
+    #loginForm .valIdation-summary-errors li {
         display: inline;
         list-style: none;
         margin: 0;
     }
 
     #loginForm input {
-        width: 250px;
+        wIdth: 250px;
     }
 
     #loginForm input[type="checkbox"],
     #loginForm input[type="submit"],
     #loginForm input[type="button"],
     #loginForm button {
-        width: auto;
+        wIdth: auto;
     }
 
 #socialLoginForm {
     margin-left: 40px;
     float: left;
-    width: 40%;
+    wIdth: 40%;
 }
 
     #socialLoginForm h2 {
@@ -390,7 +390,7 @@ aside {
 }
 
 .contact iframe {
-    border: 1px solid #333;
+    border: 1px solId #333;
     margin: 5px 0 0 10px;
 }
 
@@ -425,41 +425,41 @@ label.checkbox {
 }
 
 input, textarea {
-    border: 1px solid #e2e2e2;
+    border: 1px solId #e2e2e2;
     background: #fff;
     color: #333;
     font-size: 1.2em;
     margin: 5px 0 6px 0;
     padding: 5px;
-    width: 300px;
+    wIdth: 300px;
 }
 
 textarea {
     font-family: inherit;
-    width: 500px;
+    wIdth: 500px;
 }
 
     input:focus, textarea:focus {
-        border: 1px solid #7ac0da;
+        border: 1px solId #7ac0da;
     }
 
     input[type="checkbox"] {
         background: transparent;
         border: inherit;
-        width: auto;
+        wIdth: auto;
     }
 
     input[type="submit"],
     input[type="button"],
     button {
         background-color: #d3dce0;
-        border: 1px solid #787878;
+        border: 1px solId #787878;
         cursor: pointer;
         font-size: 1.2em;
         font-weight: 600;
         padding: 7px;
         margin-right: 8px;
-        width: auto;
+        wIdth: auto;
     }
 
     td input[type="submit"],
@@ -472,7 +472,7 @@ textarea {
 
 /* info and errors */
 .message-info {
-    border: 1px solid;
+    border: 1px solId;
     clear: both;
     padding: 10px 20px;
 }
@@ -496,31 +496,31 @@ textarea {
     color: #e80c4d;
 }
 
-/* styles for validation helpers */
-.field-validation-error {
+/* styles for valIdation helpers */
+.field-valIdation-error {
     color: #e80c4d;
     font-weight: bold;
 }
 
-.field-validation-valid {
+.field-valIdation-valId {
     display: none;
 }
 
-input.input-validation-error {
-    border: 1px solid #e80c4d;
+input.input-valIdation-error {
+    border: 1px solId #e80c4d;
 }
 
-input[type="checkbox"].input-validation-error {
+input[type="checkbox"].input-valIdation-error {
     border: 0 none;
 }
 
-.validation-summary-errors {
+.valIdation-summary-errors {
     color: #e80c4d;
     font-weight: bold;
     font-size: 1.1em;
 }
 
-.validation-summary-valid {
+.valIdation-summary-valId {
     display: none;
 }
 
@@ -590,7 +590,7 @@ tr.pager td {
 /********************
 *   Mobile Styles   *
 ********************/
-@media only screen and (max-width: 850px) {
+@media only screen and (max-wIdth: 850px) {
 
     /* header
     ----------------------------------------------------------*/
@@ -670,9 +670,9 @@ tr.pager td {
     }
 
     /* page content */
-    article, aside {
+    article, asIde {
         float: none;
-        width: 100%;
+        wIdth: 100%;
     }
 
     /* ordered list */
@@ -703,7 +703,7 @@ tr.pager td {
      section.feature {
         float: none;
         padding: 10px;
-        width: auto;
+        wIdth: auto;
      }
 
         section.feature img {
@@ -715,17 +715,17 @@ tr.pager td {
 
     /* forms */
     input {
-        width: 90%;
+        wIdth: 90%;
     }
 
     /* login page */
     #loginForm {
         border-right: none;
         float: none;
-        width: auto;
+        wIdth: auto;
     }
 
-        #loginForm .validation-error {
+        #loginForm .valIdation-error {
             display: block;
             margin-left: 15px;
         }
@@ -733,7 +733,7 @@ tr.pager td {
     #socialLoginForm {
         margin-left: 0;
         float: none;
-        width: auto;
+        wIdth: auto;
     }
 
 

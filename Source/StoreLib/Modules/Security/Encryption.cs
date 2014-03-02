@@ -8,22 +8,22 @@ namespace StoreLib.Modules.Security
     {
         private static byte[] HashedKeyGet(string key)
         {
-            MD5CryptoServiceProvider md5Provider = new MD5CryptoServiceProvider();
-            byte[] keyArray = md5Provider.ComputeHash(Encoding.UTF8.GetBytes(key));
-            md5Provider.Clear();
+            MD5CryptoServiceProvIder md5ProvIder = new MD5CryptoServiceProvIder();
+            byte[] keyArray = md5ProvIder.ComputeHash(Encoding.UTF8.GetBytes(key));
+            md5ProvIder.Clear();
             return keyArray;
         }
 
         private static ICryptoTransform CryptoTransformGet(string key, bool isEncryption)
         {
-            TripleDESCryptoServiceProvider tdesProvider = new TripleDESCryptoServiceProvider
+            TripleDESCryptoServiceProvIder tdesProvIder = new TripleDESCryptoServiceProvIder
                                                               {
                                                                   Key = HashedKeyGet(key),
                                                                   Mode = CipherMode.ECB,
                                                                   Padding = PaddingMode.PKCS7
                                                               };
-            ICryptoTransform result = isEncryption ? tdesProvider.CreateEncryptor() : tdesProvider.CreateDecryptor();
-            tdesProvider.Clear();
+            ICryptoTransform result = isEncryption ? tdesProvIder.CreateEncryptor() : tdesProvIder.CreateDecryptor();
+            tdesProvIder.Clear();
             return result;
         }
 

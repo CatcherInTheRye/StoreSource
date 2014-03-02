@@ -8,7 +8,7 @@
         @foreach (VStore.Models.ExternalLogin externalLogin in Model)
         {
             <tr>
-                <td>@externalLogin.ProviderDisplayName</td>
+                <td>@externalLogin.ProvIderDisplayName</td>
                 <td>
                     @if (ViewBag.ShowRemoveButton)
                     {
@@ -16,9 +16,9 @@
                         {
                             @Html.AntiForgeryToken()
                             <div>
-                                @Html.Hidden("provider", externalLogin.Provider)
-                                @Html.Hidden("providerUserId", externalLogin.ProviderUserId)
-                                <input type="submit" value="Remove" title="Remove this @externalLogin.ProviderDisplayName credential from your account" />
+                                @Html.HIdden("provIder", externalLogin.ProvIder)
+                                @Html.HIdden("provIderUserId", externalLogin.ProvIderUserId)
+                                <input type="submit" value="Remove" title="Remove this @externalLogin.ProvIderDisplayName credential from your account" />
                             </div>
                         }
                     }

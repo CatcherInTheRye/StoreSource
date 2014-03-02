@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.Mvc;
 using StoreLib.Model;
+using StoreLib.Model.Classes;
 using StoreLib.Modules.Application;
 using StoreLib.Modules.Helpers;
+using StoreLib.Services.Interface;
 
 namespace StoreLib.Modules.Autorization
 {
@@ -14,6 +17,14 @@ namespace StoreLib.Modules.Autorization
     public class SessionKeys
     {
         public const string User = "CurrentUser";
+        public const string CartUser = "ShoppingCartUser";
+        public const string Cart = "ShoppingCart";
+        public const string CartPackage = "ShoppingCartPackage";
+        public const string GiftCart = "ShoppingGiftCards";
+
+        public const string ShoppingCart = "ShoppingCartN";
+        public const string ShoppingCartPackage = "ShoppingCartPackageN";
+        public const string ShoppingGiftCart = "ShoppingGiftCardsN";
     }
 
     #endregion Session Keys
@@ -88,7 +99,7 @@ namespace StoreLib.Modules.Autorization
                         StorePrincipal principal = HttpContext.Current.User as StorePrincipal;
                         if (principal != null)
                         {
-                            StoreIdentity identity = principal.StoreIdentity;
+                            StoreIdentity Identity = principal.StoreIdentity;
                             //TODO : получить пользователя из базы
                             string adminLogin = ApplicationHelper.AdminLogin;
                             string adminPassword = ApplicationHelper.AdminPassword;
@@ -117,6 +128,149 @@ namespace StoreLib.Modules.Autorization
                 }
             }
             set { HttpContext.Current.Session[SessionKeys.User] = value; }
+        }
+
+        //CartUser
+        public static SessionUser CartUser
+        {
+            get { return HttpContext.Current.Session[SessionKeys.CartUser] as SessionUser; }
+            set { HttpContext.Current.Session[SessionKeys.CartUser] = value; }
+        }
+
+        //UserCart
+        public static SessionCart UserCart
+        {
+            get
+            {
+                if (HttpContext.Current == null || HttpContext.Current.Session == null) return new SessionCart();
+                SessionCart cart = HttpContext.Current.Session[SessionKeys.Cart] as SessionCart;
+                if (cart == null)
+                {
+                    cart = new SessionCart();
+                    HttpContext.Current.Session[SessionKeys.Cart] = cart;
+                }
+                return cart;
+            }
+        }
+
+        //CartPackage
+        public static SessionPackageCart CartPackage
+        {
+            get
+            {
+                if (HttpContext.Current == null || HttpContext.Current.Session == null) return new SessionPackageCart();
+                SessionPackageCart cart = HttpContext.Current.Session[SessionKeys.CartPackage] as SessionPackageCart;
+                if (cart == null)
+                {
+                    cart = new SessionPackageCart();
+                    HttpContext.Current.Session[SessionKeys.CartPackage] = cart;
+                }
+                return cart;
+            }
+            set { HttpContext.Current.Session[SessionKeys.CartPackage] = value; }
+        }
+    }
+
+    public class AppSessionN
+    {
+        //IsAuthenticated
+        public static bool IsAuthenticated
+        {
+            get { return (HttpContext.Current != null && HttpContext.Current.User != null && HttpContext.Current.User.Identity.IsAuthenticated); }
+        }
+
+        //CurrentUser
+        public static SessionUser CurrentUser
+        {
+            get
+            {
+                try
+                {
+                    if (!IsAuthenticated) return null;
+                    SessionUser user = HttpContext.Current.Session[SessionKeys.User] as SessionUser;
+                    if (user == null)
+                    {
+                        StorePrincipal principal = (HttpContext.Current.User as StorePrincipal);
+                        if (principal != null)
+                        {
+                            StoreIdentity Identity = principal.StoreIdentity;
+                            User usr = DependencyResolver.Current.GetService<IUserService>().GetUserActiveAndApproved(Identity.Id, Identity.Name);
+                            if (usr == null)
+                            {
+                                IFormsAuthenticationService formsService = new FormsAuthenticationService();
+                                formsService.SignOut();
+                            }
+                            else
+                                user = new SessionUser(usr, DependencyResolver.Current.GetService<IGeneralServiceOld>().StoreUsersGetStoresByUser(usr.Id).Select(t => new IdTitleDescription { Id = t.Id, Title = t.Title, Description = t.Color }).ToList());
+                        }
+                        else
+                        {
+                            IFormsAuthenticationService formsService = new FormsAuthenticationService();
+                            formsService.SignOut();
+                        }
+                        HttpContext.Current.Session[SessionKeys.User] = user;
+                    }
+                    return user;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                HttpContext.Current.Session[SessionKeys.User] = value;
+            }
+        }
+
+        //UserCart
+        public static SessionShoppingCart UserCart
+        {
+            get
+            {
+                if (HttpContext.Current == null || HttpContext.Current.Session == null) return new SessionShoppingCart();
+                SessionShoppingCart cart = HttpContext.Current.Session[SessionKeys.ShoppingCart] as SessionShoppingCart;
+                if (cart == null)
+                {
+                    cart = new SessionShoppingCart();
+                    HttpContext.Current.Session[SessionKeys.ShoppingCart] = cart;
+                }
+                return cart;
+            }
+        }
+
+        //CartPackage
+        public static SessionPackageCart CartPackage
+        {
+            get
+            {
+                if (HttpContext.Current == null || HttpContext.Current.Session == null) return new SessionPackageCart();
+                SessionPackageCart cart = HttpContext.Current.Session[SessionKeys.ShoppingCartPackage] as SessionPackageCart;
+                if (cart == null)
+                {
+                    cart = new SessionPackageCart();
+                    HttpContext.Current.Session[SessionKeys.ShoppingCartPackage] = cart;
+                }
+                return cart;
+            }
+            set { HttpContext.Current.Session[SessionKeys.ShoppingCartPackage] = value; }
+        }
+
+        //GiftCart
+        public static SessionGiftCart GiftCart
+        {
+            get
+            {
+                if (HttpContext.Current == null || HttpContext.Current.Session == null) return new SessionGiftCart();
+                SessionGiftCart cart = HttpContext.Current.Session[SessionKeys.ShoppingGiftCart] as SessionGiftCart;
+                if (cart == null)
+                {
+                    cart = new SessionGiftCart();
+                    HttpContext.Current.Session[SessionKeys.ShoppingGiftCart] = cart;
+                }
+                return cart;
+            }
+            set { HttpContext.Current.Session[SessionKeys.ShoppingGiftCart] = value; }
         }
     }
 

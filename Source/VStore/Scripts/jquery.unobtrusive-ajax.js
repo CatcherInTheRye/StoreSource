@@ -8,7 +8,7 @@
 
 (function ($) {
     var data_click = "unobtrusiveAjaxClick",
-        data_validation = "unobtrusiveValidation";
+        data_valIdation = "unobtrusiveValIdation";
 
     function getFunction(code, argNames) {
         var fn = window, parts = (code || "").split(".");
@@ -28,7 +28,7 @@
 
     function asyncOnBeforeSend(xhr, method) {
         if (!isMethodProxySafe(method)) {
-            xhr.setRequestHeader("X-HTTP-Method-Override", method);
+            xhr.setRequestHeader("X-HTTP-Method-OverrIde", method);
         }
     }
 
@@ -86,7 +86,7 @@
                 return result;
             },
             complete: function () {
-                loading.hide(duration);
+                loading.hIde(duration);
                 getFunction(element.getAttribute("data-ajax-complete"), ["xhr", "status"]).apply(this, arguments);
             },
             success: function (data, status, xhr) {
@@ -101,15 +101,15 @@
         method = options.type.toUpperCase();
         if (!isMethodProxySafe(method)) {
             options.type = "POST";
-            options.data.push({ name: "X-HTTP-Method-Override", value: method });
+            options.data.push({ name: "X-HTTP-Method-OverrIde", value: method });
         }
 
         $.ajax(options);
     }
 
-    function validate(form) {
-        var validationInfo = $(form).data(data_validation);
-        return !validationInfo || !validationInfo.validate || validationInfo.validate();
+    function valIdate(form) {
+        var valIdationInfo = $(form).data(data_valIdation);
+        return !valIdationInfo || !valIdationInfo.valIdate || valIdationInfo.valIdate();
     }
 
     $(document).on("click", "a[data-ajax=true]", function (evt) {
@@ -151,7 +151,7 @@
     $(document).on("submit", "form[data-ajax=true]", function (evt) {
         var clickInfo = $(this).data(data_click) || [];
         evt.preventDefault();
-        if (!validate(this)) {
+        if (!valIdate(this)) {
             return;
         }
         asyncRequest(this, {
