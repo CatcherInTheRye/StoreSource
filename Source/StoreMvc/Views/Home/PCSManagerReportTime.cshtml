@@ -1,0 +1,225 @@
+﻿@using DataRepository.DataContracts
+@using PCSMvc.Models
+@{
+    ViewBag.Title = "Time Report";
+    Layout = "~/Views/Shared/_PCSManagerLayout.cshtml";
+    List<UserForm> specialists = ViewBag.specialists as List<UserForm> ?? new List<UserForm>();
+    List<IdTitle> districts = ViewBag.districts as List<IdTitle> ?? new List<IdTitle>();
+    List<SchoolFormShort> schools = ViewBag.schools as List<SchoolFormShort> ?? new List<SchoolFormShort>();
+}
+
+<div id="column-right">
+    <div data-role="content">
+        <div class="intelli-content">
+            <div class="intelli-main-content-header ui-bar ui-bar-a">
+                <a href="javascript:;" class="icoMenu" id="togglepanel"><span>Menu</span></a>
+                <!--a class="ui-btn ui-nodisc-icon ui-btn-inline ui-btn-icon-left ui-btn-b ui-icon-bars ui-btn-icon-notext" href="javascript:;" id="togglepanel">Panel</a-->
+                <h3>
+                    Time Report
+                </h3>
+            </div>
+            <div class="intelli-main-content ui-body ui-body-a">
+                <p>
+                    <table width="100%" cellpadding="10" border="0">
+                        <tr>
+                            <td width="33%">
+                                <label>Specialist:</label>
+                                <select class="intelli-textfield" style="width:100%;" data-role="none" id="specialist" onchange="getData();">
+                                    <option value="-1"></option>
+                                    @foreach (UserForm spec in specialists)
+                                    {
+                                        <option value="@(spec.Id)">@(spec.FirstName) @(spec.LastName)</option>
+                                    }
+                                </select>
+                            </td>
+                            <td width="33%">
+                                <label>District:</label>
+                                <select class="intelli-textfield" style="width:100%;" data-role="none" id="district" onchange="getData();">
+                                    <option value="-1"></option>
+                                    @foreach (IdTitle dist in districts)
+                                    {
+                                        <option value="@(dist.Id)">@(dist.Title)</option>
+                                    }
+                                </select>
+                            </td>
+                            <td width="33%">
+                                <label>School:</label>
+                                <select class="intelli-textfield" style="width:100%;" data-role="none" id="school" onchange="getData();">
+                                    <option value="-1"></option>
+                                    @foreach (SchoolFormShort sch in schools)
+                                    {
+                                        <option value="@(sch.Id)">@(sch.Title)</option>
+                                    }
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </p>
+
+                <p>
+                    <table width="100%" cellpadding="0" border="0">
+                        <tr>
+                            <td width="10%" align="center">From</td>
+                            <td width="20%">
+                                <input class="intelli-textfield intelli-datapicker date" type="text" data-role="date" value="" id="startDate" />
+                            </td>
+                            <td width="5%" align="center">to</td>
+                            <td width="20%">
+                                <input class="intelli-textfield intelli-datapicker date" type="text" data-role="date" value="" id="endDate" />
+                            </td>
+                            <td width="45%" style="white-space:no-wrap;">
+                                <a id="genereateXls" class="intelli-btn-white editPopup" style="float:right;">XLS</a>
+                                <a id="genereatePdf" class="intelli-btn-white editPopup" style="float:right; margin-right:15px;">PDF</a>
+                            </td>
+                        </tr>
+                    </table>
+                </p>
+                <p>
+                    <div class="intelli-total" id="totalDiv" style="display:none;">
+                        <ul id="totalRow">
+                        </ul>
+                    </div>
+                </p>
+                <p>
+                    <div id="timerecordsTable"></div>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- /content -->
+</div>
+
+@section pageJS{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".date").kendoDatePicker({
+                format: "MMMM dd, yyyy",
+                parseFormats: ["yyyy-MM-dd"],
+                change: getData
+            });
+            getData();
+            
+            $("#genereatePdf").click(function() {
+                window.location.href = "@Url.Action("PCSManagerReportTimeReport", "Home")?reportType=@(ReportType.pdf.ToString())" + getReportParameters();
+            });
+            
+            $("#genereateXls").click(function() {
+                window.location.href = "@Url.Action("PCSManagerReportTimeReport", "Home")?reportType=@(ReportType.xls.ToString())" + getReportParameters();
+            });
+
+            function getReportParameters() {
+                return "&start=" + $("#startDate").val() + "&end=" + $("#endDate").val() + "&specialist=" + $("#specialist").val() + "&district=" + $("#district").val() + "&school=" + $("#school").val();
+            }
+        });
+
+        function getData() {
+            var specialist = $("#specialist").val();
+            var district = $("#district").val();
+            var school = $("#school").val();
+            var start = $("#startDate").val();
+            var end = $("#endDate").val();
+            $.get('@(Url.Action("PCSManagerReportTimeGet", "Home"))', { start: start, end: end, specialist: specialist, district: district, school: school }, function (result) {
+                console.log(result);
+                //gridElem.wrapper.empty();
+                createKendoGrid(result.Data, specialist != -1);
+            }, 'json');
+            if (specialist != -1) {
+                $("#totalDiv").show();
+                $.get('@(Url.Action("PCSManagerReportTimeTotalGet"))', { start: start, end: end, specialist: specialist }, function (result) {
+                    console.log(result);
+                    //gridElem.wrapper.empty();
+                    $("#totalDiv").html(result.Data);
+                }, 'json');
+            }
+            else {
+                $("#totalDiv").hide();
+            }
+        }
+
+        function createKendoGrid(results, withSpec) {
+            $("#timerecordsTable").empty();
+            gridElem = $("#timerecordsTable").kendoGrid({
+                dataSource: {
+                    data: results,
+                    schema: {
+                        model: {
+                            fields: {
+                                Id: { type: "int" },
+                                Date: { type: "date" },
+                                Specialist: { type: "string" },
+                                Student: { type: "string" },
+                                Code: { type: "string" },
+                                Time: { type: "int" },
+                                Note: { type: "string" }
+                            }
+                        }
+                    },
+                    pageSize: 12
+                },
+                pageable: true,
+                sortable: {
+                    mode: "multiple",
+                    allowUnsort: true
+                },
+                filterable: {
+                    extra: false,
+                    operators: {
+                        string: {
+                            contains: 'Contains',
+                            eq: "Is equal to"
+                        }
+                    }
+                },
+                scrollable: false,
+                columns: [
+                    {
+                        hidden: true,
+                        field: "Id",
+                        attributes: { 'Id': 'idCol' }
+                    },
+                    {
+                        title: "DATE",
+                        field: "Date",
+                        width: 180,
+                        filterable: true,
+                        format: "{0:MMMM dd, yyyy}",
+                        parseFormats: ["yyyy-MM-dd", "dd.MM.yyyy"]
+                    },
+                    {
+                        title: "SPECIALIST",
+                        field: "Specialist",
+                        hidden: withSpec,
+                        //template: "#= kendo.toString(date,'yyyy-MM-dd') #",
+                        width: 280,
+                        filterable: true,
+                        attributes: { 'Id': 'specCol' }
+                    },
+                    {
+                        title: "STUDENT NAME/OFFICE",
+                        field: "Student",
+                        sortable: true,
+                        width: 140,
+                        filterable: true
+                    },
+                    {
+                        title: "CODE",
+                        field: "Code",
+                        width: 200,
+                        filterable: true
+                    },
+                    {
+                        title: "TIME",
+                        field: "Time",
+                        width: 120,
+                        filterable: false
+                    },
+                    {
+                        title: "NOTES",
+                        field: "Note",
+                        filterable: false
+                    }
+                ]
+            }).data("kendoGrid");
+        }
+    </script>
+}

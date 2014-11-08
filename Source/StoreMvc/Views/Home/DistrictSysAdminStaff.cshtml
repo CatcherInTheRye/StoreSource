@@ -1,0 +1,277 @@
+﻿@using System.Collections
+@using DataRepository.DataContracts
+@using PCSMvc.Models
+@{
+    ViewBag.Title = "DistrictSysAdminStaff";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    
+}
+<div class="intelli-manager">
+    <div data-role="page" class="wrapper-content">
+        <div id="column-left">
+            <a class="logo" href="#" title="">
+                <img src="/images/logo-dictrict.png" width="229" height="120" alt="" /></a>
+                <div style="text-align:center;">
+        <a href="@(Url.Action("Logout"))" title="">Logout</a></div>
+            <ul class="intelli-mainmenu">
+                <li><a href="@(Url.Action("DistrictSysAdmin"))" title="">Settings</a></li>
+                <li><a href="@(Url.Action("DistrictSysAdminSchools"))" title="">Schools</a></li>
+                <li><a href="@(Url.Action("DistrictSysAdminStaff"))" title="">Staff</a></li>
+                <li><a href="@(Url.Action("DistrictSysAdminStudents"))" title="">Students</a></li>
+            </ul>
+            <div class="intelli-copy">
+                <span>Developed by</span> <a href="http://www.intellimedia.ca/" title="Visit Intellimedia inc.">
+                    <img src="/images/logoIntellimedia.png" with="131" height="23" alt="" /></a>
+            </div>
+        </div>
+        <!-- /left column -->
+        <div id="column-right">
+            <div data-role="content">
+                <div class="intelli-content">
+                    <div class="intelli-main-content-header ui-bar ui-bar-a">
+                        <a href="javascript:;" class="icoMenu" id="togglepanel"><span>Menu</span></a>
+                        <!--a class="ui-btn ui-nodisc-icon ui-btn-inline ui-btn-icon-left ui-btn-b ui-icon-bars ui-btn-icon-notext" href="javascript:;" id="togglepanel">Panel</a-->
+                        <h3>
+                            District and School Staff</h3>
+                    </div>
+                    <div class="intelli-main-content ui-body ui-body-a">
+                        <p>
+                            <div id="staffTable"></div>
+                        </p>
+
+                        <p>
+                            <div>
+                                <select id="typeSelect" data-role="none">
+                                    <option value="r">Request</option>
+                                    <option value="a">Approve</option>
+                                    <option value="v">View Reports</option>
+                                </select>
+                                <input type="checkbox" id="isChecked" data-role="none" />
+                                <input type="button" value="Set all" data-role="none" onclick="setAll();"/>
+                            </div>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /content -->
+            <input name="importFiles" id="importFiles" type="file" />
+            <textarea id="importResults" class="hidden" style="height: 200px!important;"></textarea>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@section pageJS{
+    <script type="text/javascript">
+        var schools;
+        $(document).ready(function() {
+            getData();
+            
+            $("#importResults").hide();
+
+            $("#importFiles").kendoUpload({
+                async: {
+                    saveUrl: "@(Url.Action("ImportStaff", "Home"))",
+                    removeUrl: "@(Url.Action("ImportStaffRemove", "Home"))",
+                    autoUpload: false
+                },
+                select: function () {
+                    $("#importResults").hide();
+                },
+                success: function (e) {
+                    if (e.response.Data != null) {
+                        $("#importResults").show().val(e.response.Data.join('\n'));
+                    } else {
+                        $("#importResults").hide();
+                    }
+                    getData();
+                },
+                multiple: false
+            });
+        });
+
+        function getData() {
+            $.get('@(Url.Action("DistrictSysAdminStaffGet"))', {}, function (result) {
+                console.log(result);
+                createKendoGrid(result.Data);
+            }, 'json');
+
+            $.get('@(Url.Action("OrganiztionSchoolsGet"))', {}, function (result) {
+                console.log(result);
+                schools = result.Data;
+            }, 'json');
+        }
+
+        function changeCombo(e) {
+            var arr = [];
+            var id = $(e).parents('tr:first').find('td:first').html();
+            arr.push(id);
+            save(arr);
+        }
+
+        function save(ids) {
+            var data = [];
+            $.each(ids, function(i, item) {
+                var boxes = $("#staffTable #" + item).parents('tr:first').find('#canCol').find('input');
+                data.push({
+                    Id: parseInt(item),
+                    CanRequest: $(boxes[0]).is(':checked'),
+                    CanApprove: $(boxes[1]).is(':checked'),
+                    CanViewReports: $(boxes[2]).is(':checked')
+                });
+            });
+            var things = JSON.stringify({ 'actions': data });
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: '/Home/DistrictSysAdminSchoolsSave',
+                data: things,
+                success: function () {
+                    $('#result').html('"PassThings()" successfully called.');
+                },
+                failure: function (response) {
+                    $('#result').html(response);
+                }
+            });
+            @*$.post('@(Url.Action("DistrictSysAdminSchoolsSave"))', { actions: data }, function (result) {
+                console.log(result);
+                //createKendoGrid(result.Data);
+            }, 'json');*@
+        }
+
+        function setAll() {
+            var isCh = $("#isChecked").is(":checked");
+            var ids = [];
+            $.each($("#staffTable ." + $("#typeSelect").val()), function(i, item) {
+                $(item).prop('checked', isCh);
+                ids.push($(item).parents('tr:first').find('td:first').html());
+            })
+            /*$.each($("#staffTable #canCol").parents('tr'), function(i, item) {
+                ids.push($(item).find('td:first').html());
+            })*/
+            save(ids);
+        }
+
+        function createKendoGrid(results) {
+            $("#staffTable").empty();
+            $("#staffTable").kendoGrid({
+                dataSource: {
+                    data: results,
+                    schema: {
+                        model: {
+                            fields: {
+                                Id: { type: "int" },
+                                Name: { type: "string" },
+                                Phone: { type: "string" },
+                                Email: { type: "string" },
+                                Dictrict: { type: "string" },
+                                School: { type: "string" },
+                                Salutation: { type: "string" },
+                                Cell: { type: "string" },
+                                CanRequest: { type: "bool" },
+                                CanApprove: { type: "bool" },
+                                CanViewReports: { type: "bool" }
+                            }
+                        }
+                    },
+                    pageSize: 20
+                },
+                pageable: true,
+                sortable: {
+                    mode: "multiple",
+                    allowUnsort: true
+                },
+                filterable: {
+                    extra: false,
+                    operators: {
+                        string: {
+                            eq: "Is equal to"
+                        }
+                    }
+                },
+                scrollable: false,
+                columns: [
+                    {
+                        hidden: true,
+                        field: "Id",
+                        attributes: { 'id': '#=Id#' }
+                    },
+                    {
+                        title: "DISTRICT",
+                        field: "Dictrict",
+                        //template: "#= kendo.toString(date,'yyyy-MM-dd') #",
+                        width: 150,
+                        filterable: false
+                    },
+                    {
+                        title: "SCHOOL",
+                        field: "School",
+                        //template: "#= kendo.toString(date,'yyyy-MM-dd') #",
+                        width: 150,
+                        filterable: {
+                            ui: schoolFilter
+                        }
+                    },
+                    {
+                        title: "NAME",
+                        field: "Name",
+                        //template: "#= kendo.toString(date,'yyyy-MM-dd') #",
+                        width: 250,
+                        filterable: false
+                    },
+                    {
+                        title: "SALUTATION",
+                        field: "Salutation",
+                        //template: "#= kendo.toString(date,'yyyy-MM-dd') #",
+                        width: 200,
+                        filterable: false
+                    },
+                    {
+                        title: "EMAIL",
+                        field: "Email",
+                        width: 150,
+                        template: "<a href='mailto:#=Email#' target='_top'>#=Email#</a>"
+                    },
+                    {
+                        title: "PHONE",
+                        field: "Phone",
+                        sortable: true,
+                        width: 150,
+                        filterable: false
+                    },
+                    {
+                        title: "CELL",
+                        field: "Cell",
+                        width: 150,
+                    },
+                    {
+                        title: "ACTION",
+                        encoded: false,
+                        field: "CanRequest",
+                        filterable: false,
+                        attributes: { 'id': 'canCol' },
+                        template: "<ul class='checkboxes'><li><input class='r' type='checkbox' #= CanRequest ? 'checked=checked' : '' # data-role='none' onchange='changeCombo(this)'/><label data-role='none'>Can Request</label></li>" +
+                            "<li><input class='a' type='checkbox' #= CanApprove ? 'checked=checked' : '' #  data-role='none' onchange='changeCombo(this)'/><label data-role='none'>Can Approve</label></li>" +
+                            "<li><input class='v' type='checkbox' #= CanViewReports ? 'checked=checked' : '' # data-role='none' onchange='changeCombo(this)'/><label data-role='none'>Can View Reports</label></li></ul>"
+                    }
+                ]
+            });
+
+            function schoolFilter(element) {
+                element.kendoDropDownList({
+                    dataSource: schools,
+                    dataValueField: "Id",
+                    dataTextField: "Title",
+                    optionLabel: "--Select School--"
+                });
+            }
+        }
+    </script>
+}

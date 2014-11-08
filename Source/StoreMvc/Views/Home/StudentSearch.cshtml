@@ -1,0 +1,172 @@
+﻿@{
+    ViewBag.Title = "Student Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="intelli-login" style="width:85%; margin:30px auto 10px auto;">
+    <div class="intelli-main-content ui-body">
+        <div class="intelli-search-field" style="position: relative; width: 95%;">
+            <input type="text" value="Search..." onblur="if(value=='') value = 'Search...'" onfocus="    if(value=='Search...') value = ''" data-role="none" class="intelli-textfield" style="width: 90%;" id="searchRequest" />
+            <a id="buttonSearch" href="javascript:;" class="search-btn" style="right: 50px;" onclick="searchStudents();"><img src="/images/icoSearch.png" width="30" height="30" alt="" /></a>
+            <a href="javascript:;" title="How to search?" onclick="showHelp();" style="display: block; height: 36px; position: absolute; right: 1%; top: 9px; width: 30px;"><img src="../images/icoMenu.png" width="30" height="30" alt="" /></a>
+        </div>
+    </div>
+    @*<div class="intelli-search-field" style="position:relative;">
+            <input type="text" title="Free Text:  text matching any of the displayed columns OR Targeted search:  name=|asn=|grade=|school= will match the text only in the indicated column" value="Search..." onblur="if(value=='') value = 'Search...'" onfocus="if(value=='Search...') value = ''" id="searchRequest" />
+            <a href="javascript:;" title="Search for student" onclick="searchStudents();" class="search-btn"><img src="../images/icoSearch.png" width="30" height="30" alt="" /></a>
+            <a href="javascript:;" title="How to search?" onclick="showHelp();" style="display: block; height: 36px; position: absolute; right: 1%; top: 9px; width: 30px;"><img src="../images/icoMenu.png" width="30" height="30" alt="" /></a>
+        </div>*@
+    <p>
+        <div style="width: 91%; margin: 0 auto; background: #fff; border: solid 3px #fff;">
+            <div id="searched"></div>
+            <div style="display:none;" id="searchedParams"></div>
+        </div>
+
+    </p>
+
+</div>
+<div class="intelli-copy" style="width:200px; margin:15px auto;">
+    <span>Developed by</span>
+    <a href="http://www.intellimedia.ca/" title="Visit Intellimedia inc."><img src="../images/logoIntellimedia.png" with="131" height="23" alt="" /></a>
+</div>
+
+<div id="informationPopup" class="intelli-popup-window intelli-window-poup-width" style="display: none;">
+    <span class="title">How to search</span> <a href="#" class="btclose"><span>Close Window</span></a>
+    <div class="wrap">
+        Free Text:  text matching any of the displayed columns OR Targeted search:  name=|asn=|grade=|school= will match the text only in the indicated column<br /><br />
+        Columns for search:<br />
+        • name<br />
+        • dob<br />
+        • number<br />
+        • grade<br />
+        • district<br />
+        • school<br />
+    </div>
+</div>
+
+
+@section pageJS{
+    <script type="text/javascript">
+        var gridElem;
+        $(document).ready(function() {
+            getStudents();
+            $("#searchRequest").keydown(function(e) {
+                var code = e.which; // recommended to use e.which, it's normalized across browsers
+                if (code == 13) searchStudents();
+            });
+        });
+
+        function getStudents() {
+            $.get('@(Url.Action("StudentSearchGet"))', {}, function (result) {
+                console.log(result);
+                createKendoGrid(result.Data, "searched");
+            }, 'json');
+        }
+
+        function createKendoGrid(results, grid) {
+            gridElem = $("#" + grid).kendoGrid({
+                dataSource: {
+                    data: results,
+                    schema: {
+                        model: {
+                            fields: {
+                                Id: { type: "int" },
+                                Name: { type: "string" },
+                                Dob: { type: "date" },
+                                Number: { type: "int" },
+                                Grade: { type: "int" },
+                                District: { type: "string" },
+                                School: { type: "string" }
+                            }
+                        }
+                    },
+                    pageSize: 20
+                },
+                sortable: {
+                    mode: "multiple",
+                    allowUnsort: true
+                },
+                scrollable: false,
+                pageable: true,
+                columns: [
+                    {
+                        hidden: true,
+                        field: "Id",
+                        attributes: { 'Id': 'idCol' }
+                    },
+                    {
+                        title: "NAME",
+                        field: "Name",
+                        //template: "#= kendo.toString(date,'yyyy-MM-dd') #",
+                        width: 280,
+                        filterable: false,
+                        template: '<a href="@(Url.Action("SelectStudent"))?studentId=#=Id#" title="Select">#= Name #</a>'
+                    },
+                    {
+                        title: "DOB",
+                        field: "Dob",
+                        width: 180,
+                        filterable: false,
+                        format: "{0:MMMM dd, yyyy}",
+                        parseFormats: ["yyyy-MM-dd", "dd.MM.yyyy"]
+                    },
+                    {
+                        title: "STUDENT NUMBER",
+                        field: "Number",
+                        sortable: true,
+                        width: 140,
+                        filterable: false
+                    },
+                    {
+                        title: "GRADE",
+                        field: "Grade",
+                        width: 120,
+                        filterable: false
+                    },
+                    {
+                        title: "DISTRICT",
+                        field: "District",
+                        filterable: {
+                            operators: {
+                                string: {
+                                    contains: 'Contains',
+                                }
+                            }
+                        }
+                    },
+                    {
+                        title: "SCHOOL",
+                        field: "School",
+                        filterable: false
+                    }
+                ]
+            }).data("kendoGrid");
+        }
+
+        function searchStudents() {
+            var data = $("#searchRequest").val();
+            if (data == "" || data == "Search...") {
+                $("#searchedParams").hide();
+                $("#searched").show();
+            }
+            else {
+                $("#searchedParams").show();
+                $("#searched").hide();
+                $.get('@(Url.Action("StudentSearchGetParams"))', { filters: data }, function (result) {
+                    console.log(result);
+                    gridElem.destroy();
+                    //gridElem.wrapper.empty();
+                    createKendoGrid(result.Data, "searchedParams");
+                }, 'json');
+            }
+        }
+
+        function showHelp() {
+            $("#informationPopup").lightbox_me({
+                centered: true, onLoad: function () {
+                    $("#informationPopup").find("input:first").focus();
+                }
+            });
+        }
+    </script>
+}

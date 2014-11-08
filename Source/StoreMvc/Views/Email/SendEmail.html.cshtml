@@ -1,0 +1,10 @@
+﻿@model PCSMvc.Models.EmailModel
+@{
+    Layout = null;
+}
+<html>
+<body>
+    <h1>@Model.Subject</h1>
+    <p>@Html.Raw(Model.Body)</p>
+</body>
+</html>

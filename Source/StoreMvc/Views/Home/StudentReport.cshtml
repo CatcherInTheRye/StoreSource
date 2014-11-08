@@ -1,0 +1,203 @@
+﻿@model StudentFullInfo
+@using PCS.DataRepository.DataContracts
+@using DataRepository.DataContracts
+@{
+    ViewBag.Title = "StudentReport";
+    List<StudentMenuItem> menu = ViewBag.menu as List<StudentMenuItem> ?? new List<StudentMenuItem>();
+    List<TabMenuItem> reports = ViewBag.reports as List<TabMenuItem> ?? new List<TabMenuItem>();
+}
+
+<div id="column-left">
+
+    <a class="logo" href="#" title=""><img src="../images/logo.png" width="229" height="120" alt="" /></a>
+
+    <ul class="intelli-mainmenu" id="mainMenu">
+        @foreach (StudentMenuItem item in menu)
+        {
+            <li><a href="@(Url.Action(item.href))" title=''>@(item.text)</a></li>
+        }
+    </ul>
+    <div class="intelli-copy">
+        <span>Developed by</span>
+        <a href="http://www.intellimedia.ca/" title="Visit Intellimedia inc."><img src="../images/logoIntellimedia.png" width="131" height="23" alt="" /></a>
+    </div>
+</div><!-- /left column -->
+
+<div id="column-right">
+    <div data-role="content" id="content">
+        <div class="intelli-content intelli-tabs">
+            <div class="intelli-main-content-header ui-bar ui-bar-a">
+                <a href="javascript:;" class="icoMenu" id="togglepanel"><span>Menu</span></a>
+                <!--a class="ui-btn ui-nodisc-icon ui-btn-inline ui-btn-icon-left ui-btn-b ui-icon-bars ui-btn-icon-notext" href="javascript:;" id="togglepanel">Panel</a-->
+                <h3>Student Reports</h3>
+            </div>
+            <div class="intelli-main-content ui-body ui-body-a">
+                <p>
+                    <a target="_self" rel="external" href="@(Url.Action("StudentREports"))" class="intelli-btn-white ui-link">&lt; Back To Student List</a>
+                </p>
+                <p>
+                    <table style="width:100%" cellpadding="0" border="0">
+                        <tr>
+                            <td width="40%">
+                                <label>Report:</label>
+                                <select class="intelli-textfield" style="width:90%;" data-role="none" id="reportSelect" onchange="updateModel();">
+                                    @foreach (TabMenuItem item in reports.Where(p => p.Type == 1).ToList())
+                                    {
+                                        <option value="@(item.Id)" data-type="@(item.Type)">@(item.SubItems)</option>
+                                    }
+                                    <optgroup label="History">
+                                        @foreach (TabMenuItem item in reports.Where(p => p.Type == 3).ToList())
+                                        {
+                                            <option value="@(item.Id)" data-type="@(item.Type)">@(item.SubItems)</option>
+                                        }
+                                    </optgroup>
+                                    <optgroup label="Team Consultings">
+                                        @foreach (TabMenuItem item in reports.Where(p => p.Type == 2).ToList())
+                                        {
+                                            <option value="@(item.Id)" data-type="@(item.Type)">@(item.SubItems)</option>
+                                        }
+                                    </optgroup>
+                                </select>
+                            </td>
+                            <td width="10%">
+                                <a class="intelli-btn-white editPopup" style="float:right; margin-top:10px;" id="genereatePdf">PDF</a>
+                            </td>
+                        </tr>
+                    </table>
+                </p>
+                <h3>Student Information</h3>
+                <p>
+                    <div class="intelli-float-half">
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0" class="table1">
+                            <tr>
+                                <td width="50%">Student Name:</td>
+                                <td width="50%">@(Model.MainInfo.FirstName + " " + Model.MainInfo.LastName)</td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Parent/Guardian:</td>
+                                <td width="50%">@(Model.MainInfo.FatherName)<br />@(Model.MainInfo.MotherName)<br />@(Model.MainInfo.GuardianName)</td>
+                            </tr>
+                            <tr>
+                                <td width="50%">School:</td>
+                                <td width="50%">@(Model.MainInfo.School)</td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Grade:</td>
+                                <td width="50%">@(Model.MainInfo.Grade)</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="intelli-float-half">
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0" class="table1">
+                            <tr>
+                                <td width="50%">DOB:</td>
+                                <td width="50%">@(Model.MainInfo.Dob.ToString("MMMM dd, yyyy", System.Globalization.CultureInfo.InvariantCulture))</td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Email:</td>
+                                <td width="50%"><a href="mailto"></a></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">District:</td>
+                                <td width="50%">@(Model.MainInfo.District)</td>
+                            </tr>
+                        </table>
+                        <br />
+                        <br />
+                        <br />
+                    </div>
+                </p>
+                <div id="dataDiv" style="clear: both;">
+                    <p>
+                        <table class="table2" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th>Service Assigned</th>
+                                <th>Consultant</th>
+                            </tr>
+                            @foreach (IdTitleDescription service in Model.Services)
+                            {
+                                <tr>
+                                    <td>@(service.Title)</td>
+                                    <td>@(service.Description)</td>
+                                </tr>
+                            }
+                        </table>
+                    </p>
+                    <h3>Background</h3>
+                    <p>@(Html.Raw(Model.Background))</p>
+                    <h3>Observations</h3>
+                    <p>@(Html.Raw(Model.Observations))</p>
+                    <h3>Test Results & Interpretations</h3>
+                    <p>@(Html.Raw(Model.Test))</p>
+                    <h3>Treatment Goals</h3>
+                    <p>@(Html.Raw(Model.Goals))</p>
+                    <h3>Progress</h3>
+                    <p>@(Html.Raw(Model.Progress))</p>
+                    <h3>Recomendations</h3>
+                    <p>@(Html.Raw(Model.Recomendations))</p>
+                    <h3>Summary & Status</h3>
+                    <p>
+                        <table class="table2" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th>Summary</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @(Html.Raw(Model.Summary))
+                                </td>
+                            </tr>
+                        </table>
+                    </p>
+                    <p>
+                        <table class="table2" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th>Status</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @(Html.Raw(Model.Status))
+                                </td>
+                            </tr>
+                        </table>
+                    </p>
+                    <h3>Attached Documents</h3>
+                    <p>
+                        <table class="table2" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th>Document</th>
+                                <th>Date</th>
+                                <th>Uploaded By</th>
+                            </tr>
+                            @foreach (UploadedFile item in Model.Files)
+                            {
+                                <tr>
+                                    <td><a href="@(Url.Action("StudentFileDownload"))?id=@(item.Id)">@(item.Name)</a></td>
+                                    <td>@(item.UploadedDate.ToString("MMMM dd, yyyy", System.Globalization.CultureInfo.InvariantCulture))</td>
+                                    <td>@(item.UploadedBy)</td>
+                                </tr>
+                            }
+                        </table>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+
+@section pageJS{
+    <script type="text/javascript">
+        function updateModel() {
+            $.get("@Url.Action("StudentReport", "Home")", { id: parseInt(@(Model.MainInfo.Id)), type: parseInt($("#reportSelect option:selected").attr("data-type")), recordId: parseInt($("#reportSelect").val()) }, function (result) {
+                $('#dataDiv').html($($.parseHTML(result)).find("#dataDiv"));
+            });
+        }
+
+        $(document).ready(function() {
+            $("#genereatePdf").click(function() {
+                window.location.href = "@Url.Action("StudentReportPDF", "Home")?id=" + parseInt(@(Model.MainInfo.Id)) + "&type=" + parseInt($("#reportSelect option:selected").attr("data-type")) + "&recordId=" + parseInt($("#reportSelect").val());
+            });
+        });
+        
+    </script>
+}

@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />      
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    @*<link rel="stylesheet" href="~/Content/themes/default/jquery.mobile-1.4.3.min.css" />*@
+    @Styles.Render(//"~/Content/themes/base/css",
+        "~/Content/css")
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/neededscripts")
+</head>
+<body class="intelli">
+    @if (!String.IsNullOrEmpty(ViewBag.Error))
+    {
+        <div class="nNote nFailure">
+            <p>
+                <strong>Error: </strong>@ViewBag.Error</p>
+        </div>
+    }
+    
+    <div id="teamConsult" class="intelli-popup-window intelli-window-poup-width" style="display: none;">
+        <span class="title">Start a Team Consultation</span> <a href="#" class="btclose"><span>Close Window</span></a>
+        <div class="wrap">
+            <select class="intelli-multiselect" multiple="multiple" data-native-menu="false" id="otherStudents" style="width:100%;" data-role="none"></select>
+            <a href="" onclick="SaveTeamConsult();" class="intelli-btn-save intelli-btn-popupsave" style="margin-top:10px;">Save</a>
+        </div>
+    </div>
+
+@*<div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav nav-pills pull-right">
+                   
+                </ul>
+            </div>
+        </div>
+    </div>*@
+    @RenderBody()
+    @RenderSection("pageJS", false)
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        kendo.culture("es-DO");
+
+        //        $(document).bind("mobileinit", function () {
+        //            $.mobile.ajaxEnabled = false;
+        //        });
+        $.extend($.mobile, {
+            linkBindingEnabled: false,
+            ajaxEnabled: false
+        });
+    </script>
+</body>
+</html>

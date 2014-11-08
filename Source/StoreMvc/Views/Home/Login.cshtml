@@ -1,0 +1,63 @@
+﻿@model PCSMvc.Models.ViewModels.LoginView
+@{
+    ViewBag.Title = "Log In";
+    Layout = null;
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/Content/main.css" />
+</head>
+<body class="intelli">
+    <div class="intelli-login">
+    <img src="/images/logo.png" width="229" height="120" alt="" style="margin: 15px 30px 20px 30px;" />
+    @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "intelli-login-form" }))
+    {
+        
+        @Html.TextBox("UserName", Model.UserName)
+        @Html.ValidationMessage("UserName")
+        @Html.Password("Password", Model.Password)
+        @Html.ValidationMessage("Password")
+        <button type="submit" class="intelli-login-button">Login</button>
+        @*<asp:linkbutton id="LinkButton1" runat="server" class="intelli-login-button" onclick="LinkButton1_Click"
+            title="Login" text="Login" />*@ @*onclick="javascript:if(document.forms['intelli-login-form']['username'].value
+        == 'manager') {window.open('manager_modules.html', '_self');} else if(document.forms['intelli-login-form']['username'].value
+        == 'district') {window.open('district_settings.html', '_self');} else if(document.forms['intelli-login-form']['username'].value
+        == 'school') {window.open('school_request_support.html', '_self');} else {window.open('modules.html',
+        '_self');}"*@
+    
+    
+@*<fieldset>
+        <legend>Enter</legend>
+        <div class="control-group">
+            <label class="control-label" for="Email">
+                Email</label>
+            <div class="controls">
+                @Html.TextBox("UserName", Model.UserName, new { @class = "input-xlarge" })
+                <p class="help-block">
+                    Enter Login</p>
+                @Html.ValidationMessage("Email")
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="Password">
+                Password</label>
+            <div class="controls">
+                @Html.Password("Password", Model.Password, new { @class = "input-xlarge" })
+                @Html.ValidationMessage("Password")
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                Log In</button>
+        </div>
+    </fieldset>*@
+    }
+    </div>
+    <div class="intelli-copy" style="width:200px; margin:15px auto;">
+  	<span>Developed by</span>
+    <a href="http://www.intellimedia.ca/" title="Visit Intellimedia inc."><img src="/images/logoIntellimedia.png" with="131" height="23" alt="" /></a>
+            <br/><span class="small" style="opacity:0.5;">Release Date: TBA</span>
+</div>
+    
+</body>

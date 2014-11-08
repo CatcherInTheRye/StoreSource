@@ -1,0 +1,10 @@
+2014-10-20 13:31:08.5030|ERROR|PCSMvc.Global.Auth.CustomAuthentication|Failed authentication: Не удалось проверить данные.
+2014-10-20 13:31:08.6240|ERROR|PCSMvc.Global.Auth.CustomAuthentication|Failed authentication: Не удалось проверить данные.
+2014-10-20 13:31:10.9422|ERROR|PCSMvc.Global.Auth.CustomAuthentication|Failed authentication: Не удалось проверить данные.
+2014-10-20 13:31:10.9422|ERROR|PCSMvc.Global.Auth.CustomAuthentication|Failed authentication: Не удалось проверить данные.
+2014-10-20 13:31:10.9422|ERROR|PCSMvc.Global.Auth.CustomAuthentication|Failed authentication: Не удалось проверить данные.
+2014-10-20 13:31:10.9422|ERROR|PCSMvc.Global.Auth.CustomAuthentication|Failed authentication: Не удалось проверить данные.
+2014-10-20 13:31:10.9682|ERROR|PCSMvc.Global.Auth.CustomAuthentication|Failed authentication: Не удалось проверить данные.
+2014-10-20 13:31:11.1262|ERROR|PCSMvc.Global.Auth.CustomAuthentication|Failed authentication: Не удалось проверить данные.
+2014-10-20 13:31:11.1612|ERROR|PCSMvc.Global.Auth.CustomAuthentication|Failed authentication: Не удалось проверить данные.
+2014-10-20 13:31:11.2682|ERROR|PCSMvc.Global.Auth.CustomAuthentication|Failed authentication: Не удалось проверить данные.

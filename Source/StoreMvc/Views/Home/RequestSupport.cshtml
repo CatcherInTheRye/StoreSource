@@ -1,0 +1,209 @@
+﻿@using DataRepository.DataContracts
+@using PCS.DataRepository.DataContracts
+
+@model StudentSupportRequestForm
+@{
+    ViewBag.Title = "Request Support";
+    List<StudentMenuItem> menu = ViewBag.menu as List<StudentMenuItem> ?? new List<StudentMenuItem>();
+    List<UserShortInfo> students = ViewBag.students as List<UserShortInfo> ?? new List<UserShortInfo>();
+    List<IdTitleDescription> types = ViewBag.types as List<IdTitleDescription> ?? new List<IdTitleDescription>();
+    List<UserShortInfo> schoolUsers = ViewBag.users.schoolUsers as List<UserShortInfo> ?? new List<UserShortInfo>();
+    List<UserShortInfo> districtUser = ViewBag.users.districtUser as List<UserShortInfo> ?? new List<UserShortInfo>();
+    UploadedFile file = Model.SelectedFile as UploadedFile ?? new UploadedFile() {Id = -1};
+}
+
+<div id="column-left">
+
+    <a class="logo" href="#" title=""><img src="../images/logo.png" width="229" height="120" alt="" /></a>
+    <div style="text-align:center;">
+        <a href="@(Url.Action("Logout"))" title="">Logout</a></div>
+    <ul class="intelli-mainmenu" id="mainMenu">
+        @foreach (StudentMenuItem item in menu)
+        {
+            <li><a href="@(Url.Action(item.href))" title=''>@(item.text)</a></li>
+        }
+    </ul>
+    <div class="intelli-copy">
+        <span>Developed by</span>
+        <a href="http://www.intellimedia.ca/" title="Visit Intellimedia inc."><img src="../images/logoIntellimedia.png" width="131" height="23" alt="" /></a>
+    </div>
+</div><!-- /left column -->
+
+<div id="column-right">
+    <div data-role="content" id="content">
+        <div class="intelli-content intelli-tabs">
+            <div class="intelli-main-content-header ui-bar ui-bar-a">
+                <a href="javascript:;" class="icoMenu" id="togglepanel"><span>Menu</span></a>
+                <!--a class="ui-btn ui-nodisc-icon ui-btn-inline ui-btn-icon-left ui-btn-b ui-icon-bars ui-btn-icon-notext" href="javascript:;" id="togglepanel">Panel</a-->
+                <h3>Request support</h3>
+            </div>
+            <div class="intelli-main-content ui-body ui-body-a">
+                <p>
+                    <a target="_self" rel="external" href="@(Url.Action("RequestSupportList"))" class="intelli-btn-white ui-link">
+                        &lt; Back To Requests
+                    </a>
+                </p>
+                <p>
+                    <input type="hidden" id="requestId" value="@(Model.Id)"/>
+                    <label>Student:</label>
+                    <select class="intelli-multiselect" data-native-menu="false" data-role="none" style="width:100%" id="student">
+                        <option value=""></option>
+                        @foreach (UserShortInfo info in students)
+                        {
+                            <option value="@(info.Id)">@(info.LastName + ", " + info.FirstName + (string.IsNullOrEmpty(info.MiddleName) ? "" : " " + info.MiddleName))</option>
+                        }
+                    </select>
+                    <span class="field-validation-error" data-valmsg-replace="true" data-valmsg-for="Title" style="display: none;" id="studentError">
+                        <span id="Title-error" class="">Student is Required</span>
+                    </span>
+                </p>
+                <p>
+                    <label>Services:</label>
+                    <select class="intelli-multiselect" style="width:100%" multiple="multiple" data-native-menu="false" id="services" data-role="none">
+                        @foreach (IdTitleDescription info in types)
+                        {
+                            <option value="@(info.Id)">@(info.Description)</option>
+                        }
+                    </select>
+                    <span class="field-validation-error" data-valmsg-replace="true" data-valmsg-for="Title" id="serviceError">
+                        <span id="Title-error" class="">Service is Required</span>
+                    </span>
+                </p>
+                <p>
+                    <label>Notify:</label>
+                    <select class="intelli-multiselect" style="width:100%" multiple="multiple" data-native-menu="false" data-role="none" id="notify">
+                        <optgroup label="School">
+                            @foreach (UserShortInfo info in schoolUsers)
+                            {
+                                <option value="@(info.Id)">@(info.LastName + ", " + info.FirstName + (string.IsNullOrEmpty(info.MiddleName) ? "" : " " + info.MiddleName))</option>
+                            }
+                        </optgroup>
+                        <optgroup label="District">
+                            @foreach (UserShortInfo info in districtUser)
+                            {
+                                <option value="@(info.Id)">@(info.LastName + ", " + info.FirstName + (string.IsNullOrEmpty(info.MiddleName) ? "" : " " + info.MiddleName))</option>
+                            }
+                        </optgroup>
+                    </select>
+                    <span class="field-validation-error" data-valmsg-replace="true" data-valmsg-for="Title" style="display: none;" id="notifyError">
+                        <span id="Title-error" class="">Notify is Required</span>
+                    </span>
+                </p>
+                <p>
+                    <label>Notes:</label>
+                    <textarea name="content" style="width:100%;" rows="10" id="note"></textarea>
+                    <span class="field-validation-error" data-valmsg-replace="true" data-valmsg-for="Title" style="display: none;" id="noteError">
+                        <span id="Title-error" class="">Notes is Required</span>
+                    </span>
+                </p>
+
+                <p>
+                    <input type="file" id="files" name="files"><br>
+                    @*<input type="file" id="attachDoc" />*@
+                </p>
+
+                <p>
+                    <a href="javascript:;" class="intelli-btn-save" onclick="save(false)">Save</a>
+                    <a href="javascript:;" class="intelli-btn-cancel" onclick="save(true)" style="pointer-events: none;" id="andSubmit">Save and Submit</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+
+@section pageJS{
+    <script type="text/javascript">
+    var beginContent;
+
+    $(document).ready(function () {
+        $("#services").select2();
+        $("#notify").select2();
+        var initialFiles = [];
+        if (parseInt(@(Model.Id)) != -1) {
+            $("#student").val(@(Model.StudentId));
+            $("#services").select2("val", "@(Model.Types)".split('_'));
+            $("#notify").select2("val", "@(Model.Users)".split('_'));
+            $("#note").val("@(Model.Reason)");
+            console.log(parseInt(@(file.Id)));
+            @if (file.Id != -1)
+            {
+                <text>
+                    var current = {
+                        name: "@(file.Name)",
+                        extension: "@(file.Name.Split('.').ToList().Last())",
+                        size: "@(file.Size)"
+                    }
+                    initialFiles.push(current);
+                    $("#andSubmit").css("pointer-events", "auto");
+                    $("#andSubmit").removeClass("intelli-btn-cancel");
+                    $("#andSubmit").addClass("intelli-btn-save");
+                </text>
+            }
+        }
+        
+        $("#files").kendoUpload({
+            multiple: false,
+            async: {
+                saveUrl: "fileUpload",
+                removeUrl: "fileRemove",
+                autoUpload: true
+            },
+            files: initialFiles,
+            upload: onUpload,
+            remove: onRemove
+        });
+
+        function onUpload(e) {
+            $("#andSubmit").css("pointer-events", "auto");
+            $("#andSubmit").removeClass("intelli-btn-cancel");
+            $("#andSubmit").addClass("intelli-btn-save");
+        }
+
+        function onRemove(e) {
+            $("#andSubmit").css("pointer-events", "none");
+            $("#andSubmit").removeClass("intelli-btn-save");
+            $("#andSubmit").addClass("intelli-btn-cancel");
+        }
+    });
+
+    function save(isSubmitted) {
+        $(".field-validation-error").hide();
+        if ($("#student").val() == "") {
+            $("#studentError").show();
+            return;
+        }
+        if ($("#services").select2("val") == "") {
+            $("#serviceError").show();
+            return;
+        }
+        if ($("#notify").select2("val") == "") {
+            $("#notifyError").show();
+            return;
+        }
+        if ($("#note").val() == "") {
+            $("#noteError").show();
+            return;
+        }
+        var data = {};
+        data.Id = parseInt($("#requestId").val());
+        data.StudentId = $("#student").val();
+        data.approvalNote = $("#note").val();
+        data.Users = $("#notify").select2('val').toString().replace(',', '_');
+        data.Types = $("#services").select2('val').toString().replace(',', '_');
+        data.Submitted = isSubmitted;
+        $.post('@Url.Action("SupportRequestSave", new { controller = "Home" })', data, function (data) {
+            if (data.Result.Type == 0) {
+                if (data.Data.length > 0)
+                    $("#requestId").val(data.Data[0].Id);
+                MessageBox(null, "Success");
+            }
+        }, 'json');
+    }
+
+        function saveSubmit() {
+            alert("TEXT");
+        }
+</script>
+}

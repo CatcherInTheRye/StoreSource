@@ -1,0 +1,118 @@
+﻿@using DataRepository.DataContracts
+@using PCS.DataRepository.DataContracts
+@model StudentSupportRequestSchortForm
+@{
+    ViewBag.Title = "Approve Support Request";
+    List<StudentMenuItem> menu = ViewBag.menu as List<StudentMenuItem> ?? new List<StudentMenuItem>();
+    UploadedFile file = Model.file as UploadedFile ?? new UploadedFile();
+}
+
+<div id="column-left">
+
+    <a class="logo" href="#" title=""><img src="../images/logo.png" width="229" height="120" alt="" /></a>
+    <div style="text-align:center;">
+        <a href="@(Url.Action("Logout"))" title="">Logout</a></div>
+    <ul class="intelli-mainmenu" id="mainMenu">
+        @foreach (StudentMenuItem item in menu)
+        {
+            <li><a href="@(Url.Action(item.href))" title=''>@(item.text)</a></li>
+        }
+    </ul>
+    <div class="intelli-copy">
+        <span>Developed by</span>
+        <a href="http://www.intellimedia.ca/" title="Visit Intellimedia inc."><img src="../images/logoIntellimedia.png" width="131" height="23" alt="" /></a>
+    </div>
+</div><!-- /left column -->
+
+<div id="column-right">
+    <div data-role="content" id="content">
+        <div class="intelli-content intelli-tabs">
+            <div class="intelli-main-content-header ui-bar ui-bar-a">
+                <a href="javascript:;" class="icoMenu" id="togglepanel"><span>Menu</span></a>
+                <!--a class="ui-btn ui-nodisc-icon ui-btn-inline ui-btn-icon-left ui-btn-b ui-icon-bars ui-btn-icon-notext" href="javascript:;" id="togglepanel">Panel</a-->
+                <h3>Approve Support Request</h3>
+            </div>
+            <div class="intelli-main-content ui-body ui-body-a" id="intelli-tab-1">
+                <p>
+                    <a target="_self" rel="external" href="@(Url.Action("ApproveSupport"))" class="intelli-btn-white ui-link">&lt; Back To Requests</a>
+                </p>
+                <p>
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0" class="table1">
+                        <colgroup>
+                            <col width="30%" />
+                            <col width="70%" />
+                        </colgroup>
+
+                        <tr>
+                            <td>Student Name:</td>
+                            <td>@(Model.StudentName)</td>
+                        </tr>
+                        <tr>
+                            <td>Requested By Name:</td>
+                            <td>@(Model.RequestedBy)</td>
+                        </tr>
+                        <tr>
+                            <td>Specialities:</td>
+                            <td>@(Model.Specialities)</td>
+                        </tr>
+                        <tr>
+                            <td>Date Of Request:</td>
+                            <td id="date">@(Model.DateOfRequest.ToString("MMMM dd, yyyy", System.Globalization.CultureInfo.InvariantCulture))</td>
+                        </tr>
+                        <tr>
+                            <td>Reason:</td>
+                            <td>@(Model.Reason)</td>
+                        </tr>
+                        <tr>
+                            <td>File:</td>
+                            <td><a href='@(Url.Action("ApproveSupportFileDownload", new { id = Model.Id }))'>@(file.Name)</a></td>
+                        </tr>
+                        <tr>
+                            <td>Approval/Denial Note</td>
+                            <td><textarea name="content" class="richtext" style="width:100%;" rows="20" id="userNote">@(Model.Note)</textarea></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <a title="An Approved support:  Automatically assigns specialist(s) and is now visible to PCS Managers/Specialists.  Triggers email to PCS, specialists and those selected to be notified" href="javascript:;" class="intelli-btn-save intelli-btn-popupsave" style="margin-top:10px;" onclick="approveRequest();">Approve</a>
+                                <a title="A Denied Support is kept in history along with the note recorded" href="javascript:;" class="intelli-btn-cancel intelli-btn-popupsave" onclick="denyRequest();" style="margin-top:10px;">Deny</a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </p>
+
+                <p>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+
+@section pageJS{
+    <script type="text/javascript">
+        $(document).ready(function() {
+        });
+
+        function denyRequest() {
+            var id = parseInt(@(Model.Id));
+            $.post('@Url.Action("SupportRequestDeny", new { controller = "Home" })', { request: id }, function (data) {
+                if (data.Result.Type == 0) {
+                    //beginContent = tinymce.get("backgroundArea").getContent();
+                    MessageBox(null, "Success");
+                }
+            }, 'json');
+        }
+
+        function approveRequest() {
+            var id = parseInt(@(Model.Id));
+            var note = $("#userNote").val();
+            $.post('@Url.Action("SupportRequestApprove", new { controller = "Home"})', { request: id, Note: note  }, function (data) {
+                if (data.Result.Type == 0) {
+                    //beginContent = tinymce.get("backgroundArea").getContent();
+                    MessageBox(null, "Success");
+                }
+            }, 'json');
+        }
+    </script>
+}

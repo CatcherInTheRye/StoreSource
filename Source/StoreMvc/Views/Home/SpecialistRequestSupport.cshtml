@@ -1,0 +1,302 @@
+﻿@using PCSMvc.Models
+@using PCS.DataRepository.DataContracts
+@{
+    ViewBag.Title = "SpecialistRequestSupport";
+    Layout = "~/Views/Shared/_PCSManagerLayout.cshtml";
+}
+
+<div id="column-right">
+    <div data-role="content">
+        <div class="intelli-content">
+            <div class="intelli-main-content-header ui-bar ui-bar-a">
+                <a href="javascript:;" class="icoMenu" id="togglepanel"><span>Menu</span></a>
+                <h3>
+                    Support Request
+                </h3>
+            </div>
+            <div class="intelli-main-content ui-body ui-body-a">
+                <div class="intelli-content intelli-tabs">
+
+                    <ul class="intelli-tabs-panel" id="navTabs">
+                        <li><a href="#intelli-tab-1">School Support Request</a></li>
+                        <li><a href="#intelli-tab-1">Specialist Support Request</a></li>
+                    </ul>
+
+                    <div id="intelli-tab-1">
+                        <p>
+                            <table width="100%" cellpadding="0" border="0">
+                                <tr>
+                                    <td width="10%" align="center">From</td>
+                                    <td width="20%">
+                                        <input class="intelli-textfield intelli-datapicker date" type="text" data-role="date" value="" id="startDate" />
+                                    </td>
+                                    <td width="5%" align="center">to</td>
+                                    <td width="20%">
+                                        <input class="intelli-textfield intelli-datapicker date" type="text" data-role="date" value="" id="endDate" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </p>
+                        <div id="kendogrid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /content -->
+</div>
+
+<div id="editRequest" class="intelli-popup-window intelli-window-poup-width ui-body ui-body-a" style="display: none;">
+    <span class="title">Edit</span> <a href="#" class="btclose"><span>Close Window</span></a>
+    <div class="wrap" data-role="content">
+        <ul class="intelli-simple-list" id="itemList">
+            <li>
+                <div class="intelli-float-half">
+                    <input type="hidden" id="reqId" />
+                    <input type="hidden" id="studId" />
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0" class="table1">
+                        <tr>
+                            <td width="50%">Student:</td>
+                            <td width="50%" id="studName"></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Grade:</td>
+                            <td width="50%" id="grade"></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">School:</td>
+                            <td width="50%" id="school"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="intelli-float-half">
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0" class="table1">
+                        <tr>
+                            <td width="50%">Gender:</td>
+                            <td width="50%" id="gender"></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Teacher:</td>
+                            <td width="50%" id="teacher">Teacher</td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Principal:</td>
+                            <td width="50%" id="principle">Principal</td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+            <li>
+                <label>Reason For Refferal:</label><textarea class="simple" name="content" rows="5" id="reason"></textarea>
+            </li>
+            <li style="margin-top:15px;"><label><strong>Requested Services</strong></label></li>
+        </ul>
+        <a href="javascript:;" class="intelli-btn-save intelli-btn-popupsave" style="margin-top:10px;" onclick="save();">Save</a>
+        <a href="javascript:;" class="intelli-btn-cancel intelli-btn-popupsave" style="margin-top:10px;" onclick="cancel();">Cancel</a>
+    </div>
+
+</div>
+
+<div id="selects" style="display:none;"></div>
+
+
+
+@section pageJS{
+    <script type="text/javascript">
+        var role;
+        $(document).ready(function () {
+            $(".date").kendoDatePicker({
+                format: "MMMM dd, yyyy",
+                parseFormats: ["yyyy-MM-dd"],
+                change: getCurrentData
+            });
+            $(".intelli-tabs").tabs({
+                activate: function(event, ui) {
+                    role = (ui.newTab.index() == 0 ? parseInt(@((int) UserRoleEnum.SchoolUser)) : parseInt(@((int) UserRoleEnum.Specialist)));
+                    getCurrentData();
+                }
+            });
+            role = parseInt(@((int) UserRoleEnum.SchoolUser));
+            getCurrentData();
+        });
+
+        function getCurrentData() {
+            var start = $("#startDate").val();
+            var end = $("#endDate").val();
+            $.get('@(Url.Action("SupportRequestsGet"))', { role: role, startDate: start, endDate: end }, function(result) {
+                if (result.Result.Type == 0) {
+                    createKendoGrid(result.Data);
+                    getSelects();
+                }
+            }, 'json');
+        }
+
+        function getSelects() {
+            $.get('@(Url.Action("TypeUserSelects"))', {}, function (selects) {
+                $('#selects').html($($.parseHTML(selects)).find("#selects").html());
+            });
+        }
+
+        function createKendoGrid(results) {
+            var kendoDataSource = new kendo.data.DataSource({
+                data: results,
+                schema: {
+                    model: {
+                        id: "Id",
+                        fields: {
+                            Id: { type: "number" },
+                            DateOfRequest: { type: "date" },
+                            District: { type: "string" },
+                            School: { type: "string" },
+                            StudentName: { type: "string" },
+                            RequestedBy: { type: "string" },
+                            Specialities: { type: "string" },
+                            Specialists: { type: "string" }
+                        }
+                    }
+                },
+                pageSize: 20
+            });
+
+            $("#kendogrid").kendoGrid({
+                dataSource: kendoDataSource,
+                sortable: {
+                    mode: "multiple",
+                    allowUnsort: true
+                },
+                pageable: true,
+                scrollable: false,
+                columns: [
+                    {
+                        hidden: true,
+                        field: "Id",
+                        attributes: { 'id': 'idCol' }
+                    },
+                    {
+                        title: "DATE",
+                        field: "DateOfRequest",
+                        sortable: true,
+                        width: "10%",
+                        template: "<a href='javascript:;' onclick='edit(this);'>#= kendo.toString(kendo.parseDate(DateOfRequest, 'yyyy-MM-dd'), 'MMM dd, yyyy') #</a>"
+                    },
+                    {
+                        title: "DISTRICT",
+                        field: "District",
+                        width: "15%",
+                    },
+                    {
+                        title: "SCHOOL",
+                        field: "School",
+                        width: "15%",
+                    },
+                    {
+                        title: "STUDENT",
+                        field: "StudentName",
+                        width: "15%",
+                    },
+                    {
+                        title: "REQUESTED BY",
+                        field: "RequestedBy",
+                        width: "15%",
+                    },
+                    {
+                        title: "SPECIALITIES",
+                        field: "Specialities",
+                        width: "15%",
+                    },
+                    {
+                        title: "ASSIGNED",
+                        field: "Specialists"
+                    }
+                ]
+            });
+        }
+
+        function edit(e) {
+            var id = $(e).parents('tr:first').find('#idCol').html();
+            $.get('@(Url.Action("SupportRequestOneGet"))', { id: id }, function(result) {
+                if (result.Result.Type == 0) {
+                    console.log(result.Data[0]);
+                    openPopup(result.Data[0]);
+                    //createKendoGrid(result.Data);
+                }
+            }, 'json');
+        }
+
+        function openPopup(data) {
+            $("#reqId").val(data.Id);
+            $("#studId").val(data.StudentId);
+            $("#studName").html(data.StudentName);
+            $("#grade").html(data.Grade);
+            $("#school").html(data.School);
+            $("#gender").html(data.Gender);
+            $("#reason").val(data.Reason);
+            $("#itemList li.typeLi").remove();
+            $.each(data.AssignedSpecialists, function(i, item) {
+                var str = "<li class='typeLi' data='" + item.Type.Id + "'><label>" + item.Type.Title + ":</label>";
+                var select = $("#selects").find('select.' + item.Type.Id);
+                $(select).attr('id', "spec" + i);
+                $(select).addClass("specialist");
+                str += $(select).outerHTML() + "</li>";
+                $("#itemList").append(str);
+                $(".typeLi #spec" + i).val(item.Specialist.Id);
+            });
+            $("#editRequest").lightbox_me({
+                centered: true,
+                onLoad: function() {
+                    $("#editRequest").find("input:first").focus();
+                }
+            });
+        }
+
+        jQuery.fn.outerHTML = function() {
+            return jQuery('<div />').append(this.eq(0).clone()).html();
+        };
+
+        function cancel() {
+            $("#editRequest").trigger('close');
+        }
+
+        function save() {
+            var Id = parseInt($("#reqId").val());
+            var assignedSpecialists = [];
+            $.each($("li.typeLi"), function(i, item) {
+                var buf = {};
+                buf.Type = {};
+                buf.Type.Id = parseInt($(item).attr('data'));
+                buf.Type.Title = "";
+                buf.Specialist = {};
+                buf.Specialist.Id = parseInt($(item).find('select:first').val());
+                buf.Specialist.Title = "";
+                assignedSpecialists.push(buf);
+            });
+            var studentId = $("#studId").val();
+
+            var things = JSON.stringify({ id: Id, items: assignedSpecialists, student: studentId });
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: '/Home/SupportRequestOneSave',
+                data: things,
+                success: function(result) {
+                    if (result.Result.Type == 0) {
+                        MessageBox(null, "Success");
+                        $("#editRequest").trigger('close');
+                        getCurrentData();
+                    }
+                },
+                failure: function(response) {
+                    $('#result').html(response);
+                }
+            });
+
+            @*$.post('@(Url.Action("SupportRequestOneSave"))', JSON.stringify({ id: Id, items: assignedSpecialists }), function (result) {
+                if (result.Result.Type == 0) {
+                    MessageBox("Success");
+                    //createKendoGrid(result.Data);
+                }
+            }, 'json');*@
+        }
+    </script>
+}

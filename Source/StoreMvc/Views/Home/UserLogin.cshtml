@@ -1,0 +1,15 @@
+﻿@model DataRepository.user
+<ul>
+    @if (Model != null)
+    {
+    
+        <li>@Model.email</li>
+        <li>@Html.ActionLink("Login", "Login", "Home")</li>
+    }
+
+    else
+    {
+        <li>@Html.Action("Index", "Home")</li>
+        @*<li>@Html.ActionLink("Registration", "Register", "User")</li>*@
+    }
+</ul>

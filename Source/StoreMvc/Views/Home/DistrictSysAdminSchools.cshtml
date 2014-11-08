@@ -1,0 +1,178 @@
+﻿@model UserForm
+@using System.Collections
+@using DataRepository.DataContracts
+@using PCSMvc.Models
+@{
+    ViewBag.Title = "DistrictSysAdminSchools";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    
+}
+<div class="intelli-manager">
+    <div data-role="page" class="wrapper-content">
+        <div id="column-left">
+            <a class="logo" href="#" title="">
+                <img src="/images/logo-dictrict.png" width="229" height="120" alt="" /></a>
+                <div style="text-align:center;">
+        <a href="@(Url.Action("Logout"))" title="">Logout</a></div>
+            <ul class="intelli-mainmenu">
+                <li><a href="@(Url.Action("DistrictSysAdmin"))" title="">Settings</a></li>
+                <li><a href="@(Url.Action("DistrictSysAdminSchools"))" title="">Schools</a></li>
+                <li><a href="@(Url.Action("DistrictSysAdminStaff"))" title="">Staff</a></li>
+                <li><a href="@(Url.Action("DistrictSysAdminStudents"))" title="">Students</a></li>
+            </ul>
+            <div class="intelli-copy">
+                <span>Developed by</span> <a href="http://www.intellimedia.ca/" title="Visit Intellimedia inc.">
+                    <img src="/images/logoIntellimedia.png" with="131" height="23" alt="" /></a>
+            </div>
+        </div>
+        <!-- /left column -->
+        <div id="column-right">
+            <div data-role="content">
+                <div class="intelli-content">
+                    <div class="intelli-main-content-header ui-bar ui-bar-a">
+                        <a href="javascript:;" class="icoMenu" id="togglepanel"><span>Menu</span></a>
+                        <!--a class="ui-btn ui-nodisc-icon ui-btn-inline ui-btn-icon-left ui-btn-b ui-icon-bars ui-btn-icon-notext" href="javascript:;" id="togglepanel">Panel</a-->
+                        <h3>
+                            Schools</h3>
+                    </div>
+                    <div class="intelli-main-content ui-body ui-body-a">
+                        <p>
+                            <div id="grid">
+                            </div>
+                        </p>
+                    </div>
+                    <input name="importFiles" id="importFiles" type="file" />
+                    
+                    <textarea id="importResults" class="hidden" style="height: 200px!important;"></textarea>
+                </div>
+            </div>
+            <!-- /content -->
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</div>
+@section pageJS{
+    <script type="text/javascript">
+
+        function formatPhoneNumber(number) {
+
+            if (number == null) {
+                return '';
+            }
+            if (number.length < 10) {
+                return number;
+            }
+
+            return number.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+        }
+
+
+        $(document).ready(function () {
+            var schoolsGrid = {
+                getCurrentData: function () {
+                    $.get('@(Url.Action("DistrictSysAdminSchoolsGet"))', function (result) {
+                        if (result.Result.Type == 0) {
+                            schoolsGrid.createKendoGrid(result.Data);
+                        }
+                    }, 'json');
+                },
+                createKendoGrid: function (results) {
+                    var kendoDataSource = new kendo.data.DataSource({
+                        data: results,
+                        schema: {
+                            model: {
+                                fields: {
+                                    Id: { type: "number" },
+                                    OrganizationId: { type: "number" },
+                                    SchoolName: { type: "string" },
+                                    Phone: { type: "string" },
+                                    Fax: { type: "string" },
+                                    FullWebAddress: { type: "string" }
+                                }
+                            }
+                        },
+                        pageSize: 20
+
+                    });
+
+                    $("#grid").kendoGrid({
+                        dataSource: kendoDataSource,
+                        sortable: {
+                            mode: "multiple",
+                            allowUnsort: true
+                        },
+                        pageable: true,
+                        scrollable: false,
+                        columns: [
+                                {
+                                    hidden: true,
+                                    field: "Id",
+                                    attributes: { 'id': 'idCol' }
+                                },
+                                {
+                                    hidden: true,
+                                    field: "OrganizationId"
+                                },
+                                {
+                                    title: "SCHOOL NAME",
+                                    field: "SchoolName",
+                                    sortable: true,
+                                    width: "40%"
+
+                                },
+                                {
+                                    title: "PHONE",
+                                    field: "Phone",
+                                    template: "#= formatPhoneNumber(Phone) #",
+                                    sortable: true,
+                                    filterable: true
+                                },
+                                {
+                                    title: "FAX",
+                                    field: "Fax",
+                                    template: "#= formatPhoneNumber(Fax) #",
+                                    sortable: true,
+                                    filterable: true
+                                },
+                                {
+                                    title: "ADDRESS",
+                                    field: "FullWebAddress",
+                                    sortable: true,
+                                    encoded: false
+                                }
+                            ]
+                    });
+                }
+            };
+            schoolsGrid.getCurrentData();
+
+            $("#importResults").hide();
+
+            $("#importFiles").kendoUpload({
+                async: {
+                    saveUrl: "@(Url.Action("ImportSchools", "Home"))",
+                    removeUrl: "@(Url.Action("ImportSchoolsRemove", "Home"))",
+                    autoUpload: false
+                },
+                select: function () {
+                    $("#importResults").hide();
+                },
+                success: function (e) {
+                    if (e.response.Data != null) {
+                        $("#importResults").show().val(e.response.Data.join('\n'));
+                    } else {
+                        $("#importResults").hide();
+                    }
+                    schoolsGrid.getCurrentData();
+                },
+                multiple: false
+            });
+        }); //document ready
+
+    </script>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

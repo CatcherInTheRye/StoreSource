@@ -1,0 +1,177 @@
+﻿@using PCS.DataRepository.DataContracts
+@{
+    ViewBag.Title = "Attached Documents";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<StudentMenuItem> leftUpperMenu = ViewBag.leftUpperMenu as List<StudentMenuItem> ?? new List<StudentMenuItem>();
+    List<StudentMenuItem> leftMiddleMenu = ViewBag.leftMiddleMenu as List<StudentMenuItem> ?? new List<StudentMenuItem>();
+    List<RoleAreaForm> leftLowMenu = ViewBag.leftLowMenu as List<RoleAreaForm> ?? new List<RoleAreaForm>();
+    List<TabMenuItem> tabsMenu = ViewBag.tabsMenu as List<TabMenuItem> ?? new List<TabMenuItem>();
+}
+<div id="column-left">
+    <a class="logo" href="#" title="">
+        <img src="../images/logo.png" width="229" height="120" alt="" /></a>
+    <ul class="intelli-mainmenu" id="mainMenu">
+        @foreach (StudentMenuItem item in leftUpperMenu)
+        {
+            <li><a href="@(Url.Action(item.href))" title=''>@(item.text)</a></li>
+        }
+    </ul>
+    <ul class="intelli-mainmenu intelli-actions-menu" id="secondaryMenu">
+        @foreach (StudentMenuItem item in leftMiddleMenu)
+        {
+            <li><a href='#' class='action_nav' onclick='@(item.href)();' title=''>@(item.text)</a></li>
+        }
+    </ul>
+    <div class="intelli-custom-outerpanel">
+        <ul class="intelli-cusom-toolbar" style="margin: 0 -43px;" id="areas">
+            @foreach (RoleAreaForm area in leftLowMenu)
+            {
+                <li><a href="@(Url.Action("SpecialistArea", new { areaId = area.Id }))" title="">
+                    <img src="~/images/@(area.Image).png" width="43" height="43" alt="" /><br />
+                    <span>@(area.Text)</span></a></li>
+            }
+        </ul>
+    </div>
+    <div class="intelli-copy">
+        <span>Developed by</span> <a href="http://www.intellimedia.ca/" title="Visit Intellimedia inc.">
+            <img src="../images/logoIntellimedia.png" with="131" height="23" alt="" /></a>
+    </div>
+</div>
+<!-- /left column -->
+<div id="column-right">
+    <div data-role="content" id="content">
+        <div class="intelli-content intelli-tabs">
+            <ul class="intelli-tabs-panel" style="background: transparent;">
+                @foreach (TabMenuItem tab in tabsMenu)
+                {
+                    string sub = (tab.SubItems == "" ? " " : tab.SubItems);
+                    string title = Enum.GetName(typeof(PCSMvc.Models.TabItemEnum), tab.Type).Replace('_', ' ');
+                    string rowId = tab.Id.ToString();
+                    string typeId = tab.Type.ToString();
+                    <li data-id="@(rowId)" data-type="@(typeId)"><a href="#intelli-tab-1">@(title)<br />
+                        <span class="small">@Html.Raw(sub)&nbsp;</span></a></li>
+                }
+            </ul>
+            <div class="intelli-main-content-header ui-bar ui-bar-a">
+                <a href="javascript:;" class="icoMenu" id="togglepanel"><span>Menu</span></a>
+                <!--a class="ui-btn ui-nodisc-icon ui-btn-inline ui-btn-icon-left ui-btn-b ui-icon-bars ui-btn-icon-notext" href="javascript:;" id="togglepanel">Panel</a-->
+                <h3>
+                    Attach Documents</h3>
+            </div>
+            <div class="intelli-main-content">
+                <div id="grid">
+                </div>
+                <input name="importFiles" id="importFiles" type="file" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear">
+</div>
+@section pageJS{
+    <script type="text/javascript">
+
+        function createGrid() {
+            $.get('@(Url.Action("AttachDocumentsGet", "Home"))', {}, function (result) {
+                if (result.Result.Type == 0) {
+                    createKendoGrid(result.Data);
+                }
+            }, 'json');
+        }
+
+        var kendoDataSource;
+        function createKendoGrid(results) {
+            kendoDataSource = new kendo.data.DataSource({
+                data: results,
+                schema: {
+                    model: {
+                        id: "Id",
+                        fields: {
+                            Id: { type: "number" },
+                            FileName: { type: "string" },
+                            DateUploadedS: { type: "string" },
+                            UploadedByName: { type: "string" },
+                            Description: { type: "string" }
+                        }
+                    }
+                },
+                pageSize: 20
+                //                    serverPaging: true,
+                //                    serverFiltering: true,
+                //                    serverSorting: true
+            });
+
+            $("#grid").kendoGrid({
+                dataSource: kendoDataSource,
+                sortable: {
+                    mode: "multiple",
+                    allowUnsort: true
+                },
+                pageable: true,
+                scrollable: false,
+                columns: [
+                    {
+                        hidden: true,
+                        field: "Id"
+                    },
+                    {
+                        title: "DOCUMENT",
+                        field: "FileName",
+                        sortable: true,
+                        width: "40%",
+                        //filterable: false,
+                        template: "<a style='cursor: pointer; text-decoration:underline;' onclick='downloadDoc(${Id})' title='download'>#:FileName#</a>"
+                    },
+                    {
+                        title: "DATE",
+                        field: "DateUploadedS"
+                    },
+                    {
+                        title: "UPLOADED BY",
+                        field: "UploadedByName"
+                    },
+                    {
+                        title: "DESCRIPTION",
+                        field: "Description"
+                    },
+                    {
+                        width: 20,
+                        template: "<a onclick='recordRemove(${Id})' title='Delete' class='intelli-btn-delete'><span>Delete</span></a>"
+                    }
+                ]
+            });
+        } //createKendoGrid
+
+        function downloadDoc(id) {
+            window.location.href = "@Url.Action("AttachDocumentGet", "Home")?id=" + id;
+        }
+
+        function recordRemove(id) {
+            if (ConfirmBox("", "Remove document?")) {
+                $.post("@(Url.Action("AttachDocumentRemove", "Home"))", { id: id }, function(data) {
+                    if (data.Result.Type == 0) {
+                        createGrid();
+                    }
+                });
+            }
+        }
+
+        $(document).ready(function () {
+            createGrid();
+            
+            $("#importFiles").kendoUpload({
+                async: {
+                    saveUrl: "@(Url.Action("AttachDocumentUpload", "Home"))",
+                    removeUrl: "@(Url.Action("AttachDocumentRemoveEmpty", "Home"))",
+                    autoUpload: false
+                },
+                success: function (e) {
+                    createGrid();
+                },
+                multiple: false
+            });
+        });
+        
+        
+    </script>
+}

@@ -1,0 +1,17 @@
+@charset "utf-8";
+/* CSS Document */
+
+ul.intelli-mainmenu li a {display:block; border-top:solid 1px #dcdcdc; border-left:solid 1px #cdcdcd3; border-right:solid 1px #cdcdcd3; border-bottom:solid 1px #bdbdbd; background:#bfd0d1; padding:15px 18px; list-style-type:none; font-weight:normal; text-decoration:none; color:#333; font-size:0.8em;}
+ul.intelli-mainmenu li:first-child a {border-radius:8px 8px 0 0; -webkit-border-radius: 8px 8px 0 0; -moz-border-radius: 8px 8px 0 0; border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; border-top:solid 1px #b3b3b3; border-left:solid 1px #cdcdcd3; border-right:solid 1px #cdcdcd3; border-bottom:solid 1px #bdbdbd;}
+ul.intelli-mainmenu li:last-child a {border-radius:0 0 8px 8px; -webkit-border-radius: 0 0 8px 8px; -moz-border-radius: 0 0 8px 8px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; border-left:solid 1px #cdcdcd3; border-right:solid 1px #cdcdcd3; border-bottom:solid 1px #e5e5e5;}
+ul.intelli-mainmenu li a:hover {background:#cddfe0;}
+
+.intelli-custom-outerpanel {margin-top:15px; border-radius:8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; border-top:solid 1px #b3b3b3; border-left:solid 1px #cdcdcd3; border-right:solid 1px #cdcdcd3; border-bottom:solid 1px #e5e5e5; background:#d1d1d1; padding:15px 18px;}
+
+.intelli-current, .intelli-cusom-toolbar li:hover {background:#e5e5e5; border-radius: 5px;}
+
+.intelli-login {margin-top:50px; border-radius:8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; border-top:solid 1px #b3b3b3; border-left:solid 1px #cdcdcd3; border-right:solid 1px #cdcdcd3; border-bottom:solid 1px #e5e5e5; background:#d1d1d1; padding:15px 18px; width:300px; margin:50px auto 0 auto;}
+
+.intelli-popup-window {	width:675px;	background:#e8e8e8;	padding:5px;	border:solid 1px #a9a9a9;	border-radius:8px;	    box-shadow:0 8px 13px #888;	position:absolute;	z-index:200;		left:50%;	top:25%;	margin-left:-337px;	overflow:hidden;}
+
+.intelli-popup-window div.wrap {	padding:10px;	border:solid 1px #bcb0b0;	background:#e0e0e0;	font-size:12px;	clear:both;}

@@ -1,0 +1,1025 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+body.intelli {
+    background: url("../images/bgBody.png") !important;
+    background-color: transparent !important;
+    font-family: Verdana, Geneva, sans-serif;
+    color: #333;
+    text-shadow: 0 1px 0 #f3f3f3;
+}
+
+    body.intelli .intelli-panel {
+        background: none !important;
+    }
+
+    body.intelli .ui-page-theme-a {
+        background: none;
+    }
+
+#column-left {
+    float: left;
+    width: 240px;
+    padding: 5px 0 15px 15px;
+    position: relative;
+    left: 0;
+}
+
+#column-right {
+    float: left;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 255px;
+}
+
+/*a:hover {color:#059;}*/
+
+a {
+    outline: none;
+    color: #38c;
+    font-weight: normal;
+}
+
+    a.logo {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        position: relative;
+    }
+
+.clear {
+    clear: both;
+}
+
+.hidden {
+    display: none;
+}
+
+.intelli-content {
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+
+    .intelli-content .ui-bar {
+        border-radius: 8px 8px 0 0;
+        -webkit-border-radius: 8px 8px 0 0;
+        -moz-border-radius: 8px 8px 0 0;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-bottom: solid 2px #cfcfcf !important;
+    }
+
+    .intelli-content .ui-body {
+        border-radius: 0 0 8px 8px;
+        -webkit-border-radius: 0 0 8px 8px;
+        -moz-border-radius: 0 0 8px 8px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        padding-bottom: 1em;
+        border-top: none !important;
+    }
+.intelli-btn-delete { cursor: pointer;}
+
+/*.intelli-content .ui-bar-a {border-width:0 !important;}*/
+
+ul.intelli-mainmenu {
+    margin: 15px 0 0 0;
+    padding: 0;
+}
+
+    ul.intelli-mainmenu li {
+        list-style-type: none;
+    }
+
+        ul.intelli-mainmenu li a {
+            display: block;
+            border-top: solid 1px #dcdcdc;
+            border-left: solid 1px #cdcdcd3;
+            border-right: solid 1px #cdcdcd3;
+            border-bottom: solid 1px #bdbdbd;
+            background: #d1d1d1;
+            padding: 15px 18px;
+            list-style-type: none;
+            font-weight: normal;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.8em;
+        }
+
+        ul.intelli-mainmenu li:first-child a {
+            border-radius: 8px 8px 0 0;
+            -webkit-border-radius: 8px 8px 0 0;
+            -moz-border-radius: 8px 8px 0 0;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+            border-top: solid 1px #b3b3b3;
+            border-left: solid 1px #cdcdcd3;
+            border-right: solid 1px #cdcdcd3;
+            border-bottom: solid 1px #bdbdbd;
+        }
+
+        ul.intelli-mainmenu li:last-child a {
+            border-radius: 0 0 8px 8px;
+            -webkit-border-radius: 0 0 8px 8px;
+            -moz-border-radius: 0 0 8px 8px;
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            border-left: solid 1px #cdcdcd3;
+            border-right: solid 1px #cdcdcd3;
+            border-bottom: solid 1px #e5e5e5;
+        }
+
+        ul.intelli-mainmenu li a:hover {
+            background: #e0e0e0;
+        }
+
+        ul.intelli-mainmenu li a:visited {
+            color: #333;
+        }
+
+/*ul.intelli-actions-menu li a {display:block; border-top:solid 1px #dcdcdc; border-left:solid 1px #cdcdcd3; border-right:solid 1px #cdcdcd3; border-bottom:solid 1px #bdbdbd; background:#c3adad; padding:15px 18px; list-style-type:none; font-weight:normal; text-decoration:none; color:#333; font-size:0.8em;}
+ul.intelli-actions-menu li:first-child a {border-radius:8px 8px 0 0; -webkit-border-radius: 8px 8px 0 0; -moz-border-radius: 8px 8px 0 0; border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; border-top:solid 1px #b3b3b3; border-left:solid 1px #cdcdcd3; border-right:solid 1px #cdcdcd3; border-bottom:solid 1px #bdbdbd;}
+ul.intelli-actions-menu li:last-child a {border-radius:0 0 8px 8px; -webkit-border-radius: 0 0 8px 8px; -moz-border-radius: 0 0 8px 8px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; border-left:solid 1px #cdcdcd3; border-right:solid 1px #cdcdcd3; border-bottom:solid 1px #e5e5e5;}
+ul.intelli-actions-menu li a:hover {background:#e0e0e0;}
+ul.intelli-actions-menu li a:visited {color:#333;}*/
+a.action_nav {
+    color: #C00 !important;
+    font-weight: bold !important;
+}
+
+/*ul.intelli-mainmenu li a:focus {box-shadow:0 0 12px #38e;}*/
+
+.intelli-custom-outerpanel {
+    margin-top: 15px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top: solid 1px #b3b3b3;
+    border-left: solid 1px #cdcdcd3;
+    border-right: solid 1px #cdcdcd3;
+    border-bottom: solid 1px #e5e5e5;
+    background: #d1d1d1;
+    padding: 15px 18px;
+}
+
+.intelli-cusom-toolbar {
+    margin: 0 auto;
+}
+    /*.intelli-cusom-toolbar li {list-style-type:none; display:inline-block; text-align:center; margin:0 25px 0 0;}*/
+    .intelli-cusom-toolbar li {
+        list-style-type: none;
+        display: inline-block;
+        text-align: center;
+        padding: 10px;
+    }
+
+        .intelli-cusom-toolbar li a {
+            font-weight: normal;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.7em;
+        }
+
+        .intelli-current, .intelli-cusom-toolbar li:hover {
+            background: #e5e5e5;
+            border-radius: 5px;
+        }
+
+a.icoMenu {
+    width: 32px;
+    height: 34px;
+    display: block;
+    float: left;
+    background: url("../images/icoMenu.png") no-repeat;
+    margin-right: 15px;
+    border: none !important;
+    background-color: transparent !important;
+    box-shadow: none;
+    padding: 0 !important;
+}
+
+    a.icoMenu span {
+        display: none;
+    }
+
+    a.icoMenu:focus {
+        box-shadow: none !important;
+    }
+
+.intelli-main-content-header h3 {
+    margin-top: 15px;
+    text-align: left;
+}
+
+.intelli-main-content {
+    height: auto;
+}
+
+    .intelli-main-content a {
+        font-weight: normal !important;
+    }
+
+.intelli-copy {
+    font-size: 0.8em;
+    text-align: center;
+    margin-top: 15px;
+}
+
+    .intelli-copy span {
+        vertical-align: super;
+    }
+
+.intelli-float-half {
+    width: 50%;
+    float: left;
+    margin-bottom: 20px;
+}
+
+.intelli table.table1 {
+    padding: 0 5px;
+}
+
+    .intelli table.table1 td {
+        padding: 5px 0;
+        border-bottom: solid 1px #ececec;
+    }
+
+        .intelli table.table1 td:first-child {
+            font-size: 0.8em;
+            color: #666;
+        }
+
+.intelli table.table2 {
+    border: solid 2px #d4d4d4;
+    font-size: 0.8em;
+}
+
+    .intelli table.table2 th {
+        text-transform: uppercase;
+        color: #333;
+        text-align: left;
+        border-bottom: solid 2px #d4d4d4;
+        background: #d4d4d4;
+        color: #8f8f8f;
+        text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
+    }
+
+    .intelli table.table2 th, .intelli table.table2 td {
+        padding: 10px;
+    }
+
+    .intelli table.table2 tr:nth-child(2n+1) {
+        background: #f8f8f8;
+    }
+
+.intelli-login {
+    margin-top: 50px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top: solid 1px #b3b3b3;
+    border-left: solid 1px #cdcdcd3;
+    border-right: solid 1px #cdcdcd3;
+    border-bottom: solid 1px #e5e5e5;
+    background: #d1d1d1;
+    padding: 15px 18px;
+    width: 300px;
+    margin: 50px auto 0 auto;
+}
+
+    .intelli-login input[type="text"], .intelli-login select, .intelli-login input[type="password"] {
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-top: solid 1px #c6c6c6;
+        border-bottom: solid 1px #fbfbfb;
+        border-left: solid 1px #f3f3f3;
+        border-right: solid 1px #f3f3f3;
+        padding: 10px 5px;
+        font-size: 1.2em;
+        background: #f8f8f8;
+        margin: 0 auto 10px auto;
+        width: 100%;
+    }
+
+.search-btn {
+    display: block;
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    right: 5%;
+    top: 9px;
+    background: #f8f8f8;
+}
+
+.intelli-login-button {
+    margin: 10px 0 5px 100px;
+    -moz-box-shadow: inset 0px 1px 0px 0px #76d465;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #76d465;
+    box-shadow: inset 0px 1px 0px 0px #76d465;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #388a2f), color-stop(1, #428c30));
+    background: -moz-linear-gradient(top, #388a2f 5%, #428c30 100%);
+    background: -webkit-linear-gradient(top, #388a2f 5%, #428c30 100%);
+    background: -o-linear-gradient(top, #388a2f 5%, #428c30 100%);
+    background: -ms-linear-gradient(top, #388a2f 5%, #428c30 100%);
+    background: linear-gradient(to bottom, #388a2f 5%, #428c30 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#388a2f', endColorstr='#428c30',GradientType=0);
+    background-color: #388a2f;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #129418;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: arial;
+    font-size: 18px;
+    padding: 8px 30px;
+    text-decoration: none;
+    text-shadow: 0px -1px 0px #1e400e;
+}
+
+    .intelli-login-button:hover {
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #428c30), color-stop(1, #388a2f));
+        background: -moz-linear-gradient(top, #428c30 5%, #388a2f 100%);
+        background: -webkit-linear-gradient(top, #428c30 5%, #388a2f 100%);
+        background: -o-linear-gradient(top, #428c30 5%, #388a2f 100%);
+        background: -ms-linear-gradient(top, #428c30 5%, #388a2f 100%);
+        background: linear-gradient(to bottom, #428c30 5%, #388a2f 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#428c30', endColorstr='#388a2f',GradientType=0);
+        background-color: #428c30;
+    }
+
+    .intelli-login-button:active {
+        position: relative;
+        top: 1px;
+    }
+
+.intelli-search-field input {
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.intelli-search-field {
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top: solid 1px #c6c6c6;
+    border-bottom: solid 1px #fbfbfb;
+    border-left: solid 1px #f3f3f3;
+    border-right: solid 1px #f3f3f3;
+    padding: 10px 5px;
+    font-size: 1.2em;
+    background: #f8f8f8;
+    margin: 15px auto;
+    width: 90%;
+}
+
+.intelli-btn-cancel {
+    -moz-box-shadow: inset 0px 1px 0px 0px #f29c93;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #f29c93;
+    box-shadow: inset 0px 1px 0px 0px #f29c93;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100));
+    background: -moz-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+    background: -webkit-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+    background: -o-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+    background: -ms-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+    background: linear-gradient(to bottom, #fe1a00 5%, #ce0100 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100',GradientType=0);
+    background-color: #fe1a00;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #d83526;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: arial;
+    font-size: 13px;
+    padding: 10px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #b23e35;
+    color: #fff !important;
+}
+
+    .intelli-btn-cancel:hover {
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00));
+        background: -moz-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+        background: -webkit-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+        background: -o-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+        background: -ms-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+        background: linear-gradient(to bottom, #ce0100 5%, #fe1a00 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00',GradientType=0);
+        background-color: #ce0100;
+    }
+
+    .intelli-btn-cancel:active {
+        position: relative;
+        top: 1px;
+    }
+
+.intelli-btn-save {
+    -moz-box-shadow: inset 0px 1px 0px 0px #70e075;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #70e075;
+    box-shadow: inset 0px 1px 0px 0px #70e075;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #04c207), color-stop(1, #0fa60a));
+    background: -moz-linear-gradient(top, #04c207 5%, #0fa60a 100%);
+    background: -webkit-linear-gradient(top, #04c207 5%, #0fa60a 100%);
+    background: -o-linear-gradient(top, #04c207 5%, #0fa60a 100%);
+    background: -ms-linear-gradient(top, #04c207 5%, #0fa60a 100%);
+    background: linear-gradient(to bottom, #04c207 5%, #0fa60a 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#04c207', endColorstr='#0fa60a',GradientType=0);
+    background-color: #04c207;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #07b80a;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: arial;
+    font-size: 13px;
+    padding: 10px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #0a8016;
+    color: #fff !important;
+}
+
+    .intelli-btn-save:hover {
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0fa60a), color-stop(1, #04c207));
+        background: -moz-linear-gradient(top, #0fa60a 5%, #04c207 100%);
+        background: -webkit-linear-gradient(top, #0fa60a 5%, #04c207 100%);
+        background: -o-linear-gradient(top, #0fa60a 5%, #04c207 100%);
+        background: -ms-linear-gradient(top, #0fa60a 5%, #04c207 100%);
+        background: linear-gradient(to bottom, #0fa60a 5%, #04c207 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0fa60a', endColorstr='#04c207',GradientType=0);
+        background-color: #0fa60a;
+    }
+
+    .intelli-btn-save:active {
+        position: relative;
+        top: 1px;
+    }
+
+.intelli-btn-white {
+    -moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
+    box-shadow: inset 0px 1px 0px 0px #ffffff;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
+    background: -moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+    background: -webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+    background: -o-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+    background: -ms-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+    background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
+    background-color: #f9f9f9;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #666666;
+    font-family: arial;
+    font-size: 13px;
+    padding: 10px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #ffffff;
+    color: #000 !important;
+}
+
+    .intelli-btn-white:hover {
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9));
+        background: -moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+        background: -webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+        background: -o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+        background: -ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+        background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9',GradientType=0);
+        background-color: #e9e9e9;
+    }
+
+    .intelli-btn-white:active {
+        position: relative;
+        top: 1px;
+    }
+
+.editor {
+    box-sizing: content-box;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
+    box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
+    margin: 10px 0 15px;
+}
+
+.intelli-btn-delete {
+    display: block;
+    width: 13px;
+    height: 18px;
+    background: url("../images/icoTrash.png") no-repeat;
+    border: none !important;
+    background-color: transparent !important;
+    box-shadow: none;
+    padding: 0 !important;
+}
+
+    .intelli-btn-delete span {
+        display: none;
+    }
+
+.intelli-popup-window {
+    width: 675px;
+    background: #bfd0d1;
+    padding: 5px;
+    border: solid 1px #a9a9a9;
+    border-radius: 8px;
+    box-shadow: 0 8px 13px #888;
+    position: absolute;
+    z-index: 200;
+    left: 50%;
+    top: 25%;
+    margin-left: -337px;
+    overflow: hidden;
+}
+
+a.btclose span {
+    display: none;
+}
+
+a.btclose {
+    display: block;
+    width: 15px;
+    height: 15px;
+    background: url("../images/btclose.png") no-repeat 0px 0px;
+    float: right;
+    margin: 1px 0 3px 0;
+}
+
+    a.btclose:hover {
+        background: url("../images/btclose.png") no-repeat 0px -15px;
+    }
+
+.intelli-popup-window span.title {
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    color: #333;
+    float: left;
+    width: 90%;
+    margin: 1px 0 5px 0;
+}
+
+.intelli-popup-window div.wrap {
+    padding: 10px;
+    border: solid 1px #bcb0b0;
+    background: #e0e0e0;
+    font-size: 12px;
+    clear: both;
+}
+
+.intelli-window-poup-width {
+    500px;
+}
+
+.intelli-simple-list {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+    .intelli-simple-list li {
+        list-style-type: none;
+    }
+
+        .intelli-simple-list li label {
+        }
+
+.intelli-textfield {
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top: solid 1px #c6c6c6;
+    border-bottom: solid 1px #fbfbfb;
+    border-left: solid 1px #f3f3f3;
+    border-right: solid 1px #f3f3f3;
+    padding: 10px 5px;
+    font-size: 1.2em;
+    background: #f8f8f8;
+    margin: 0 0 10px 0px;
+    width: 97%;
+}
+
+.mce-panel {
+    border-radius: 5px !important;
+    -webkit-border-radius: 5px !important;
+    -moz-border-radius: 5px !important;
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+    border: solid 1px #dedede !important;
+}
+
+.intelli-main-content h3 {
+    color: #00a950;
+}
+
+.intelli-table-small {
+    font-size: 0.7em !important;
+}
+
+    .intelli-table-small td, .intelli-table-small th {
+        padding-left: 2px !important;
+        padding-right: 2px !important;
+        text-align: center !important;
+    }
+
+.intelli-manager .intelli-cusom-toolbar li {
+    min-width: 80px;
+    text-align: center;
+    padding: 10px 5px;
+    margin: 5px 0;
+}
+
+.intelli-pagenator {
+    margin: 3px 0 0 0;
+    padding: 0;
+}
+
+    .intelli-pagenator li {
+        list-style-type: none;
+        display: inline;
+        padding: 0 3px;
+    }
+
+body.intelli .ui-tabs {
+    padding: 0;
+}
+
+.intelli-tabs-panel {
+    margin: 0;
+    padding: 0 0 0 6px;
+    background: #ddd;
+    border-radius: 0;
+}
+
+    .intelli-tabs-panel li {
+        list-style-type: none;
+        display: inline-block;
+        margin: 5px 0 0 0px;
+    }
+
+    .intelli-tabs-panel a {
+        display: block;
+        padding: 15px 15px;
+        font-size: 0.8em;
+        font-weight: bolder;
+        text-decoration: none;
+        color: rgb(51, 51, 51); /* color:#333 !important;*/
+        line-height: 1em;
+    }
+
+
+
+    .intelli-tabs-panel li.ui-state-default {
+        background: #efefef;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .intelli-tabs-panel li.ui-tabs-active {
+        background: #fff;
+        position: relative;
+    }
+
+    /*.intelli-manager-student*/ .intelli-tabs-panel li.ui-state-default {
+        background: #dedede;
+        border-radius: 5px 5px 0 0;
+    }
+    /*.intelli-manager-student*/ .intelli-tabs-panel li.ui-tabs-active {
+        background: #e9e9e9;
+        position: relative;
+    }
+        /*.intelli-manager-student*/ .intelli-tabs-panel li.ui-tabs-active:after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #e9e9e9;
+            z-index: 100;
+        }
+    /*.intelli-manager-student*/ .intelli-tabs-panel a {
+        color: #333 !important;
+    }
+        /*.intelli-manager-student*/ .intelli-tabs-panel a:hover {
+            color: #059 !important;
+        }
+
+
+.demo-info {
+    margin: 0.8em 0 0;
+    font-size: 1em;
+}
+
+.ui-datepicker {
+    display: none;
+}
+/* set height and left/right margin to accomodate prev/next icons */
+.ui-datepicker-header {
+    position: relative;
+    padding: 0.3125em 2.0625em;
+    line-height: 1.75em;
+    text-align: center;
+}
+
+    .ui-datepicker-header .ui-btn {
+        margin: -1px 0 0 0;
+    }
+/* fixed width layout for calendar; cells are fixed width */
+.ui-datepicker-calendar {
+    border-collapse: collapse;
+    line-height: 2;
+}
+
+    .ui-datepicker-calendar .ui-btn {
+        margin: 0;
+        padding: 0;
+        width: 2em;
+        line-height: inherit;
+    }
+
+.ui-datepicker-today .ui-btn {
+    text-decoration: underline !important;
+}
+
+.ui-datepicker-days-cell-over .ui-btn {
+    border-color: inherit !important;
+}
+
+.ui-datepicker-buttonpane .ui-btn {
+    float: left;
+    margin: 0.5em 0 0;
+    padding: 0.5em 1em;
+}
+
+    .ui-datepicker-buttonpane .ui-btn:last-child {
+        float: right;
+    }
+/* class that can be added to datepicker <input> element's wrapper; makes room for trigger button */
+.dp-input-button-wrap {
+    position: relative;
+    padding-right: 2.5em;
+}
+
+    .dp-input-button-wrap .ui-btn {
+        top: 0.1875em;
+        margin: 0;
+    }
+/* jQM framework wraps popup content inside a div with the ID <div-id>-popup */
+#dp-fullsize-popup {
+    width: 80%;
+}
+/* fluid width layout for calendar; table is 100% wide; cells size automatically */
+.ui-datepicker-inline .ui-datepicker-calendar {
+    width: 100%;
+}
+
+    .ui-datepicker-inline .ui-datepicker-calendar .ui-btn {
+        width: auto;
+    }
+
+.ui-datepicker-title {
+    top: 5px !important;
+    text-align: center !important;
+    width: 190px !important;
+}
+
+.ui-datepicker-prev {
+    position: absolute !important;
+    left: 5px !important;
+}
+
+.ui-datepicker-next {
+    position: absolute !important;
+    left: 225px !important;
+}
+
+/*input.intelli-datapicker {position:relative; z-index:49;}
+input.intelli-datapicker:after {content:""; display:block; width:20px; height:20px; background:url("../images/icoCalendar.png") no-repeat; z-index:50; top:3px; right:5px; position:absolute;}*/
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+    box-shadow: 0 0 12px #38c;
+}
+
+div.ui-focus {
+    box-shadow: none !important;
+}
+
+span.red {
+    color: #C00;
+}
+
+span.small {
+    font-size: 0.8em;
+    font-weight: normal !important;
+}
+
+select.intelli-year-select {
+    font-size: 0.8em;
+}
+
+.intelli-total {
+    background: #f8f8f8;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+    .intelli-total ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    .intelli-total li {
+        list-style-type: none;
+        display: inline;
+        margin-right: 30px;
+    }
+
+ul.checkboxes {
+    margin: 0;
+    padding: 0;
+}
+
+    ul.checkboxes li {
+        list-style-type: none;
+    }
+
+        ul.checkboxes li input[type="checkbox"], ul.checkboxes li input[type="radio"] {
+            float: left;
+        }
+
+        ul.checkboxes li label {
+            font-size: 1em;
+        }
+
+/* *** Updates 10.10.2014 */
+
+.intelli-login {
+    width: 40%;
+}
+
+.intelli-login-button {
+    display: block;
+    width: 110px;
+    margin: 10px auto 5px auto;
+}
+
+.intelli-login > img {
+    display: block;
+    margin: 14px auto 20px auto !important;
+}
+
+.intelli-login {
+    min-width: 265px;
+    margin-top: 100px;
+}
+
+.intelli-tabs-panel {
+    display: none;
+}
+
+@media all and (min-width: 0px) {
+    #column-left {
+        left: -270px;
+    }
+
+    #column-right {
+        left: 0px;
+    }
+
+    .intelli-float-half {
+        width: 100%;
+        float: left;
+    }
+
+    .intelli-window-poup-width {
+        width: 75%;
+    }
+
+    .table2 th, .table2 td {
+        font-size: 0.8em !important;
+    }
+}
+
+@media all and (min-width: 480px) {
+    #column-left {
+        left: 0px;
+    }
+
+    #column-right {
+        left: 255px;
+    }
+
+    .intelli-float-half {
+        width: 100%;
+        float: left;
+    }
+
+    .intelli-window-poup-width {
+        width: 380px;
+    }
+
+    .table2 th, .table2 td {
+        font-size: 0.9em !important;
+    }
+}
+
+@media all and (min-width: 800px) {
+    .intelli-float-half {
+        width: 50%;
+        float: left;
+    }
+
+    .intelli-window-poup-width {
+        width: 500px;
+    }
+
+    .table2 th, .table2 td {
+        font-size: 1em !important;
+    }
+
+    .intelli-login ul.intelli-cusom-toolbar {
+        margin: 20px auto 30px auto !important;
+        width: 50%;
+    }
+    /*.intelli-tabs-panel {display:block;}		*/
+}
+
+@media all and (min-width: 950px) {
+    .intelli-tabs-panel {
+        display: block;
+    }
+}
+
+.k-alt {
+    background: white !important;
+}
+
+.k-grid * {
+    border: 0 !important;
+}
+
+/*.k-grid {
+            margin: 0 auto;
+            background: #fff;
+            border: solid 3px #fff;
+        }*/
+
+.k-grid th.k-header,
+.k-grid th.k-header .k-link {
+    text-transform: uppercase !important;
+    color: #333 !important;
+    text-align: left !important;
+    border-bottom: solid 2px #d4d4d4 !important;
+    background: #d4d4d4 !important;
+    color: #8f8f8f !important;
+    text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5) !important;
+    font-size: 1em !important;
+    font-weight: bold !important;
+}
