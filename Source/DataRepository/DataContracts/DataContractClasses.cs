@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Linq;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using System.Web.Mvc;
 
 namespace DataRepository.DataContracts
 {
