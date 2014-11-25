@@ -152,6 +152,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
@@ -190,6 +194,8 @@
     <Compile Include="App_Start\PreStartApp.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
@@ -530,6 +536,7 @@
     <Content Include="js\Common.js" />
     <Content Include="Scripts\bootstrap-wysiwyg.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Areas\Admin\Views\Web.config" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -663,6 +670,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Scripts\KendoUICore\js\" />
   </ItemGroup>
   <ItemGroup>
@@ -681,47 +690,10 @@
     <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\PCSManager.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Specialist.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\DistrictSysAdmin.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\SchoolUser.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\PCSManagerSpecialists.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Reports\PDFGenerator.ashx" />
-    <Content Include="Views\Shared\_PCSManagerLayout.cshtml" />
-    <Content Include="Views\Home\UserUpdate.cshtml" />
-    <Content Include="Views\Home\DistrictSysAdminSchools.cshtml" />
-    <Content Include="Views\Home\DistrictSysAdminStaff.cshtml" />
-    <Content Include="Views\Home\DistrictSysAdminStudents.cshtml" />
-    <Content Include="Views\Home\ApproveSupport.cshtml" />
-    <Content Include="Views\Home\ApproveSupportEdit.cshtml" />
-    <Content Include="Views\Home\Background.cshtml" />
-    <Content Include="Views\Home\Goals.cshtml" />
-    <Content Include="Views\Home\Observations.cshtml" />
-    <Content Include="Views\Home\Office.cshtml" />
-    <Content Include="Views\Home\Progress.cshtml" />
-    <Content Include="Views\Home\Recomendations.cshtml" />
-    <Content Include="Views\Home\RequestSupport.cshtml" />
-    <Content Include="Views\Home\SelectStudent.cshtml" />
-    <Content Include="Views\Home\SpecialistArea.cshtml" />
-    <Content Include="Views\Home\StudentInfo.cshtml" />
-    <Content Include="Views\Home\StudentSearch.cshtml" />
-    <Content Include="Views\Home\Summary.cshtml" />
-    <Content Include="Views\Home\Test.cshtml" />
-    <Content Include="Views\Home\Timerecords.cshtml" />
-    <Content Include="Views\Home\TimerecordsOffice.cshtml" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
@@ -729,20 +701,8 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
-    <Content Include="Views\Home\Organizations.cshtml" />
-    <Content Include="Views\Home\OrganizationUpdate.cshtml" />
-    <Content Include="Views\Home\PCSManagerSettings.cshtml" />
-    <Content Include="Views\Home\DistrictSysAdminStudentInfo.cshtml" />
     <Content Include="Views\Email\SendEmail.html.cshtml" />
-    <Content Include="Views\Home\StudentReports.cshtml" />
-    <Content Include="Views\Home\StudentReport.cshtml" />
-    <Content Include="Views\Home\PCSManagerReportTime.cshtml" />
-    <Content Include="Views\Home\SpecialistRequestSupport.cshtml" />
-    <Content Include="Views\Home\PCSManagerReportCase.cshtml" />
-    <Content Include="Views\Home\RequestSupportList.cshtml" />
-    <Content Include="Views\Home\TypeUserSelects.cshtml" />
     <Content Include="Views\Home\AccessDenied.cshtml" />
-    <Content Include="Views\Home\AttachDocuments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />

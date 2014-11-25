@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataRepository
 {
-    public partial class user
+    public partial class User
     {
         //TODO. Tolik. Needed for registration
         //public static string GetActivateUrl()

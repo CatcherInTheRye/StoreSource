@@ -60,61 +60,29 @@ namespace DataRepository
 
         #endregion init
 
-        #region Authentication
-
-        
-        #endregion Authentication
-
-        #region User Role
-
-        public RoleForm UserRoleGet(string userId)
-        {
-            int id;
-            int.TryParse(userId, out id);
-            role result = null;
-            List<userRole> userRoles = Db.userRoles.Where(p => p.userId == id).ToList();
-            //now user has only 1 role
-            userRole userRole = userRoles.FirstOrDefault();
-            if (userRole != null)
-            {
-                List<role> roles = Db.roles.Where(p => p.id == userRole.roleId).ToList();
-                result = roles.FirstOrDefault();
-            }
-
-            return result != null
-                       ? new RoleForm
-                             {
-                                 Id = result.id,
-                                 Title = result.roleName,
-                                 Description = result.roleDescription
-                             }
-                       : null;
-        }
-
-        #endregion User Role
 
         #region Users
 
-        public IQueryable<user> Users
+        public IQueryable<User> Users
         {
             get
             {
-                return Db.users;
+                return Db.Users;
             }
         }
 
         public List<UserForm> UserForms
         {
             //TODO: Tolik. First ToList() may be redundant. Check SQL Server
-            get { return Users.ToList().Select(u => (UserForm)ModelMapper.Map(u, typeof(user), typeof(UserForm))).ToList(); }
+            get { return Users.ToList().Select(u => (UserForm)ModelMapper.Map(u, typeof(User), typeof(UserForm))).ToList(); }
         }
 
-        public user UserGetByLogin(string userName)
+        public User UserGetByLogin(string userName)
         {
-            return Users.FirstOrDefault(p => string.Compare(p.userName, userName, true) == 0);
+            return Users.FirstOrDefault(p => string.Compare(p.Phone, userName, true) == 0);
         }
 
-        public user Login(string userName, string password)
+        public User Login(string userName, string password)
         {
             return Users.FirstOrDefault(p => string.Compare(p.userName, userName, true) == 0 && p.pwd == password);
         }
@@ -242,7 +210,7 @@ namespace DataRepository
             UserForm result = UsersGetExtended().FirstOrDefault(p => p.Id == id);
             if (result != null)
             {
-                user u = Users.FirstOrDefault(p => p.id == id);
+                User u = Users.FirstOrDefault(p => p.id == id);
                 if (u != null)
                 {
                     result.Pwd = u.pwd;
@@ -258,46 +226,46 @@ namespace DataRepository
 
         public UserForm UserUpdate(UserForm userForm, int userId)
         {
-            user user = Users.FirstOrDefault(p => p.id == userForm.Id);
+            User User = Users.FirstOrDefault(p => p.id == userForm.Id);
             bool userCreated = false;
-            if (user == null) //create
+            if (User == null) //create
             {
-                user = new user();
-                user.active = true;
-                Db.users.InsertOnSubmit(user);
+                User = new User();
+                User.active = true;
+                Db.users.InsertOnSubmit(User);
                 userCreated = true;
             }
 
             //TODO: Tolik. check
-            //user = (user) ModelMapper.Map(userForm, typeof (UserForm), typeof (user));
-            user.firstName = userForm.FirstName;
-            user.lastName = userForm.LastName;
-            user.middleName = userForm.MiddleName;
-            user.phone = userForm.Phone;
-            user.cell = userForm.Cell;
-            user.salutation = userForm.Salutation;
-            user.userName = userForm.UserName;
-            user.email = userForm.Email;
-            user.ps_user_id = !string.IsNullOrWhiteSpace(userForm.PsUserId) ? int.Parse(userForm.PsUserId) : -1;
+            //User = (User) ModelMapper.Map(userForm, typeof (UserForm), typeof (User));
+            User.firstName = userForm.FirstName;
+            User.lastName = userForm.LastName;
+            User.middleName = userForm.MiddleName;
+            User.phone = userForm.Phone;
+            User.cell = userForm.Cell;
+            User.salutation = userForm.Salutation;
+            User.userName = userForm.UserName;
+            User.email = userForm.Email;
+            User.ps_user_id = !string.IsNullOrWhiteSpace(userForm.PsUserId) ? int.Parse(userForm.PsUserId) : -1;
 
-            user.pwd = userForm.Pwd;
-            user.pwdChangedBy = userId;
-            user.pwdChangedDate = DateTime.UtcNow;
+            User.pwd = userForm.Pwd;
+            User.pwdChangedBy = userId;
+            User.pwdChangedDate = DateTime.UtcNow;
 
             SubmitChanges();
 
             if (userCreated)
             {
-                //user role
+                //User role
                 userRole userRole = new userRole();
-                userRole.user = user;
+                userRole.User = User;
                 userRole.roleId = userForm.UserRole;
             }
 
             //Speciality. User support types
             if (!string.IsNullOrEmpty(userForm.UserSupportRequests))
             {
-                List<userSupportType> userSupportTypes = user.userSupportTypes.ToList();
+                List<userSupportType> userSupportTypes = User.userSupportTypes.ToList();
                 //remove unused
                 List<userSupportType> userSupportTypesForDelete =
                     userSupportTypes.Where(p => p.supportRequestTypeId != int.Parse(userForm.UserSupportRequests)).ToList();
@@ -310,7 +278,7 @@ namespace DataRepository
                 {
                     userSupportType newUserSupportType = new userSupportType
                     {
-                        user = user,
+                        User = User,
                         supportRequestTypeId = int.Parse(userForm.UserSupportRequests)
                     };
                     Db.userSupportTypes.InsertOnSubmit(newUserSupportType);
@@ -321,7 +289,7 @@ namespace DataRepository
             if (!string.IsNullOrWhiteSpace(userForm.Districts) || !string.IsNullOrWhiteSpace(userForm.Schools))
             {
                 //remove old values
-                List<userDefaultLocation> userDefaultLocations = user.userDefaultLocations.ToList(); //what are in base now
+                List<userDefaultLocation> userDefaultLocations = User.userDefaultLocations.ToList(); //what are in base now
                 foreach (userDefaultLocation userDefaultLocation in userDefaultLocations)
                 {
                     Db.userDefaultLocations.DeleteOnSubmit(userDefaultLocation);
@@ -356,7 +324,7 @@ namespace DataRepository
                 {
                     userDefaultLocation toAdd = new userDefaultLocation()
                                                     {
-                                                        user = user,
+                                                        User = User,
                                                         organizationId = change.OrganizationId,
                                                         schoolId = change.Id != -1 ? change.Id : (int?)null
                                                     };
@@ -370,12 +338,12 @@ namespace DataRepository
                 {
                     foreach (int i in organizations)
                     {
-                        userOrganization record = Db.userOrganizations.Where(p => p.user == user && p.organizationId == i).FirstOrDefault();
+                        userOrganization record = Db.userOrganizations.Where(p => p.User == User && p.organizationId == i).FirstOrDefault();
                         if (record == null)
                         {
                             record = new userOrganization();
                             record.organizationId = i;
-                            record.user = user;
+                            record.User = User;
                             Db.userOrganizations.InsertOnSubmit(record);
                         }
 
@@ -385,12 +353,12 @@ namespace DataRepository
 
             if (userForm.UserActionForm != null)
             {
-                userForm.UserActionForm.UserId = user.id;
+                userForm.UserActionForm.UserId = User.id;
                 UserActionUpdate(userForm.UserActionForm);
             }
             SubmitChanges();
 
-            return UserGetForEdit(user.id);
+            return UserGetForEdit(User.id);
         }
 
         public UserActionForm UserActionUpdate(UserActionForm userActionForm)
@@ -412,10 +380,10 @@ namespace DataRepository
 
         public void UserRemove(int id)
         {
-            user user = Users.FirstOrDefault(t => t.id == id);
-            if (user == null) return;
-            //Db.users.DeleteOnSubmit(user);
-            user.active = false;
+            User User = Users.FirstOrDefault(t => t.id == id);
+            if (User == null) return;
+            //Db.users.DeleteOnSubmit(User);
+            User.active = false;
             SubmitChanges();
         }
 
@@ -433,14 +401,14 @@ namespace DataRepository
             List<TimeRecordReportForm> result = Db.userTimeRecords.Where(p => (string.IsNullOrEmpty(start) || p.date > startDate)
                 && (string.IsNullOrEmpty(end) || p.date < endDate)
                 && (specialist == -1 || p.userId == specialist)
-                && (district == -1 || p.user.userDefaultLocations.FirstOrDefault().organizationId == district)
-                && (school == -1 || p.user.userDefaultLocations.FirstOrDefault().schoolId == school)).Select(p => new TimeRecordReportForm()
+                && (district == -1 || p.User.userDefaultLocations.FirstOrDefault().organizationId == district)
+                && (school == -1 || p.User.userDefaultLocations.FirstOrDefault().schoolId == school)).Select(p => new TimeRecordReportForm()
             {
                 Id = p.id,
                 Code = p.code,
                 Date = p.date,
                 Note = p.notes,
-                Specialist = p.user.FullName,
+                Specialist = p.User.FullName,
                 Student = (p.studentId == null ? "Office" : p.student.firstName + " " + p.student.lastName),
                 Time = p.time
             }).OrderByDescending(p => p.Date).ThenBy(p => p.Specialist).ToList();
@@ -473,13 +441,13 @@ namespace DataRepository
             List<CaseRecordReportForm> result = Db.studentSupportRequests.Where(p => (string.IsNullOrEmpty(start) || p.dateRequested > startDate)
                 && (string.IsNullOrEmpty(end) || p.dateRequested < endDate)
                 && (specialist == -1 || p.requestedBy == specialist)
-                && (district == -1 || p.user.userDefaultLocations.FirstOrDefault().organizationId == district)
-                && (school == -1 || p.user.userDefaultLocations.FirstOrDefault().schoolId == school)).Select(p => new CaseRecordReportForm()
+                && (district == -1 || p.User.userDefaultLocations.FirstOrDefault().organizationId == district)
+                && (school == -1 || p.User.userDefaultLocations.FirstOrDefault().schoolId == school)).Select(p => new CaseRecordReportForm()
                 {
                     Id = p.id,
-                    District = p.user.userDefaultLocations.FirstOrDefault().organization.districtName,
-                    School = p.user.userDefaultLocations.FirstOrDefault().school.schoolName,
-                    Specialist = p.user.firstName + " " + p.user.lastName,
+                    District = p.User.userDefaultLocations.FirstOrDefault().organization.districtName,
+                    School = p.User.userDefaultLocations.FirstOrDefault().school.schoolName,
+                    Specialist = p.User.firstName + " " + p.User.lastName,
                     Student = p.student.firstName + " " + p.student.lastName,
                     Type = string.Join(", ", p.studentSupportRequestTypes.ToList().Select(t => t.supportRequestType.code).ToList()),
                     Grade = p.student.grade,
