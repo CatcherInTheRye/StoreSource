@@ -4,41 +4,41 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="VStoreModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="VStoreModelStoreContainer">
-          <EntitySet Name="Addresses" EntityType="VStoreModel.Store.Addresses" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Dictionary" EntityType="VStoreModel.Store.Dictionary" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="MarginRules" EntityType="VStoreModel.Store.MarginRules" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Products" EntityType="VStoreModel.Store.Products" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="sysdiagrams" EntityType="VStoreModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Users" EntityType="VStoreModel.Store.Users" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="VendorProducts" EntityType="VStoreModel.Store.VendorProducts" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Vendors" EntityType="VStoreModel.Store.Vendors" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <AssociationSet Name="FK_Product_MarginRule" Association="VStoreModel.Store.FK_Product_MarginRule">
+      <Schema Namespace="StoreModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="StoreModelStoreContainer">
+          <EntitySet Name="Addresses" EntityType="StoreModel.Store.Addresses" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Dictionary" EntityType="StoreModel.Store.Dictionary" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MarginRules" EntityType="StoreModel.Store.MarginRules" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Products" EntityType="StoreModel.Store.Products" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="StoreModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="StoreModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VendorProducts" EntityType="StoreModel.Store.VendorProducts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Vendors" EntityType="StoreModel.Store.Vendors" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Product_MarginRule" Association="StoreModel.Store.FK_Product_MarginRule">
             <End Role="MarginRules" EntitySet="MarginRules" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_Gender" Association="VStoreModel.Store.FK_User_Gender">
+          <AssociationSet Name="FK_User_Gender" Association="StoreModel.Store.FK_User_Gender">
             <End Role="Dictionary" EntitySet="Dictionary" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_Status" Association="VStoreModel.Store.FK_User_Status">
+          <AssociationSet Name="FK_User_Status" Association="StoreModel.Store.FK_User_Status">
             <End Role="Dictionary" EntitySet="Dictionary" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_UserRole" Association="VStoreModel.Store.FK_User_UserRole">
+          <AssociationSet Name="FK_User_UserRole" Association="StoreModel.Store.FK_User_UserRole">
             <End Role="Dictionary" EntitySet="Dictionary" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK_Vendor_Address" Association="VStoreModel.Store.FK_Vendor_Address">
+          <AssociationSet Name="FK_Vendor_Address" Association="StoreModel.Store.FK_Vendor_Address">
             <End Role="Addresses" EntitySet="Addresses" />
             <End Role="Vendors" EntitySet="Vendors" />
           </AssociationSet>
-          <AssociationSet Name="FK_VendorProduct_Product" Association="VStoreModel.Store.FK_VendorProduct_Product">
+          <AssociationSet Name="FK_VendorProduct_Product" Association="StoreModel.Store.FK_VendorProduct_Product">
             <End Role="Products" EntitySet="Products" />
             <End Role="VendorProducts" EntitySet="VendorProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK_VendorProduct_Vendor" Association="VStoreModel.Store.FK_VendorProduct_Vendor">
+          <AssociationSet Name="FK_VendorProduct_Vendor" Association="StoreModel.Store.FK_VendorProduct_Vendor">
             <End Role="Vendors" EntitySet="Vendors" />
             <End Role="VendorProducts" EntitySet="VendorProducts" />
           </AssociationSet>
@@ -136,8 +136,8 @@
           <Property Name="AddressId" Type="int" />
         </EntityType>
         <Association Name="FK_Product_MarginRule">
-          <End Role="MarginRules" Type="VStoreModel.Store.MarginRules" Multiplicity="0..1" />
-          <End Role="Products" Type="VStoreModel.Store.Products" Multiplicity="*" />
+          <End Role="MarginRules" Type="StoreModel.Store.MarginRules" Multiplicity="0..1" />
+          <End Role="Products" Type="StoreModel.Store.Products" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MarginRules">
               <PropertyRef Name="Id" />
@@ -148,8 +148,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Gender">
-          <End Role="Dictionary" Type="VStoreModel.Store.Dictionary" Multiplicity="1" />
-          <End Role="Users" Type="VStoreModel.Store.Users" Multiplicity="*" />
+          <End Role="Dictionary" Type="StoreModel.Store.Dictionary" Multiplicity="1" />
+          <End Role="Users" Type="StoreModel.Store.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dictionary">
               <PropertyRef Name="Id" />
@@ -160,8 +160,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Status">
-          <End Role="Dictionary" Type="VStoreModel.Store.Dictionary" Multiplicity="1" />
-          <End Role="Users" Type="VStoreModel.Store.Users" Multiplicity="*" />
+          <End Role="Dictionary" Type="StoreModel.Store.Dictionary" Multiplicity="1" />
+          <End Role="Users" Type="StoreModel.Store.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dictionary">
               <PropertyRef Name="Id" />
@@ -172,8 +172,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_UserRole">
-          <End Role="Dictionary" Type="VStoreModel.Store.Dictionary" Multiplicity="1" />
-          <End Role="Users" Type="VStoreModel.Store.Users" Multiplicity="*" />
+          <End Role="Dictionary" Type="StoreModel.Store.Dictionary" Multiplicity="1" />
+          <End Role="Users" Type="StoreModel.Store.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dictionary">
               <PropertyRef Name="Id" />
@@ -184,8 +184,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Vendor_Address">
-          <End Role="Addresses" Type="VStoreModel.Store.Addresses" Multiplicity="0..1" />
-          <End Role="Vendors" Type="VStoreModel.Store.Vendors" Multiplicity="*" />
+          <End Role="Addresses" Type="StoreModel.Store.Addresses" Multiplicity="0..1" />
+          <End Role="Vendors" Type="StoreModel.Store.Vendors" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Addresses">
               <PropertyRef Name="Id" />
@@ -196,8 +196,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VendorProduct_Product">
-          <End Role="Products" Type="VStoreModel.Store.Products" Multiplicity="1" />
-          <End Role="VendorProducts" Type="VStoreModel.Store.VendorProducts" Multiplicity="*" />
+          <End Role="Products" Type="StoreModel.Store.Products" Multiplicity="1" />
+          <End Role="VendorProducts" Type="StoreModel.Store.VendorProducts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="Id" />
@@ -208,8 +208,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VendorProduct_Vendor">
-          <End Role="Vendors" Type="VStoreModel.Store.Vendors" Multiplicity="1" />
-          <End Role="VendorProducts" Type="VStoreModel.Store.VendorProducts" Multiplicity="*" />
+          <End Role="Vendors" Type="StoreModel.Store.Vendors" Multiplicity="1" />
+          <End Role="VendorProducts" Type="StoreModel.Store.VendorProducts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Vendors">
               <PropertyRef Name="Id" />
@@ -223,41 +223,41 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="VStoreModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="VStoreEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
-          <EntitySet Name="Addresses" EntityType="VStoreModel.Address" />
-          <EntitySet Name="Dictionaries" EntityType="VStoreModel.Dictionary" />
-          <EntitySet Name="MarginRules" EntityType="VStoreModel.MarginRule" />
-          <EntitySet Name="Products" EntityType="VStoreModel.Product" />
-          <EntitySet Name="sysdiagrams" EntityType="VStoreModel.sysdiagram" />
-          <EntitySet Name="Users" EntityType="VStoreModel.User" />
-          <EntitySet Name="VendorProducts" EntityType="VStoreModel.VendorProduct" />
-          <EntitySet Name="Vendors" EntityType="VStoreModel.Vendor" />
-          <AssociationSet Name="FK_Vendor_Address" Association="VStoreModel.FK_Vendor_Address">
+      <Schema Namespace="StoreModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="StoreEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="StoreModel.Address" />
+          <EntitySet Name="Dictionaries" EntityType="StoreModel.Dictionary" />
+          <EntitySet Name="MarginRules" EntityType="StoreModel.MarginRule" />
+          <EntitySet Name="Products" EntityType="StoreModel.Product" />
+          <EntitySet Name="sysdiagrams" EntityType="StoreModel.sysdiagram" />
+          <EntitySet Name="Users" EntityType="StoreModel.User" />
+          <EntitySet Name="VendorProducts" EntityType="StoreModel.VendorProduct" />
+          <EntitySet Name="Vendors" EntityType="StoreModel.Vendor" />
+          <AssociationSet Name="FK_Vendor_Address" Association="StoreModel.FK_Vendor_Address">
             <End Role="Addresses" EntitySet="Addresses" />
             <End Role="Vendors" EntitySet="Vendors" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_Gender" Association="VStoreModel.FK_User_Gender">
+          <AssociationSet Name="FK_User_Gender" Association="StoreModel.FK_User_Gender">
             <End Role="Dictionary" EntitySet="Dictionaries" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_Status" Association="VStoreModel.FK_User_Status">
+          <AssociationSet Name="FK_User_Status" Association="StoreModel.FK_User_Status">
             <End Role="Dictionary" EntitySet="Dictionaries" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_UserRole" Association="VStoreModel.FK_User_UserRole">
+          <AssociationSet Name="FK_User_UserRole" Association="StoreModel.FK_User_UserRole">
             <End Role="Dictionary" EntitySet="Dictionaries" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_MarginRule" Association="VStoreModel.FK_Product_MarginRule">
+          <AssociationSet Name="FK_Product_MarginRule" Association="StoreModel.FK_Product_MarginRule">
             <End Role="MarginRules" EntitySet="MarginRules" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK_VendorProduct_Product" Association="VStoreModel.FK_VendorProduct_Product">
+          <AssociationSet Name="FK_VendorProduct_Product" Association="StoreModel.FK_VendorProduct_Product">
             <End Role="Products" EntitySet="Products" />
             <End Role="VendorProducts" EntitySet="VendorProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK_VendorProduct_Vendor" Association="VStoreModel.FK_VendorProduct_Vendor">
+          <AssociationSet Name="FK_VendorProduct_Vendor" Association="StoreModel.FK_VendorProduct_Vendor">
             <End Role="Vendors" EntitySet="Vendors" />
             <End Role="VendorProducts" EntitySet="VendorProducts" />
           </AssociationSet>
@@ -266,7 +266,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Phone" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
           <Property Name="HomePhone" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
           <Property Name="City" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
@@ -274,7 +274,7 @@
           <Property Name="Street" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="PostalCode" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
           <Property Name="Email" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Vendors" Relationship="VStoreModel.FK_Vendor_Address" FromRole="Addresses" ToRole="Vendors" />
+          <NavigationProperty Name="Vendors" Relationship="StoreModel.FK_Vendor_Address" FromRole="Addresses" ToRole="Vendors" />
         </EntityType>
         <EntityType Name="Dictionary">
           <Key>
@@ -285,32 +285,32 @@
           <Property Name="VariableTypeName" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
           <Property Name="VariableValue" Type="String" MaxLength="512" Unicode="true" FixedLength="false" />
           <Property Name="IsActive" Type="Boolean" />
-          <NavigationProperty Name="Users" Relationship="VStoreModel.FK_User_Gender" FromRole="Dictionary" ToRole="Users" />
-          <NavigationProperty Name="Users1" Relationship="VStoreModel.FK_User_Status" FromRole="Dictionary" ToRole="Users" />
-          <NavigationProperty Name="Users2" Relationship="VStoreModel.FK_User_UserRole" FromRole="Dictionary" ToRole="Users" />
+          <NavigationProperty Name="Users" Relationship="StoreModel.FK_User_Gender" FromRole="Dictionary" ToRole="Users" />
+          <NavigationProperty Name="Users1" Relationship="StoreModel.FK_User_Status" FromRole="Dictionary" ToRole="Users" />
+          <NavigationProperty Name="Users2" Relationship="StoreModel.FK_User_UserRole" FromRole="Dictionary" ToRole="Users" />
         </EntityType>
         <EntityType Name="MarginRule">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Margin" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
           <Property Name="IsPercent" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Products" Relationship="VStoreModel.FK_Product_MarginRule" FromRole="MarginRules" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="StoreModel.FK_Product_MarginRule" FromRole="MarginRules" ToRole="Products" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Model" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Cost" Type="Decimal" Precision="20" Scale="4" />
           <Property Name="Price" Type="Decimal" Precision="20" Scale="4" />
           <Property Name="MarginRuleId" Type="Int32" />
-          <NavigationProperty Name="MarginRule" Relationship="VStoreModel.FK_Product_MarginRule" FromRole="Products" ToRole="MarginRules" />
-          <NavigationProperty Name="VendorProducts" Relationship="VStoreModel.FK_VendorProduct_Product" FromRole="Products" ToRole="VendorProducts" />
+          <NavigationProperty Name="MarginRule" Relationship="StoreModel.FK_Product_MarginRule" FromRole="Products" ToRole="MarginRules" />
+          <NavigationProperty Name="VendorProducts" Relationship="StoreModel.FK_VendorProduct_Product" FromRole="Products" ToRole="VendorProducts" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -318,7 +318,7 @@
           </Key>
           <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
@@ -326,7 +326,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
           <Property Name="SecondaryEmail" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
           <Property Name="Login" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
@@ -343,34 +343,34 @@
           <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Phone" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="GenderId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Dictionary" Relationship="VStoreModel.FK_User_Gender" FromRole="Users" ToRole="Dictionary" />
-          <NavigationProperty Name="Dictionary1" Relationship="VStoreModel.FK_User_Status" FromRole="Users" ToRole="Dictionary" />
-          <NavigationProperty Name="Dictionary2" Relationship="VStoreModel.FK_User_UserRole" FromRole="Users" ToRole="Dictionary" />
+          <NavigationProperty Name="Dictionary" Relationship="StoreModel.FK_User_Gender" FromRole="Users" ToRole="Dictionary" />
+          <NavigationProperty Name="Dictionary1" Relationship="StoreModel.FK_User_Status" FromRole="Users" ToRole="Dictionary" />
+          <NavigationProperty Name="Dictionary2" Relationship="StoreModel.FK_User_UserRole" FromRole="Users" ToRole="Dictionary" />
         </EntityType>
         <EntityType Name="VendorProduct">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="VendorId" Type="Int32" Nullable="false" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="VStoreModel.FK_VendorProduct_Product" FromRole="VendorProducts" ToRole="Products" />
-          <NavigationProperty Name="Vendor" Relationship="VStoreModel.FK_VendorProduct_Vendor" FromRole="VendorProducts" ToRole="Vendors" />
+          <NavigationProperty Name="Product" Relationship="StoreModel.FK_VendorProduct_Product" FromRole="VendorProducts" ToRole="Products" />
+          <NavigationProperty Name="Vendor" Relationship="StoreModel.FK_VendorProduct_Vendor" FromRole="VendorProducts" ToRole="Vendors" />
         </EntityType>
         <EntityType Name="Vendor">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="AddressId" Type="Int32" />
-          <NavigationProperty Name="Address" Relationship="VStoreModel.FK_Vendor_Address" FromRole="Vendors" ToRole="Addresses" />
-          <NavigationProperty Name="VendorProducts" Relationship="VStoreModel.FK_VendorProduct_Vendor" FromRole="Vendors" ToRole="VendorProducts" />
+          <NavigationProperty Name="Address" Relationship="StoreModel.FK_Vendor_Address" FromRole="Vendors" ToRole="Addresses" />
+          <NavigationProperty Name="VendorProducts" Relationship="StoreModel.FK_VendorProduct_Vendor" FromRole="Vendors" ToRole="VendorProducts" />
         </EntityType>
         <Association Name="FK_Vendor_Address">
-          <End Role="Addresses" Type="VStoreModel.Address" Multiplicity="0..1" />
-          <End Role="Vendors" Type="VStoreModel.Vendor" Multiplicity="*" />
+          <End Role="Addresses" Type="StoreModel.Address" Multiplicity="0..1" />
+          <End Role="Vendors" Type="StoreModel.Vendor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Addresses">
               <PropertyRef Name="Id" />
@@ -381,8 +381,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Gender">
-          <End Role="Dictionary" Type="VStoreModel.Dictionary" Multiplicity="1" />
-          <End Role="Users" Type="VStoreModel.User" Multiplicity="*" />
+          <End Role="Dictionary" Type="StoreModel.Dictionary" Multiplicity="1" />
+          <End Role="Users" Type="StoreModel.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dictionary">
               <PropertyRef Name="Id" />
@@ -393,8 +393,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Status">
-          <End Role="Dictionary" Type="VStoreModel.Dictionary" Multiplicity="1" />
-          <End Role="Users" Type="VStoreModel.User" Multiplicity="*" />
+          <End Role="Dictionary" Type="StoreModel.Dictionary" Multiplicity="1" />
+          <End Role="Users" Type="StoreModel.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dictionary">
               <PropertyRef Name="Id" />
@@ -405,8 +405,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_UserRole">
-          <End Role="Dictionary" Type="VStoreModel.Dictionary" Multiplicity="1" />
-          <End Role="Users" Type="VStoreModel.User" Multiplicity="*" />
+          <End Role="Dictionary" Type="StoreModel.Dictionary" Multiplicity="1" />
+          <End Role="Users" Type="StoreModel.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dictionary">
               <PropertyRef Name="Id" />
@@ -417,8 +417,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_MarginRule">
-          <End Role="MarginRules" Type="VStoreModel.MarginRule" Multiplicity="0..1" />
-          <End Role="Products" Type="VStoreModel.Product" Multiplicity="*" />
+          <End Role="MarginRules" Type="StoreModel.MarginRule" Multiplicity="0..1" />
+          <End Role="Products" Type="StoreModel.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MarginRules">
               <PropertyRef Name="Id" />
@@ -429,8 +429,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VendorProduct_Product">
-          <End Role="Products" Type="VStoreModel.Product" Multiplicity="1" />
-          <End Role="VendorProducts" Type="VStoreModel.VendorProduct" Multiplicity="*" />
+          <End Role="Products" Type="StoreModel.Product" Multiplicity="1" />
+          <End Role="VendorProducts" Type="StoreModel.VendorProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="Id" />
@@ -441,8 +441,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VendorProduct_Vendor">
-          <End Role="Vendors" Type="VStoreModel.Vendor" Multiplicity="1" />
-          <End Role="VendorProducts" Type="VStoreModel.VendorProduct" Multiplicity="*" />
+          <End Role="Vendors" Type="StoreModel.Vendor" Multiplicity="1" />
+          <End Role="VendorProducts" Type="StoreModel.VendorProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Vendors">
               <PropertyRef Name="Id" />
@@ -457,9 +457,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="VStoreModelStoreContainer" CdmEntityContainer="VStoreEntities">
+        <EntityContainerMapping StorageEntityContainer="StoreModelStoreContainer" CdmEntityContainer="StoreEntities">
           <EntitySetMapping Name="Addresses">
-            <EntityTypeMapping TypeName="VStoreModel.Address">
+            <EntityTypeMapping TypeName="StoreModel.Address">
               <MappingFragment StoreEntitySet="Addresses">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
@@ -473,7 +473,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Dictionaries">
-            <EntityTypeMapping TypeName="VStoreModel.Dictionary">
+            <EntityTypeMapping TypeName="StoreModel.Dictionary">
               <MappingFragment StoreEntitySet="Dictionary">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="VariableTypeID" ColumnName="VariableTypeID" />
@@ -484,7 +484,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MarginRules">
-            <EntityTypeMapping TypeName="VStoreModel.MarginRule">
+            <EntityTypeMapping TypeName="StoreModel.MarginRule">
               <MappingFragment StoreEntitySet="MarginRules">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Margin" ColumnName="Margin" />
@@ -493,7 +493,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="VStoreModel.Product">
+            <EntityTypeMapping TypeName="StoreModel.Product">
               <MappingFragment StoreEntitySet="Products">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -506,7 +506,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="VStoreModel.sysdiagram">
+            <EntityTypeMapping TypeName="StoreModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -517,7 +517,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="VStoreModel.User">
+            <EntityTypeMapping TypeName="StoreModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -540,7 +540,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VendorProducts">
-            <EntityTypeMapping TypeName="VStoreModel.VendorProduct">
+            <EntityTypeMapping TypeName="StoreModel.VendorProduct">
               <MappingFragment StoreEntitySet="VendorProducts">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="VendorId" ColumnName="VendorId" />
@@ -549,7 +549,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Vendors">
-            <EntityTypeMapping TypeName="VStoreModel.Vendor">
+            <EntityTypeMapping TypeName="StoreModel.Vendor">
               <MappingFragment StoreEntitySet="Vendors">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -578,6 +578,6 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams />
+    <Diagrams></Diagrams>
   </Designer>
 </edmx:Edmx>

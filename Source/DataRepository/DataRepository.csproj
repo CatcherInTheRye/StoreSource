@@ -77,6 +77,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -122,15 +123,16 @@
       <DependentUpon>StoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="Common\Dictionary.cs" />
     <Compile Include="DataContracts\Student.cs" />
     <Compile Include="DataContracts\DataContractClasses.cs" />
     <Compile Include="Dictionary.cs">
       <DependentUpon>StoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="IRepository.cs" />
-    <Compile Include="Mappers\EfStatus.cs" />
-    <Compile Include="Mappers\CommonMapper.cs" />
-    <Compile Include="Mappers\IMapper.cs" />
+    <Compile Include="Common\EfStatus.cs" />
+    <Compile Include="Common\CommonMapper.cs" />
+    <Compile Include="Common\IMapper.cs" />
     <Compile Include="MarginRule.cs">
       <DependentUpon>StoreModel.tt</DependentUpon>
     </Compile>
@@ -165,7 +167,7 @@
     <Compile Include="User.cs">
       <DependentUpon>StoreModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Users\user.cs" />
+    <Compile Include="Users\User.cs" />
     <Compile Include="Vendor.cs">
       <DependentUpon>StoreModel.tt</DependentUpon>
     </Compile>

@@ -8,7 +8,10 @@ namespace DataRepository
 {
     public interface IRepository
     {
-        
+        #region Dictionary
+
+        #endregion Dictionary
+
         #region Users
 
         IQueryable<User> Users { get; }

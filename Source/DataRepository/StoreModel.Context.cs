@@ -13,10 +13,10 @@ namespace DataRepository
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class VStoreEntities : DbContext
+    public partial class StoreEntities : DbContext
     {
-        public VStoreEntities()
-            : base("name=VStoreEntities")
+        public StoreEntities()
+            : base("name=StoreEntities")
         {
         }
     

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using DataRepository.Common;
 
 namespace DataRepository
 {
@@ -17,20 +16,17 @@ namespace DataRepository
 
         //public string Captcha { get; set; }
 
-        public int UserRole
+        public UserType UserRole
         {
-            get {
-                userRole role = userRoles.FirstOrDefault();
-                return role != null ? role.roleId : -1;
-            }
+            get { return (UserType) UserRoleId; }
         }
 
         public string FullName
         {
             get
             {
-                return string.Format("{0}, {1}{2}", lastName, firstName,
-                    !string.IsNullOrWhiteSpace(middleName) ? string.Format(" {0}", middleName) : "");
+                return string.Format("{0}, {1}{2}", LastName, FirstName,
+                    !string.IsNullOrWhiteSpace(MiddleName) ? string.Format(" {0}", MiddleName) : string.Empty);
             }
         }
 
@@ -42,15 +38,7 @@ namespace DataRepository
             }
 
             var rolesArray = roles.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var role in rolesArray)
-            {
-                var hasRole = userRoles.Any(p => string.Compare(p.roleId.ToString(), role, true) == 0);
-                if (hasRole)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return rolesArray.Any(p => string.Compare(p, UserRole.ToString(), StringComparison.OrdinalIgnoreCase) == 0);
         }
     }
 }
